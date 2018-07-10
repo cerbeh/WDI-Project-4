@@ -1,5 +1,6 @@
 const router = require('express').Router();
 const users = require('../controllers/users');
+const sessions = require('../controllers/sessions');
 const secureRoute = require('../lib/secureRoute');
 
 router.post('/register', users.register);
@@ -17,7 +18,8 @@ router.route('/users/:id/sessions')
   .post(secureRoute, users.sessionsCreate);
 
 router.route('/users/:id/sessions/:sessionId')
-  .get(users.sessionsShow)
-  .put(users.sessionsUpdate);
+  .get(sessions.show)
+  .put(secureRoute, sessions.update)
+  .delete(secureRoute, sessions.delete);
 
 module.exports = router;

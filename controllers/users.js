@@ -49,62 +49,17 @@ function login(req, res, next) {
     .catch(next);
 }
 
-function sessionsCreate(req, res, next) {
-  User.findById(req.currentUser._id)
-    .then(user => {
-      user.sessions.push(req.body);
-      return user.save();
-    })
-    .then(user => res.json(user))
-    .catch(next);
-}
-
-function sessionsIndex(req, res, next) {
-  User.findById(req.params.id)
-    .then(user => res.json(user.sessions))
-    .catch(next);
-}
-
-function sessionsShow(req, res, next) {
-  User.findById(req.params.id)
-    .then(user => {
-      const session = user.sessions.filter(session => {
-        return session._id.toString() === req.params.sessionId;
-      })[0];
-      res.json(session);
-    })
-    .catch(next);
-}
-
-function sessionsUpdate(req, res , next) {
-  User.findById(req.params.id)
-    .then(user => {
-      user.sessions.map(session => {
-        if(session._id.toString() === req.params.sessionId) {
-          session.title = req.body.title;
-          session.discipline = req.body.discipline;
-          session.duration = req.body.duration;
-          session.notes = req.body.notes;
-        }
-        return session;
-      });
-      user.save();
-      const session = user.sessions.filter(session => {
-        return session._id.toString() === req.params.sessionId;
-      })[0];
-      res.json(session);
-    })
-    .catch(next);
-}
-
 module.exports = {
   index: indexRoute,
   show: showRoute,
+<<<<<<< HEAD
   update: updateRoute,
   sessionsCreate: sessionsCreate,
   sessionsIndex: sessionsIndex,
   sessionsShow: sessionsShow,
   sessionsUpdate: sessionsUpdate,
+=======
+>>>>>>> development
   register,
   login
 };
