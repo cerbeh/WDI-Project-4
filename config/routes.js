@@ -15,7 +15,11 @@ router.route('/users/:id/sessions')
   .post(secureRoute, users.sessionsCreate)
   .get(users.sessionsIndex);
 
+router.get('/users', users.index);
+router.get('/users/:id', users.show);
+
 router.route('/users/:id/sessions/:sessionId')
-  .get(users.sessionsShow);
+  .get(users.sessionsShow)
+  .put(users.sessionsUpdate);
 
 module.exports = router;

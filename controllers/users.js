@@ -68,9 +68,26 @@ function sessionsShow(req, res, next) {
     .catch(next);
 }
 
-// function sessionsUpdate(req, res , next) {
-//
-// }
+function sessionsUpdate(req, res , next) {
+  User.findById(req.params.id)
+    .then(user => {
+      user.sessions.map(session => {
+        if(session._id.toString() === req.params.sessionId) {
+          session.title = req.body.title;
+          session.discipline = req.body.discipline;
+          session.duration = req.body.duration;
+          session.notes = req.body.notes;
+        }
+        return session;
+      });
+      user.save();
+      const session = user.sessions.filter(session => {
+        return session._id.toString() === req.params.sessionId;
+      })[0];
+      res.json(session);
+    })
+    .catch(next);
+}
 
 module.exports = {
   index: indexRoute,
@@ -78,6 +95,7 @@ module.exports = {
   sessionsCreate: sessionsCreate,
   sessionsIndex: sessionsIndex,
   sessionsShow: sessionsShow,
+  sessionsUpdate: sessionsUpdate,
   register,
   login
 };
