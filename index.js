@@ -11,7 +11,6 @@ mongoose.Promise = require('bluebird');
 mongoose.connect(dbURI);
 
 app.use(express.static(`${__dirname}/public`));
-app.get('/*', (req, res) => res.sendFile(`${__dirname}/public/index.html`));
 
 app.use(bodyParser.json());
 app.use('/api', routes);

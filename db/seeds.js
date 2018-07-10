@@ -6,7 +6,6 @@ const User = require('../models/user');
 
 mongoose.connect(dbURI, (err, db) => {
   db.dropDatabase()
-
     .then(() => User.create([{
       username: 'martin',
       email: 'martin@martin.com',
@@ -68,5 +67,4 @@ mongoose.connect(dbURI, (err, db) => {
     .then(users => console.log(`${users.length} kendoka created`))
     .catch(err => console.log(err))
     .finally(() => mongoose.connection.close());
-
 });

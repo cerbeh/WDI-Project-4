@@ -7,10 +7,10 @@ const historySchema = new  mongoose.Schema({
 });
 
 const practiceSchema = new mongoose.Schema({
-  practiceType: { type: String, required: 'Type of practice is required'},
+  title: String,
+  practiceType: String,
   description: String,
-  venue: String,
-  date: String,
+  user: { type: mongoose.Schema.ObjectId, ref: 'User' },
   history: [ historySchema ]
 });
 
