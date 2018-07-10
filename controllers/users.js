@@ -57,11 +57,24 @@ function sessionsIndex(req, res, next) {
     .catch(next);
 }
 
+function sessionsShow(req, res, next) {
+  User.findById(req.params.id)
+    .then(user => {
+      console.log(user);
+    })
+    .catch(next);
+}
+
+// function sessionsUpdate(req, res , next) {
+//
+// }
+
 module.exports = {
   index: indexRoute,
   show: showRoute,
   sessionsCreate: sessionsCreate,
   sessionsIndex: sessionsIndex,
+  sessionsShow: sessionsShow,
   register,
   login
 };

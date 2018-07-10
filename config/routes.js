@@ -9,4 +9,7 @@ router.route('/users/:id/sessions')
   .post(secureRoute, user.sessionsCreate)
   .get(user.sessionsIndex);
 
+router.route('/users/:id/sessions/:id')
+  .get(user.sessionsShow);
+
 module.exports = router;
