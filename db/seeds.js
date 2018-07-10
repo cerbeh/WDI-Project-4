@@ -25,7 +25,6 @@ mongoose.connect(dbURI, (err, db) => {
         duration: 45,
         notes: 'Sesh'
       }]
-      // practiceType: [{name: 'keiko'}, {name: 'kata'}]
     }, {
       username: 'othermartin',
       email: 'othermartin@othermartin.com',
@@ -39,7 +38,6 @@ mongoose.connect(dbURI, (err, db) => {
         duration: 60,
         notes: 'Smashed it.'
       }]
-      // practiceType: [{name: 'shiai'}, {name: 'kata'}]
     }, {
       username: 'linda',
       email: 'linda@linda.com',
@@ -53,7 +51,6 @@ mongoose.connect(dbURI, (err, db) => {
         duration: 60,
         notes: 'Smashed it.'
       }]
-      // practiceType: [{name: 'keiko'}, {name: 'kata'}]
     }, {
       username: 'mike',
       email: 'mike@mike.com',
@@ -66,7 +63,6 @@ mongoose.connect(dbURI, (err, db) => {
         duration: 60,
         notes: 'Smashed it.'
       }]
-      // practiceType: [{name: 'keiko'}, {name: 'kata'}]
     }, {
       username: 'nic',
       email: 'nic@nic.com',
@@ -79,7 +75,6 @@ mongoose.connect(dbURI, (err, db) => {
         duration: 60,
         notes: 'Smashed it.'
       }]
-      // practiceType: [{name: 'shiai'}, {name: 'kata'}]
     }, {
       username: 'stevan',
       email: 'stevan@stevan.com',
@@ -92,7 +87,6 @@ mongoose.connect(dbURI, (err, db) => {
         duration: 60,
         notes: 'Smashed it.'
       }]
-      // practiceType: [{name: 'keiko'}, {name: 'kata'}]
     }, {
       username: 'rich',
       email: 'rich@rich.com',
@@ -105,7 +99,6 @@ mongoose.connect(dbURI, (err, db) => {
         duration: 60,
         notes: 'Smashed it.'
       }]
-      // practiceType: [{name: 'keiko'}, {name: 'kata'}]
     }, {
       username: 'avon',
       email: 'avon@avon.com',
@@ -118,7 +111,6 @@ mongoose.connect(dbURI, (err, db) => {
         duration: 60,
         notes: 'Smashed it.'
       }]
-      // practiceType: [{name: 'shiai'}]
     }, {
       username: 'bianca',
       email: 'bianca@bianca.com',
@@ -131,7 +123,6 @@ mongoose.connect(dbURI, (err, db) => {
         duration: 60,
         notes: 'Smashed it.'
       }]
-      // practiceType: [{name: 'keiko'}]
     }]))
     .then(users => console.log(`${users.length} kendoka created`))
     .catch(err => console.log(err))
