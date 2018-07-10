@@ -14,8 +14,8 @@ router.route('/users/:id')
   .put(users.update);
 
 router.route('/users/:id/sessions')
-  .get(users.sessionsIndex)
-  .post(secureRoute, users.sessionsCreate);
+  .get(sessions.index)
+  .post(secureRoute, sessions.create);
 
 router.route('/users/:id/sessions/:sessionId')
   .get(sessions.show)
