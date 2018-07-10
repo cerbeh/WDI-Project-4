@@ -9,14 +9,12 @@ router.route('/users')
   .get(users.index);
 
 router.route('/users/:id')
-  .get(users.show);
+  .get(users.show)
+  .put(users.update);
 
 router.route('/users/:id/sessions')
-  .post(secureRoute, users.sessionsCreate)
-  .get(users.sessionsIndex);
-
-router.get('/users', users.index);
-router.get('/users/:id', users.show);
+  .get(users.sessionsIndex)
+  .post(secureRoute, users.sessionsCreate);
 
 router.route('/users/:id/sessions/:sessionId')
   .get(users.sessionsShow)
