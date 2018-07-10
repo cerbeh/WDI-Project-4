@@ -41,7 +41,7 @@ function login(req, res, next) {
     .catch(next);
 }
 
-function sessionCreate(req, res, next) {
+function sessionsCreate(req, res, next) {
   User.findById(req.currentUser._id)
     .then(user => {
       user.sessions.push(req.body);
@@ -51,10 +51,17 @@ function sessionCreate(req, res, next) {
     .catch(next);
 }
 
+function sessionsIndex(req, res, next) {
+  User.findById(req.params.id)
+    .then(user => res.json(user.sessions))
+    .catch(next);
+}
+
 module.exports = {
   index: indexRoute,
   show: showRoute,
-  sessionCreate: sessionCreate,
+  sessionsCreate: sessionsCreate,
+  sessionsIndex: sessionsIndex,
   register,
   login
 };
