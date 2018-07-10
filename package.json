@@ -8,7 +8,8 @@
     "test:client": "nyc mocha test/client/**/*_spec.js --require test/client/helper --recursive --exit",
     "test:server": "nyc mocha test/server/**/*_spec.js --require test/server/helper --recursive --exit",
     "build": "webpack -p",
-    "start": "yarn build && node index"
+    "start": "yarn build && node index",
+    "seed": "node db/seeds"
   },
   "author": "Students",
   "license": "ISC",
