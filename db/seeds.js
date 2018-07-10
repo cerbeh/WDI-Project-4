@@ -18,6 +18,12 @@ mongoose.connect(dbURI, (err, db) => {
         // date: 2018-07-10,
         duration: 60,
         notes: 'Smashed it.'
+      },{
+        title: 'Practice for semis',
+        discipline: 'Kata',
+        // date: 2018-07-10,
+        duration: 45,
+        notes: 'Sesh'
       }]
       // practiceType: [{name: 'keiko'}, {name: 'kata'}]
     }, {
