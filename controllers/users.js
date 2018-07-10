@@ -41,9 +41,40 @@ function login(req, res, next) {
     .catch(next);
 }
 
+function sessionsCreate(req, res, next) {
+  User.findById(req.currentUser._id)
+    .then(user => {
+      user.sessions.push(req.body);
+      return user.save();
+    })
+    .then(user => res.json(user))
+    .catch(next);
+}
+
+function sessionsIndex(req, res, next) {
+  User.findById(req.params.id)
+    .then(user => res.json(user.sessions))
+    .catch(next);
+}
+
+function sessionsShow(req, res, next) {
+  User.findById(req.params.id)
+    .then(user => {
+      console.log(user);
+    })
+    .catch(next);
+}
+
+// function sessionsUpdate(req, res , next) {
+//
+// }
+
 module.exports = {
   index: indexRoute,
   show: showRoute,
+  sessionsCreate: sessionsCreate,
+  sessionsIndex: sessionsIndex,
+  sessionsShow: sessionsShow,
   register,
   login
 };
