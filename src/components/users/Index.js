@@ -10,12 +10,9 @@ class UsersIndex extends React.Component{
       users: []
     };
   }
-  componentDidMount(){
-    axios({
-      url: '/api/users',
-      method: 'GET'
-    })
-      .then(res => this.setState({ users: res.data}));
+  componentDidMount() {
+    axios.get('/api/users')
+      .then(res => this.setState({ users: res.data }));
   }
   render(){
     return(

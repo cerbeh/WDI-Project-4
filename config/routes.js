@@ -1,18 +1,21 @@
 const router = require('express').Router();
-const user = require('../controllers/users');
+const users = require('../controllers/users');
 const secureRoute = require('../lib/secureRoute');
 
-router.post('/register', user.register);
-router.post('/login', user.login);
+router.post('/register', users.register);
+router.post('/login', users.login);
 
 router.route('/users')
-  .get(user.index);
+  .get(users.index);
+
+router.route('/users/:id')
+  .get(users.show);
 
 router.route('/users/:id/sessions')
-  .post(secureRoute, user.sessionsCreate)
-  .get(user.sessionsIndex);
+  .post(secureRoute, users.sessionsCreate)
+  .get(users.sessionsIndex);
 
 router.route('/users/:id/sessions/:sessionId')
-  .get(user.sessionsShow);
+  .get(users.sessionsShow);
 
 module.exports = router;

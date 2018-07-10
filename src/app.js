@@ -18,7 +18,7 @@ class App extends React.Component {
             <div className="container">
               <h1>TEAM CHARTREUSE</h1>
               <Switch>
-                <Route path="/users" component={UsersShow} />
+                <Route path="/users/:id" component={UsersShow} />
                 <Route path="/users" component={UsersIndex} />
                 <Route exact path="/" component={Home} />
               </Switch>
