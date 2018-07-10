@@ -20,17 +20,20 @@ class UsersShow extends React.Component{
     if(this.state.error) return <h2 className="title is-2">{this.state.error}</h2>;
     if(!this.state.user) return <h2 className="title">Loading...</h2>;
     return(
-      <section>
+      <section className="section">
         <div>
           <h1 className="title">{this.state.user.username}</h1>
-          <h5 className="is-5">I was born in:</h5>
-          <h2 className="is-5">{this.state.user.dob}</h2>
+          <h5 className="is-5">I was born on:</h5>
+          <h2 className="subtitle"><strong>{this.state.user.dob}</strong></h2>
           <h5 className="is-5">My height:</h5>
-          <h2 className="is-5">{this.state.user.height}</h2>
+          <h2 className="subtitle"><strong>{this.state.user.height}</strong> cm</h2>
           <h5 className="is-5">My Weight:</h5>
-          <h2 className="is-5">{this.state.user.weight}</h2>
+          <h2 className="subtitle"><strong>{this.state.user.weight}</strong> kilos</h2>
           <h5 className="is-5">Grade:</h5>
-          <h2 className="is-5">{this.state.user.grade}</h2>
+          <h2 className="subtitle"><strong>{this.state.user.grade}</strong></h2>
+        </div>
+        <div id="bottomBtn">
+          <button className="edit"><i className="fas fa-pencil-alt fa-3x"></i></button>
         </div>
       </section>
     );

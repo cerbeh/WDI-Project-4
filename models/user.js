@@ -1,5 +1,6 @@
 const mongoose = require('mongoose');
 const bcrypt = require('bcrypt');
+const moment = require('moment');
 
 
 // const weightSchema = new mongoose.Schema({
@@ -27,6 +28,13 @@ const userSchema = new mongoose.Schema({
   weight: Number,
   sessions: [ sessionSchema ]
 });
+
+userSchema.path('dob')
+  .get(function formatDate(dob) {
+    return moment(dob).format('YYYY-MM-DD');
+  });
+
+userSchema.set('toJSON', { getters: true });
 
 userSchema.set('toJSON', {
   virtuals: true,

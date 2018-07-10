@@ -1,13 +1,16 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
+import Auth from '../../lib/Auth';
 
 const Footer = () => {
   return (
     <nav className="navbar is-link is-fixed-bottom" role="navigation">
       <div className="navbar-brand">
-        <a className="navbar-item is-expanded  is-block has-text-centered">
-          <i className="fa fa-user"></i>
-          <p className="is-size-7">Account</p>
-        </a>
+        <Link to={`/users/${Auth.getPayload().sub}`}>
+          <a className="navbar-item is-expanded  is-block has-text-centered">
+            <i className="fa fa-user"></i>
+            <p className="is-size-7">Account</p>
+          </a></Link>
         <a className="navbar-item is-expanded  is-block has-text-centered">
           <i className="far fa-calendar-alt"></i>
           <p className="is-size-7">Schedule</p>
