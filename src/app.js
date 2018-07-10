@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import UsersIndex from './components/users/Index';
 import UsersShow from './components/users/Show';
+import UsersEdit from './components/users/Edit';
 import Home from './components/pages/Home';
 import AuthLogin from './components/auth/Login';
 import AuthRegister from './components/auth/Register';
@@ -20,6 +21,7 @@ class App extends React.Component {
             <div className="container">
               <h1>TEAM CHARTREUSE</h1>
               <Switch>
+                <Route path="/users/:id/edit" component={UsersEdit} />
                 <Route path="/users/:id" component={UsersShow} />
                 <Route path="/users" component={UsersIndex} />
                 <Route path="/login" component={AuthLogin} />

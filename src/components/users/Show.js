@@ -1,5 +1,7 @@
 import React from 'react';
 import axios from 'axios';
+import { Link } from 'react-router-dom';
+import Auth from '../../lib/Auth';
 
 
 class UsersShow extends React.Component{
@@ -32,9 +34,11 @@ class UsersShow extends React.Component{
           <h5 className="is-5">Grade:</h5>
           <h2 className="subtitle"><strong>{this.state.user.grade}</strong></h2>
         </div>
-        <div id="bottomBtn">
-          <button className="edit"><i className="fas fa-pencil-alt fa-3x"></i></button>
-        </div>
+        <Link to={`/users/${Auth.getPayload().sub}/edit`}>
+          <div id="bottomBtn">
+            <button className="edit"><i className="fas fa-pencil-alt fa-3x"></i></button>
+          </div>
+        </Link>
       </section>
     );
   }
