@@ -52,14 +52,7 @@ function login(req, res, next) {
 module.exports = {
   index: indexRoute,
   show: showRoute,
-<<<<<<< HEAD
   update: updateRoute,
-  sessionsCreate: sessionsCreate,
-  sessionsIndex: sessionsIndex,
-  sessionsShow: sessionsShow,
-  sessionsUpdate: sessionsUpdate,
-=======
->>>>>>> development
   register,
   login
 };
