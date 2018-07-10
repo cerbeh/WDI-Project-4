@@ -5,6 +5,9 @@ const secureRoute = require('../lib/secureRoute');
 router.post('/register', user.register);
 router.post('/login', user.login);
 
+router.route('/users')
+  .get(user.index);
+
 router.route('/users/:id/sessions')
   .post(secureRoute, user.sessionsCreate)
   .get(user.sessionsIndex);
