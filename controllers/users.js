@@ -89,6 +89,13 @@ function sessionsUpdate(req, res , next) {
     .catch(next);
 }
 
+function sessionsDelete(req, res, next) {
+  User.findById(req.params.id
+    .then(user => {
+      
+    }))
+}
+
 module.exports = {
   index: indexRoute,
   show: showRoute,
