@@ -1,6 +1,13 @@
 const mongoose = require('mongoose');
 const bcrypt = require('bcrypt');
 
+
+// const weightSchema = new mongoose.Schema({
+//   value: Number,
+//   updated: { type: Date, default: Date.now }
+// });
+
+
 const sessionSchema = new mongoose.Schema({
   title: String,
   discipline: { type: String, required: true },
@@ -13,6 +20,11 @@ const userSchema = new mongoose.Schema({
   username: { type: String, required: true },
   email: { type: String, required: true },
   password: { type: String, required: true},
+  gender: { type: String, enum: ['Male', 'Female']},
+  grade: { type: String, enum: ['1st Kyu', '1st Dan', '2nd Dan', '3rd Dan', '4th Dan', '5th Dan', '6th Dan', '7th Dan', '8th Dan']},
+  dob: Date,
+  height: Number,
+  weight: Number,
   sessions: [ sessionSchema ]
 });
 
