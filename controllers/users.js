@@ -71,29 +71,35 @@ function sessionsShow(req, res, next) {
 function sessionsUpdate(req, res , next) {
   User.findById(req.params.id)
     .then(user => {
+      let updatedSession;
       user.sessions.map(session => {
         if(session._id.toString() === req.params.sessionId) {
           session.title = req.body.title;
           session.discipline = req.body.discipline;
           session.duration = req.body.duration;
           session.notes = req.body.notes;
+          return updatedSession = session;
         }
         return session;
       });
       user.save();
-      const session = user.sessions.filter(session => {
-        return session._id.toString() === req.params.sessionId;
-      })[0];
-      res.json(session);
+      res.json(updatedSession);
     })
     .catch(next);
 }
 
 function sessionsDelete(req, res, next) {
-  User.findById(req.params.id
+  User.findById(req.params.id)
     .then(user => {
-      
-    }))
+      user.sessions.forEach((session, index) => {
+        if(session._id.toString() === req.params.sessionId) {
+          user.sessions.splice(index, 1);
+        }
+      });
+      user.save();
+      res.json(user.sessions);
+    })
+    .catch(next);
 }
 
 module.exports = {
@@ -103,6 +109,7 @@ module.exports = {
   sessionsIndex: sessionsIndex,
   sessionsShow: sessionsShow,
   sessionsUpdate: sessionsUpdate,
+  sessionsDelete: sessionsDelete,
   register,
   login
 };
