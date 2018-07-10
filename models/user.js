@@ -1,11 +1,22 @@
 const mongoose = require('mongoose');
 const bcrypt = require('bcrypt');
 
+const sessionSchema = new mongoose.Schema({
+  title: String,
+  discipline: { type: String, required: true },
+  date: Date,
+  duration: Number,
+  notes: String
+});
+
 const userSchema = new mongoose.Schema({
   username: { type: String, required: true },
   email: { type: String, required: true },
-  password: { type: String, required: true}
+  password: { type: String, required: true},
+  sessions: [ sessionSchema ]
 });
+
+
 
 
 userSchema.set('toJSON', {
@@ -34,6 +45,10 @@ userSchema.pre('save', function hashPassword(next) {
   }
   next();
 });
+
+userSchema.methods.validatePassword = function validatePassword(password) {
+  return bcrypt.compareSync(password, this.password);
+};
 
 
 module.exports = mongoose.model('User', userSchema);
