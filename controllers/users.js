@@ -60,7 +60,10 @@ function sessionsIndex(req, res, next) {
 function sessionsShow(req, res, next) {
   User.findById(req.params.id)
     .then(user => {
-      console.log(user);
+      const session = user.sessions.filter(session => {
+        return session._id.toString() === req.params.sessionId;
+      })[0];
+      res.json(session);
     })
     .catch(next);
 }

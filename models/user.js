@@ -16,9 +16,6 @@ const userSchema = new mongoose.Schema({
   sessions: [ sessionSchema ]
 });
 
-
-
-
 userSchema.set('toJSON', {
   virtuals: true,
   transform(doc, json) {
