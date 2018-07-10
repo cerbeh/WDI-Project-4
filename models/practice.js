@@ -10,7 +10,7 @@ const practiceSchema = new mongoose.Schema({
   practiceType: { type: String, required: 'Type of practice is required'},
   description: String,
   venue: String,
-  startDate: String,
+  date: String,
   history: [ historySchema ]
 });
 
