@@ -1,13 +1,10 @@
 const router = require('express').Router();
-const users = require('../controllers/users');
+const user = require('../controllers/users');
 const secureRoute = require('../lib/secureRoute');
 
-router.get('/users', users.index);
+router.post('/register', user.register);
+router.post('/login', user.login);
 
-router.route('/users/:id')
-  .get(secureRoute, users.show);
-
-router.post('/register', users.register);
-router.post('/login', users.login);
+router.post('/users/:id/sessions',secureRoute, user.sessionCreate);
 
 module.exports = router;

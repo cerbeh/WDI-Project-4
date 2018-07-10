@@ -17,7 +17,7 @@ mongoose.connect(dbURI, (err, db) => {
         discipline: 'Keiko',
         // date: 2018-07-10,
         duration: 60,
-        note: 'Smashed it.'
+        notes: 'Smashed it.'
       }]
       // practiceType: [{name: 'keiko'}, {name: 'kata'}]
     }, {
@@ -31,7 +31,7 @@ mongoose.connect(dbURI, (err, db) => {
         discipline: 'Keiko',
         // date: 2018-07-10,
         duration: 60,
-        note: 'Smashed it.'
+        notes: 'Smashed it.'
       }]
       // practiceType: [{name: 'shiai'}, {name: 'kata'}]
     }, {
@@ -45,7 +45,7 @@ mongoose.connect(dbURI, (err, db) => {
         discipline: 'Keiko',
         // date: 2018-07-10,
         duration: 60,
-        note: 'Smashed it.'
+        notes: 'Smashed it.'
       }]
       // practiceType: [{name: 'keiko'}, {name: 'kata'}]
     }, {
@@ -58,7 +58,7 @@ mongoose.connect(dbURI, (err, db) => {
         discipline: 'Keiko',
         // date: 2018-07-10,
         duration: 60,
-        note: 'Smashed it.'
+        notes: 'Smashed it.'
       }]
       // practiceType: [{name: 'keiko'}, {name: 'kata'}]
     }, {
@@ -71,7 +71,7 @@ mongoose.connect(dbURI, (err, db) => {
         discipline: 'Keiko',
         // date: 2018-07-10,
         duration: 60,
-        note: 'Smashed it.'
+        notes: 'Smashed it.'
       }]
       // practiceType: [{name: 'shiai'}, {name: 'kata'}]
     }, {
@@ -84,7 +84,7 @@ mongoose.connect(dbURI, (err, db) => {
         discipline: 'Keiko',
         // date: 2018-07-10,
         duration: 60,
-        note: 'Smashed it.'
+        notes: 'Smashed it.'
       }]
       // practiceType: [{name: 'keiko'}, {name: 'kata'}]
     }, {
@@ -97,7 +97,7 @@ mongoose.connect(dbURI, (err, db) => {
         discipline: 'Keiko',
         // date: 2018-07-10,
         duration: 60,
-        note: 'Smashed it.'
+        notes: 'Smashed it.'
       }]
       // practiceType: [{name: 'keiko'}, {name: 'kata'}]
     }, {
@@ -110,7 +110,7 @@ mongoose.connect(dbURI, (err, db) => {
         discipline: 'Keiko',
         // date: 2018-07-10,
         duration: 60,
-        note: 'Smashed it.'
+        notes: 'Smashed it.'
       }]
       // practiceType: [{name: 'shiai'}]
     }, {
@@ -123,7 +123,7 @@ mongoose.connect(dbURI, (err, db) => {
         discipline: 'Keiko',
         // date: 2018-07-10,
         duration: 60,
-        note: 'Smashed it.'
+        notes: 'Smashed it.'
       }]
       // practiceType: [{name: 'keiko'}]
     }]))

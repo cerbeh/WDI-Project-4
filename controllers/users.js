@@ -41,9 +41,20 @@ function login(req, res, next) {
     .catch(next);
 }
 
+function sessionCreate(req, res, next) {
+  User.findById(req.currentUser._id)
+    .then(user => {
+      user.sessions.push(req.body);
+      return user.save();
+    })
+    .then(user => res.json(user))
+    .catch(next);
+}
+
 module.exports = {
   index: indexRoute,
   show: showRoute,
+  sessionCreate: sessionCreate,
   register,
   login
 };
