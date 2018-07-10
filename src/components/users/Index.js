@@ -19,14 +19,18 @@ class UsersIndex extends React.Component{
   }
   render(){
     return(
-      <div>
+      <section>
         <h1>Users Index</h1>
-        {this.state.users.map(user =>
-          <div key={user._id}>{user.username}
-            <Link to={`/users/${user._id}`}>{user.username}</Link>
+        <div>
+          <div>
+            {this.state.users.map(user =>
+              <div key={user._id}>{user.username}
+                <Link to={`/users/${user._id}`}>{user.username}</Link>
+              </div>
+            )}
           </div>
-        )}
-      </div>
+        </div>
+      </section>
     );
   }
 }
