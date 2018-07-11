@@ -19,10 +19,7 @@ class UsersEdit extends React.Component{
   }
 
   handleChange=({ target: { name, value }})=> {
-    console.log(name, 'name');
-    console.log(value, 'value');
-    const newState = { ...this.state.user, [name]: value};
-    console.log(newState);
+    const newState = { ...this.state.user, [name]: value };
     this.setState({ user: newState });
   }
 

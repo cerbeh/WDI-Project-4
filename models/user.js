@@ -33,7 +33,12 @@ const userSchema = new mongoose.Schema({
 
 userSchema.path('dob')
   .get(function formatDate(dob) {
-    return moment(dob).format('YYYY-MM-DD').split(' at')[0];
+    return moment(dob).format('YYYY-MM-DD');
+  });
+
+sessionSchema.path('date')
+  .get(function formatDate(date) {
+    return moment(date).format('YYYY-MM-DD');
   });
 
 userSchema.set('toJSON', {
@@ -69,7 +74,8 @@ userSchema.methods.validatePassword = function validatePassword(password) {
 };
 
 sessionSchema.set('toJSON', {
-  virtuals: true
+  virtuals: true,
+  getters: true
 });
 
 sessionSchema
