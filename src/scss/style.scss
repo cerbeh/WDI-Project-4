@@ -2,7 +2,14 @@
 @import '~bulma';
 @import 'variables';
 
-
+.hero-body{
+  font-family: $primary-font;
+  padding-left: 10%;
+  .title{
+    font-size: 5rem;
+    letter-spacing: normal;
+  }
+}
 .header-image {
     background-image: url("https://i.imgur.com/ubXKmWN.jpg");
     background-position: center center;
@@ -14,10 +21,6 @@
 
 .fa-arrow-alt-circle-right{
   color: $accent-colour;
-}
-
-.home-container{
-  padding-left: 10%;
 }
 
 
