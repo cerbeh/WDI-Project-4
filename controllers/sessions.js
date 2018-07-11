@@ -35,10 +35,6 @@ function updateRoute(req, res , next) {
         { '$set': {
           'sessions.$.title': req.body.title
         }},
-        function(err, model) {
-          if (err) next();
-          return res.json(model);
-        }
       );
 
       // user.update({ 'sessions.$': req.params.sessionId },
