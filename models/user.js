@@ -17,6 +17,7 @@ const sessionSchema = new mongoose.Schema({
   notes: String
 });
 
+
 const userSchema = new mongoose.Schema({
   username: { type: String, required: true },
   email: { type: String, required: true },
@@ -30,10 +31,9 @@ const userSchema = new mongoose.Schema({
 });
 
 
-
 userSchema.path('dob')
   .get(function formatDate(dob) {
-    return moment(dob).format('YYYY-MM-DD');
+    return moment(dob).format('YYYY-MM-DD').split(' at')[0];
   });
 
 // userSchema.path('sessions')

@@ -3,6 +3,7 @@ import axios from 'axios';
 import { Link } from 'react-router-dom';
 import Auth from '../../lib/Auth';
 import Chart from '../charts/Chart';
+import moment from 'moment';
 
 class UsersShow extends React.Component{
   constructor(){
@@ -12,6 +13,7 @@ class UsersShow extends React.Component{
   }
 
   componentDidMount(){
+    this.getDisplayDate(moment());
     this.getChartData();
     axios.get(`/api/users/${this.props.match.params.id}`)
       .then(res => this.setState({ user: res.data }))
@@ -41,6 +43,9 @@ class UsersShow extends React.Component{
         ]
       }
     });
+  }
+  getDisplayDate(date) {
+    this.setState({ displayDate: moment(date).calendar().split(' at')[0] });
   }
   render(){
     if(this.state.error) return <h2 className="title is-2">{this.state.error}</h2>;

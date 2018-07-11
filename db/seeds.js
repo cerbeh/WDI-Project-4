@@ -24,9 +24,69 @@ mongoose.connect(dbURI, (err, db) => {
         notes: 'Smashed it.'
       },{
         title: 'Practice for semis',
+        discipline: 'Keiko',
+        // date: 2018-07-10,
+        duration: 45,
+        notes: 'Sesh'
+      },{
+        title: 'Practice for semis',
+        discipline: 'Keiko',
+        // date: 2018-07-10,
+        duration: 50,
+        notes: 'Sesh'
+      },{
+        title: 'Practice for semis',
+        discipline: 'Keiko',
+        // date: 2018-07-10,
+        duration: 50,
+        notes: 'Sesh'
+      },{
+        title: 'Practice for semis',
+        discipline: 'Kata',
+        // date: 2018-07-10,
+        duration: 50,
+        notes: 'Sesh'
+      },{
+        title: 'Practice for semis',
+        discipline: 'Kata',
+        // date: 2018-07-10,
+        duration: 50,
+        notes: 'Sesh'
+      },{
+        title: 'Practice for semis',
         discipline: 'Kata',
         // date: 2018-07-10,
         duration: 45,
+        notes: 'Sesh'
+      },{
+        title: 'Practice for semis',
+        discipline: 'Shiai',
+        // date: 2018-07-10,
+        duration: 30,
+        notes: 'Sesh'
+      },{
+        title: 'Practice for semis',
+        discipline: 'Shiai',
+        // date: 2018-07-10,
+        duration: 45,
+        notes: 'Sesh'
+      },{
+        title: 'Practice for semis',
+        discipline: 'Shiai',
+        // date: 2018-07-10,
+        duration: 30,
+        notes: 'Sesh'
+      },{
+        title: 'Practice for semis',
+        discipline: 'Shiai',
+        // date: 2018-07-10,
+        duration: 45,
+        notes: 'Sesh'
+      },{
+        title: 'Practice for semis',
+        discipline: 'Kata',
+        // date: 2018-07-10,
+        duration: 10,
         notes: 'Sesh'
       }]
     }, {

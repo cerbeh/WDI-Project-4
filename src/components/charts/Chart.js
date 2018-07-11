@@ -5,6 +5,8 @@ class Chart extends React.Component{
   constructor(){
     super();
     this.state={
+      daysDisplayed: null,
+      mode: 'all-time',
       chartData: {
         labels: ['2018-07-01', '2018-07-02','2018-07-03','2018-07-04','2018-07-05','2018-07-06','2018-07-07'],
         datasets: [

@@ -2,6 +2,7 @@ import React from 'react';
 
 const SessionsForm = ({ handleChange, handleSubmit, data}) => {
 
+  console.log(data);
   return(
     <form onSubmit={handleSubmit}>
       <div className="field">
