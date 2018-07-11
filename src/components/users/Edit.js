@@ -18,14 +18,15 @@ class UsersEdit extends React.Component{
   }
 
   handleChange=({ target: { name, value }})=>{
-    this.setState({ [name]: value});
+    this.setState({ user: {[name]: value}});
   }
+
   handleSubmit = (e) => {
     e.preventDefault();
     axios({
       url: `/api/users/${this.props.match.params.id}`,
       method: 'PUT',
-      data: this.state,
+      data: this.state.user,
       headers: { Authorization: `Bearer ${Auth.getToken()}`}
     })
       .then(() => this.props.history.push(`/users/${Auth.getPayload().sub}`))
