@@ -1,13 +1,17 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
+import Auth from '../../lib/Auth';
 
 const Footer = () => {
   return (
+    <div>
+      {Auth.isAuthenticated() &&
     <nav className="navbar is-link is-fixed-bottom" role="navigation">
       <div className="navbar-brand">
-        <a className="navbar-item is-expanded  is-block has-text-centered">
+        <Link className="navbar-item is-expanded is-block has-text-centered" to={`/users/${Auth.getPayload().sub}`}>
           <i className="fa fa-user"></i>
           <p className="is-size-7">Account</p>
-        </a>
+        </Link>
         <a className="navbar-item is-expanded  is-block has-text-centered">
           <i className="far fa-calendar-alt"></i>
           <p className="is-size-7">Schedule</p>
@@ -26,6 +30,8 @@ const Footer = () => {
         </a>
       </div>
     </nav>
+      }
+    </div>
   );
 };
 
