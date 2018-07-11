@@ -34,9 +34,8 @@ userSchema.path('dob')
     return moment(dob).format('YYYY-MM-DD');
   });
 
-userSchema.set('toJSON', { getters: true });
-
 userSchema.set('toJSON', {
+  getters: true,
   virtuals: true,
   transform(doc, json) {
     delete json.password;

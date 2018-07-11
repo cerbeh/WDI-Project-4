@@ -18,9 +18,15 @@ class SessionsIndex extends React.Component {
         <div>
           <ul>
             { this.state.sessions && this.state.sessions.map(session =>
-              <li key={session._id}>
+              <li key={session._id} className="session-list">
                 <Link to={`/users/${this.props.match.params.id}/sessions/${session._id}`}>
                   {session.title}
+                </Link>
+                <p>
+                  {session.date}
+                </p>
+                <Link to={`/users/${this.props.match.params.id}/sessions/${session._id}/edit`}>
+                  Edit
                 </Link>
               </li>
             )}
