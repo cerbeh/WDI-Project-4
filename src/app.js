@@ -9,6 +9,7 @@ import AuthLogin from './components/auth/Login';
 import AuthRegister from './components/auth/Register';
 import Navbar from './components/common/Navbar';
 import Footer from './components/common/Footer';
+
 import 'bulma';
 import './scss/style.scss';
 class App extends React.Component {
