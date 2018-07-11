@@ -25,6 +25,9 @@ class SessionsIndex extends React.Component {
               </li>
             )}
           </ul>
+          <Link className="button" to={`/users/${this.props.match.params.id}/sessions/new`}>
+            NEW SESH
+          </Link>
         </div>
       </section>
     );

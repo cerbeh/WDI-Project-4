@@ -22,7 +22,7 @@ class sessionsNew extends React.Component {
       headers: { Authorization: `Bearer ${Auth.getToken()}`}
     })
       .then(() => {
-        this.props.history.push(`/users/${Auth.getPayload().sub}/`);
+        this.props.history.push(`/users/${this.props.match.params.id}/sessions`);
       })
       .catch(err => this.setState({errors: err.response.data.errors}));
   }
