@@ -28,21 +28,22 @@ function showRoute(req, res, next) {
 }
 
 function updateRoute(req, res , next) {
+  console.log(req.body);
   User.findById(req.params.id)
     .then(user => {
-      let updatedSession;
-      user.sessions.map(session => {
-        if(session._id.toString() === req.params.sessionId) {
-          session.title = req.body.title;
-          session.discipline = req.body.discipline;
-          session.duration = req.body.duration;
-          session.notes = req.body.notes;
-          return updatedSession = session;
-        }
-        return session;
-      });
-      user.save();
-      res.json(updatedSession);
+      user.update({ 'sessions.id': req.params.sessionId },
+        {'$set': {
+          'sessions.$.title': req.body.title,
+          'discipline.$.discipline': req.body.discipline,
+          'duration.$.duration': req.body.duration,
+          'notes.$.notes': req.body.notes
+        }}
+      );
+      console.log(user);
+    })
+    .then(user => {
+      console.log(user);
+      res.json(user);
     })
     .catch(next);
 }
