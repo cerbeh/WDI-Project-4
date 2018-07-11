@@ -1,12 +1,12 @@
 import React from 'react';
-import { Line, Bar, Pie } from 'react-chartjs-2';
+import { Line } from 'react-chartjs-2';
 
 class Chart extends React.Component{
   constructor(){
     super();
     this.state={
       chartData: {
-        labels: ['kata', 'keiko','shiai'],
+        labels: ['2018-07-01', '2018-07-02','2018-07-03','2018-07-04','2018-07-05','2018-07-06','2018-07-07'],
         datasets: [
           {
             label: 'Duration',
