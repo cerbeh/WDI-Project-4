@@ -7,12 +7,12 @@ const UsersForm = ({ handleChange, handleSubmit, data }) => {
     <form onSubmit={handleSubmit}>
       <div className="field">
         <label className="label">Username</label>
-        <input className="input" name="username" placeholder="Username" onChange={handleChange} value={data.username || ''}/>
+        {data.user && <input className="input" name="username" placeholder="Username" onChange={handleChange} value={data.user.username || ''}/>}
         {data.errors.username && <small>{data.errors.username}</small>}
       </div>
       <div className="field">
         <label className="label">Date of Birth</label>
-        <input className="input" type="date" name="dob" placeholder="Date of Birth" onChange={handleChange} value={data.dob || ''} />
+        {data.user && <input className="input" type="date" name="dob" placeholder="Date of Birth" onChange={handleChange} value={data.user.dob || ''} />}
         {data.errors.dob && <small>{data.errors.dob}</small>}
       </div>
       <div className="field">
@@ -30,12 +30,12 @@ const UsersForm = ({ handleChange, handleSubmit, data }) => {
       </div>
       <div className="field">
         <label className="label">Height</label>
-        <input className="input" name="image" placeholder="Height" onChange={handleChange} value={data.height || ''}/>
+        {data.user && <input className="input" name="image" placeholder="Height" onChange={handleChange} value={data.user.height || ''}/>}
         {data.errors.height && <small>{data.errors.height}</small>}
       </div>
       <div className="field">
         <label className="label">Weight</label>
-        <input className="input" name="image" placeholder="Weight" onChange={handleChange} value={data.weight || ''}/>
+        {data.user && <input className="input" name="image" placeholder="Weight" onChange={handleChange} value={data.user.weight || ''}/>}
         {data.errors.weight && <small>{data.errors.weight}</small>}
       </div>
       <div className="field">
