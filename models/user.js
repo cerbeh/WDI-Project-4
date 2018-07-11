@@ -34,6 +34,14 @@ userSchema.path('dob')
     return moment(dob).format('YYYY-MM-DD');
   });
 
+// userSchema.path('sessions')
+//   .get(function formatDate(sessions) {
+//     sessions.forEach(session => {
+//       console.log(session);
+//       return moment(session).format('YYYY-MM-DD');
+//     });
+//   });
+
 userSchema.set('toJSON', {
   getters: true,
   virtuals: true,
