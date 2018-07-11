@@ -19,11 +19,11 @@ const UsersForm = ({ handleChange, handleSubmit, data }) => {
         <label className="label">Gender</label>
         <div className="control">
           <div className="select is-fullwidth">
-            <select name="gender" onChange={handleChange} value={data.gender || ''}>
+            {data.user &&  <select name="gender" onChange={handleChange} value={data.user.gender || ''}>
               <option value="" disabled>Please choose</option>
               <option>Male</option>
               <option>Female</option>
-            </select>
+            </select>}
           </div>
         </div>
         {data.errors.gender && <small>{data.errors.gender}</small>}
@@ -42,7 +42,7 @@ const UsersForm = ({ handleChange, handleSubmit, data }) => {
         <label className="label">Grade</label>
         <div className="control">
           <div className="select is-fullwidth">
-            <select name="grade" onChange={handleChange} value={data.grade || ''}>
+            { data.user &&  <select name="grade" onChange={handleChange} value={data.user.grade || ''}>
               <option value="" disabled>Please choose</option>
               <option>1st Kyu</option>
               <option>1st Dan</option>
@@ -53,7 +53,7 @@ const UsersForm = ({ handleChange, handleSubmit, data }) => {
               <option>6th Dan</option>
               <option>7th Dan</option>
               <option>8th Dan</option>
-            </select>
+            </select>}
           </div>
         </div>
         {data.errors.grade && <small>{data.errors.grade}</small>}
