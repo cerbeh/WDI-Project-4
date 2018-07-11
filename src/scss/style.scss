@@ -6,11 +6,15 @@
   font-family: $primary-font;
   padding-left: 10%;
   .title{
-    font-size: 5rem;
+    color: white;
+    font-size: 3rem;
     letter-spacing: normal;
   }
+  h2{
+    color: white;
+  }
 }
-.header-image {
+.hero {
     background-image: url("https://i.imgur.com/ubXKmWN.jpg");
     background-position: center center;
     background-repeat: no-repeat;
@@ -25,7 +29,8 @@
 
 
 .edit {
-  border-style: none
+  border-style: none;
+  background: transparent;
 }
 
 #bottomBtn {
@@ -38,3 +43,68 @@
   display: flex;
   justify-content: space-around;
 }
+
+
+.navbar-burger {
+    position: fixed;
+    top: 0;
+    right: 1rem;
+    background-color: transparent;
+    z-index: 2000;
+    margin: 0;
+    padding: 0;
+    border: none;
+    outline: none;
+
+    span {
+        height: 3px;
+        left: calc(50% - 15px);
+        width: 30px;
+    }
+
+    &:hover {
+        background-color: transparent;
+    }
+}
+
+
+.social {
+        color: grey;
+        text-align: center;
+        font-size: 1.5rem;
+        margin-top: 40px;
+        margin-bottom: 2rem;
+
+        ul {
+            display: inline;
+
+            li {
+                display: inline-block;
+                list-style: none;
+                margin-right: 1.5rem;
+
+                a, a:visited, a:active {
+                    text-decoration: none;
+                    color: inherit;
+                }
+
+                &:last-child {
+                    margin-right: 0;
+                }
+            }
+        }
+    }
+
+
+    @media only screen and (min-width: 768px) {
+        /* styles for wide screens */
+        .hero {
+            background-image: url("https://imgur.com/86pvG6E.jpg");
+            background-size: cover;
+            background-color: #999;
+            width: 100%;
+            margin: 0;
+        }
+
+
+    }

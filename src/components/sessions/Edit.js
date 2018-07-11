@@ -3,14 +3,13 @@ import axios from 'axios';
 
 import Form from './Form';
 import Auth from '../../lib/Auth';
-import moment from 'moment';
+
 
 class SessionsEdit extends React.Component {
 
   state = {}
 
   componentDidMount() {
-    this.getDisplayDate(moment());
     axios.get(`/api/users/${this.props.match.params.id}/sessions/${this.props.match.params.sessionId}`)
       .then(res => this.setState({ session: res.data }));
   }
@@ -27,10 +26,6 @@ class SessionsEdit extends React.Component {
       data: this.state,
       headers: { Authorization: `Bearer ${Auth.getToken()}`}
     });
-  }
-
-  getDisplayDate(date) {
-    this.setState({ displayDate: moment(date).calendar().split(' at')[0] });
   }
 
   render() {

@@ -31,6 +31,16 @@ const userSchema = new mongoose.Schema({
 });
 
 
+userSchema.virtual('totalPracticeTime')
+  .get(function() {
+    if (this.sessions.duration) {
+      const totalPracticed = this.sessions.duration.map(entry => {
+        return entry.totalPracticed;
+      });
+      return totalPracticed.reduce((a, i) => a + i, 0);
+    }
+  });
+
 userSchema.path('dob')
   .get(function formatDate(dob) {
     return moment(dob).format('YYYY-MM-DD').split(' at')[0];
@@ -73,8 +83,11 @@ userSchema.methods.validatePassword = function validatePassword(password) {
   return bcrypt.compareSync(password, this.password);
 };
 
+
+
 sessionSchema.set('toJSON', {
-  virtuals: true
+  virtuals: true,
+  getters: true
 });
 
 sessionSchema

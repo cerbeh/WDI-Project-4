@@ -1,52 +1,35 @@
-import React from 'react';
+import React, {Component} from 'react';
 import { Line } from 'react-chartjs-2';
 
-class Chart extends React.Component{
-  constructor(){
-    super();
-    this.state={
-      daysDisplayed: null,
-      mode: 'all-time',
-      chartData: {
-        labels: ['2018-07-01', '2018-07-02','2018-07-03','2018-07-04','2018-07-05','2018-07-06','2018-07-07'],
-        datasets: [
-          {
-            label: 'Duration',
-            data: [
-              60,
-              20,
-              15,
-              25,
-              40,
-              5
-            ],
-            backgroundColor: [
-              'rgba(255, 99, 132, 0.6)',
-              'rgba(54, 162, 235, 0.6)',
-              'rgba(255, 206, 86, 0.6)'
-            ]
-          }
-        ]
-      }
+class Chart extends Component{
+  constructor(props){
+    super(props);
+    this.state = {
+      chartData: props.chartData
     };
   }
 
+  static defaultProps = {
+    displayTitle: true,
+    displayLegend: true,
+    legendPosition: 'right'
+  }
 
   render(){
-    return(
-      <div className="container">
+    return (
+      <div className="chart">
+
         <Line
           data={this.state.chartData}
-          width={100}
-          height={50}
           options={{
             title: {
-              display: this.props.displayTi,
-              text: 'Amount practiced',
+              display: this.props.displayTitle,
+              text: 'Total Practice Time',
               fontSize: 25
             },
             legend: {
-              display: true
+              display: this.props.displayLegend,
+              position: this.props.legendPosition
             }
           }}
         />

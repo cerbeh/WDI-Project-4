@@ -30,21 +30,19 @@ class App extends React.Component {
       <BrowserRouter>
         <main>
           <Navbar />
-          <section>
-            <div className="container">
-              <Switch>
-                <Route path="/users/:id/edit" component={UsersEdit} />
-                <Route path="/users/:id/sessions/new" component={SessionsNew} />
-                <Route path="/users/:id/sessions/:sessionId/edit" component={SessionsEdit} />
-                <Route path="/users/:id/sessions/:sessionId" component={SessionsShow} />
-                <Route path="/users/:id/sessions/" component={SessionsIndex} />
-                <Route path="/users/:id" component={UsersShow} />
-                <Route path="/users" component={UsersIndex} />
-                <Route path="/login" component={AuthLogin} />
-                <Route path="/register" component={AuthRegister} />
-                <Route exact path="/" component={Home} />
-              </Switch>
-            </div>
+          <section className="section-content">
+            <Switch>
+              <Route path="/users/:id/edit" component={UsersEdit} />
+              <Route path="/users/:id/sessions/new" component={SessionsNew} />
+              <Route path="/users/:id/sessions/:sessionId/edit" component={SessionsEdit} />
+              <Route path="/users/:id/sessions/:sessionId" component={SessionsShow} />
+              <Route path="/users/:id/sessions/" component={SessionsIndex} />
+              <Route path="/users/:id" component={UsersShow} />
+              <Route path="/users" component={UsersIndex} />
+              <Route path="/login" component={AuthLogin} />
+              <Route path="/register" component={AuthRegister} />
+              <Route exact path="/" component={Home} />
+            </Switch>
           </section>
           <Footer />
         </main>

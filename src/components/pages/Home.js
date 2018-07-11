@@ -10,7 +10,7 @@ class Home extends React.Component {
 
   render() {
     return <div>
-      <section className="hero is-primary is-fullheight header-image">
+      <section className="hero is-fullheight">
         <div className="hero-head">
         </div>
         <div className="hero-body">
@@ -22,7 +22,7 @@ class Home extends React.Component {
               Focus on being better than you were yesterday
             </h2>
             {!Auth.isAuthenticated() && <Link className="navbar-item" to="/register"><i className="fas fa-arrow-alt-circle-right fa-5x"></i></Link>}
-            {Auth.isAuthenticated() && <Link className="navbar-item" to={`/users/${Auth.getPayload().sub}`}><i className="fas fa-arrow-alt-circle-right fa-5x"></i></Link>}
+            {Auth.isAuthenticated() && <Link className="navbar-item" to={`/users/${Auth.getPayload().sub}`}><i className="fas fa-arrow-alt-circle-right fa-2x"></i></Link>}
 
           </div>
         </div>
