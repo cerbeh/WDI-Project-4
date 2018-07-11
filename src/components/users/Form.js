@@ -1,6 +1,8 @@
 import React from 'react';
 
 const UsersForm = ({ handleChange, handleSubmit, data }) => {
+
+  console.log(data);
   return (
     <form onSubmit={handleSubmit}>
       <div className="field">
