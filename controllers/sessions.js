@@ -31,19 +31,22 @@ function updateRoute(req, res , next) {
   console.log(req.body);
   User.findById(req.params.id)
     .then(user => {
-      user.update({ 'sessions.id': req.params.sessionId },
-        {'$set': {
-          'sessions.$.title': req.body.title,
-          'discipline.$.discipline': req.body.discipline,
-          'duration.$.duration': req.body.duration,
-          'notes.$.notes': req.body.notes
-        }}
+      user.update({ 'sessions._id': req.body.sessionId },
+        { '$set': {
+          'sessions.$.title': req.body.title
+        }},
+        function(err, model) {
+          if (err) next();
+          return res.json(model);
+        }
       );
-      console.log(user);
-    })
-    .then(user => {
-      console.log(user);
-      res.json(user);
+
+      // user.update({ 'sessions.$': req.params.sessionId },
+      //   {'$set': {
+      //     'sessions.$.title': req.body.title
+      //   }}
+      // );
+      res.json(user.sessions);
     })
     .catch(next);
 }
