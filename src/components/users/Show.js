@@ -59,11 +59,28 @@ class UsersShow extends React.Component{
           <h2 className="subtitle"><strong>{this.state.user.grade}</strong></h2>
         </div>
         <Chart chartData={this.state.chartData}/>
-        <Link to={`/users/${Auth.getPayload().sub}/edit`}>
-          <div id="bottomBtn">
-            <button className="edit"><i className="fas fa-pencil-alt fa-3x"></i></button>
-          </div>
-        </Link>
+        <div id="bottomBtn">
+          <Link to={`/users/${Auth.getPayload().sub}/edit`}>
+            <button className="edit">
+              <i className="fas fa-pencil-alt fa-3x"></i>
+              <p>Edit Profile</p>
+            </button>
+          </Link>
+          <Link to={`/users/${this.props.match.params.id}/sessions`}>
+            <button className="edit">
+              <i className="fas fa-history fa-3x"></i>
+              <i className="fas fa-dumbbell fa-3x"></i>
+              <p>Past Sessions</p>
+            </button>
+          </Link>
+          <Link to={`/users/${this.props.match.params.id}/sessions/new`}>
+            <button className="edit">
+              <i className="fas fa-plus fa-3x"></i>
+              <i className="fas fa-dumbbell fa-3x"></i>
+              <p>New Sesh</p>
+            </button>
+          </Link>
+        </div>
       </section>
     );
   }
