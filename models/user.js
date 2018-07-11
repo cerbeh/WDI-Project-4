@@ -36,13 +36,10 @@ userSchema.path('dob')
     return moment(dob).format('YYYY-MM-DD').split(' at')[0];
   });
 
-// userSchema.path('sessions')
-//   .get(function formatDate(sessions) {
-//     sessions.forEach(session => {
-//       console.log(session);
-//       return moment(session).format('YYYY-MM-DD');
-//     });
-//   });
+sessionSchema.path('date')
+  .get(function formatDate(date) {
+    return moment(date).format('YYYY-MM-DD');
+  });
 
 userSchema.set('toJSON', {
   getters: true,
