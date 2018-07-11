@@ -34,11 +34,6 @@ userSchema.path('dob')
     return moment(dob).format('YYYY-MM-DD');
   });
 
-sessionSchema.path('date')
-  .get(function formatDate(date) {
-    return moment(date).format('YYYY-MM-DD');
-  });
-
 userSchema.set('toJSON', {
   getters: true,
   virtuals: true,
