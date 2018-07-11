@@ -17,6 +17,7 @@ const sessionSchema = new mongoose.Schema({
   notes: String
 });
 
+
 const userSchema = new mongoose.Schema({
   username: { type: String, required: true },
   email: { type: String, required: true },
@@ -29,9 +30,10 @@ const userSchema = new mongoose.Schema({
   sessions: [ sessionSchema ]
 });
 
+
 userSchema.path('dob')
   .get(function formatDate(dob) {
-    return moment(dob).format('YYYY-MM-DD');
+    return moment(dob).format('YYYY-MM-DD').split(' at')[0];
   });
 
 userSchema.set('toJSON', {
@@ -66,5 +68,16 @@ userSchema.methods.validatePassword = function validatePassword(password) {
   return bcrypt.compareSync(password, this.password);
 };
 
+sessionSchema.set('toJSON', {
+  virtuals: true
+});
+
+sessionSchema
+  .virtual('extraNotes')
+  .get(function(){
+    if (this.notes) {
+      return this.notes.length > 100 ? this.notes.substring(0, 100) + '...' : this.notes;
+    }
+  });
 
 module.exports = mongoose.model('User', userSchema);

@@ -6,7 +6,8 @@ import UsersForm from './Form';
 
 class UsersEdit extends React.Component{
   state ={
-    errors: {}
+    errors: {},
+    user: {}
   }
 
   componentDidMount() {
@@ -17,15 +18,20 @@ class UsersEdit extends React.Component{
       .catch(err => this.setState({ error: err.message }));
   }
 
-  handleChange=({ target: { name, value }})=>{
-    this.setState({ [name]: value});
+  handleChange=({ target: { name, value }})=> {
+    console.log(name, 'name');
+    console.log(value, 'value');
+    const newState = { ...this.state.user, [name]: value};
+    console.log(newState);
+    this.setState({ user: newState });
   }
+
   handleSubmit = (e) => {
     e.preventDefault();
     axios({
       url: `/api/users/${this.props.match.params.id}`,
       method: 'PUT',
-      data: this.state,
+      data: this.state.user,
       headers: { Authorization: `Bearer ${Auth.getToken()}`}
     })
       .then(() => this.props.history.push(`/users/${Auth.getPayload().sub}`))
@@ -37,7 +43,8 @@ class UsersEdit extends React.Component{
       <UsersForm
         handleChange={this.handleChange}
         handleSubmit={this.handleSubmit}
-        data={this.state}
+        data={this.state.user}
+        errors={this.state.errors}
       />
     );
   }

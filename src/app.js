@@ -21,6 +21,9 @@ import Home from './components/pages/Home';
 import Navbar from './components/common/Navbar';
 import Footer from './components/common/Footer';
 
+import 'bulma';
+import './scss/style.scss';
+
 class App extends React.Component {
   render() {
     return (
