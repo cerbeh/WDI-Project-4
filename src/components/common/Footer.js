@@ -4,9 +4,11 @@ import Auth from '../../lib/Auth';
 
 const Footer = () => {
   return (
+    <div>
+      {Auth.isAuthenticated() &&
     <nav className="navbar is-link is-fixed-bottom" role="navigation">
       <div className="navbar-brand">
-        <Link className="navbar-item is-expanded is-block has-text-centered" to={`/users/${Auth.getPayload().sub}`}>   
+        <Link className="navbar-item is-expanded is-block has-text-centered" to={`/users/${Auth.getPayload().sub}`}>
           <i className="fa fa-user"></i>
           <p className="is-size-7">Account</p>
         </Link>
@@ -28,6 +30,8 @@ const Footer = () => {
         </a>
       </div>
     </nav>
+      }
+    </div>
   );
 };
 

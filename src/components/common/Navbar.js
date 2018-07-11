@@ -30,8 +30,7 @@ class Navbar extends React.Component{
             className={`navbar-burger${this.state.navbarOpen ? ' is-active' : ''}`}
             aria-label="menu"
             aria-expanded="false"
-            onClick={this.toggleNavbar}
-          >
+            onClick={this.toggleNavbar}>
             <span aria-hidden="true"></span>
             <span aria-hidden="true"></span>
             <span aria-hidden="true"></span>

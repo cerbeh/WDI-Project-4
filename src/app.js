@@ -19,7 +19,6 @@ class App extends React.Component {
           <Navbar />
           <section>
             <div className="container">
-              <h1>TEAM CHARTREUSE</h1>
               <Switch>
                 <Route path="/users/:id/edit" component={UsersEdit} />
                 <Route path="/users/:id" component={UsersShow} />
