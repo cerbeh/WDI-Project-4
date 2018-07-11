@@ -6,7 +6,9 @@ import Auth from '../../lib/Auth';
 
 class SessionsEdit extends React.Component {
 
-  state = {}
+  state = {
+    session: {}
+  }
 
   componentDidMount() {
     axios.get(`/api/users/${this.props.match.params.id}/sessions/${this.props.match.params.sessionId}`)
@@ -28,15 +30,14 @@ class SessionsEdit extends React.Component {
   }
 
   render() {
+    console.log(this.state);
     return(
       <div>
-        {this.state.session &&
-          <Form
-            handleChange={this.handleChange}
-            handleSubmit={this.handleSubmit}
-            data={this.state.session}
-          />
-        }
+        <Form
+          handleChange={this.handleChange}
+          handleSubmit={this.handleSubmit}
+          data={this.state.session}
+        />
       </div>
     );
   }
