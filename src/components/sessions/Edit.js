@@ -3,7 +3,6 @@ import axios from 'axios';
 
 import Form from './Form';
 import Auth from '../../lib/Auth';
-import moment from 'moment';
 
 class SessionsEdit extends React.Component {
 
@@ -12,31 +11,27 @@ class SessionsEdit extends React.Component {
   }
 
   componentDidMount() {
-    this.getDisplayDate(moment());
     axios.get(`/api/users/${this.props.match.params.id}/sessions/${this.props.match.params.sessionId}`)
       .then(res => this.setState({ session: res.data }));
   }
 
-  handleChange = ({ target: { name, value }}) => {
-    this.setState({ [name]: value });
+  handleChange=({ target: { name, value }})=> {
+    const newState = { ...this.state.session, [name]: value };
+    this.setState({ session: newState });
   }
 
   handleSubmit = (e) => {
     e.preventDefault();
     axios({
-      url: `/api/users/${this.props.match.params.id}/sessions`,
+      url: `/api/users/${this.props.match.params.id}/sessions/${this.props.match.params.sessionId}`,
       method: 'PUT',
       data: this.state,
       headers: { Authorization: `Bearer ${Auth.getToken()}`}
-    });
-  }
-
-  getDisplayDate(date) {
-    this.setState({ displayDate: moment(date).calendar().split(' at')[0] });
+    })
+      .then(() => this.props.history.push(`/users/${this.props.match.params.id}/sessions`));
   }
 
   render() {
-    console.log(this.state);
     return(
       <div>
         <Form
