@@ -11,6 +11,7 @@ import UsersEdit from './components/users/Edit';
 
 import SessionsNew from './components/sessions/New';
 import SessionsIndex from './components/sessions/Index';
+import SessionsShow from './components/sessions/Show';
 
 import AuthLogin from './components/auth/Login';
 import AuthRegister from './components/auth/Register';
@@ -30,6 +31,7 @@ class App extends React.Component {
               <Switch>
                 <Route path="/users/:id/edit" component={UsersEdit} />
                 <Route path="/users/:id/sessions/new" component={SessionsNew} />
+                <Route path="/users/:id/sessions/:sessionId" component={SessionsShow} />
                 <Route path="/users/:id/sessions/" component={SessionsIndex} />
                 <Route path="/users/:id" component={UsersShow} />
                 <Route path="/users" component={UsersIndex} />
