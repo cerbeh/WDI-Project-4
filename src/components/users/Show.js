@@ -43,17 +43,19 @@ class UsersShow extends React.Component{
     axios.get(`/api/users/${this.props.match.params.id}`)
       .then(res => {
 
+        //Generate an array with unique disciplines
         const label = _.uniq(res.data.sessions.map(session => {
           return session.discipline;
         }));
 
+        //Manipulate data from models to be formatted how chartjs wants to be fed
         const datasets = label.map(discipline => {
           return {
-
+            //label for the dataset from the previous lodash variable
             label: discipline,
 
             backgroundColor: 'rgba(255, 206, 86, 0.6)',
-
+            //filters the user.sessions to only show the current discipline
             data: res.data.sessions.filter(session => {
               if (session.discipline === discipline) return session;
             }).map(obj => {
