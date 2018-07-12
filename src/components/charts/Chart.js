@@ -9,6 +9,9 @@ class Chart extends React.Component{
     };
   }
 
+  componentDidMount() {
+    console.log(this.state.chartData, 'chart');
+  }
 
   static defaultProps = {
     displayTitle: true,

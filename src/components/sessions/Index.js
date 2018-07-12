@@ -39,7 +39,7 @@ class SessionsIndex extends React.Component {
         </div>
         <div className="container bottomBtn">
           <Link to={`/users/${this.props.match.params.id}/sessions/new`}>
-            <i className="fas fa-arrow-alt-circle-right fa-2x"></i>
+            <i className="fas fa-plus-circle fa-2x"></i>
           </Link>
         </div>
       </section>

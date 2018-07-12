@@ -21,15 +21,6 @@ userSchema.virtual('sessions', {
   ref: 'Session'
 });
 
-userSchema.virtual('totalPracticeTime')
-  .get(function() {
-    if (this.sessions.duration) {
-      const totalPracticed = this.sessions.duration.map(entry => {
-        return entry.totalPracticed;
-      });
-      return totalPracticed.reduce((a, i) => a + i, 0);
-    }
-  });
 
 userSchema.path('dob')
   .get(function formatDate(dob) {

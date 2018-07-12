@@ -49,21 +49,25 @@ class UsersShow extends React.Component{
     axios.get(`/api/users/${this.props.match.params.id}`)
       .then(res => this.setState({ user: res.data }))
       .then(() => {
-        this.state.user.sessions.forEach(session => {
-          console.log(session.discipline);
-          // const newDataSet = this.state.chartData.datasets
-          const newLabels = this.state.chartData.labels.concat(session.date);
-          this.setState({chartData: { labels: newLabels}});
+        // let newLabels;
+        // this.state.user.sessions.forEach(session => {
+        //   console.log(session.discipline);
+        //   newLabels = this.state.chartData.labels.concat(session.date);
+        // });
+        const newLabels = this.state.user.sessions.map(session => {
+          return session.date;
         });
+        this.setState({chartData: { labels: newLabels}});
       })
       .catch(err => this.setState({ error: err.message }));
   }
 
-  componentDidUpdate = () => {
-  }
+  // componentDidUpdate = () => {
+  //   const arrayData = []
+  // }
 
   render(){
-    console.log(this.state.user.sessions);
+    console.log(this.state.chartData.labels);
     if(this.state.error) return <h2 className="title is-2">{this.state.error}</h2>;
     if(!this.state.user) return <h2 className="title">Loading...</h2>;
     return(
@@ -80,7 +84,12 @@ class UsersShow extends React.Component{
           <h2 className="subtitle"><strong>{this.state.user.grade}</strong></h2>
         </div>
 
-        {this.state.chartData && <Chart chartData={this.state.chartData} discipline="Keiko" legendPosition="bottom"/>}
+        {this.state.chartData &&
+          <Chart
+            chartData={this.state.chartData}
+            discipline="Keiko"
+            legendPosition="bottom"
+          />}
 
         <div className="bottomBtn">
           <Link to={`/users/${Auth.getPayload().sub}/edit`}>
