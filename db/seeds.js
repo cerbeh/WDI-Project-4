@@ -90,7 +90,7 @@ mongoose.connect(dbURI, (err, db) => {
     }]))
     .then(users => {
       console.log(`${users.length} kendoka created`);
-      Session.create([{
+      return Session.create([{
         title: 'Practice for finals',
         discipline: 'Keiko',
         date: 20180710,

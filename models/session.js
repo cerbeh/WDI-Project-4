@@ -8,6 +8,8 @@ const sessionSchema = new mongoose.Schema({
   duration: Number,
   notes: String,
   creator: { type: mongoose.Schema.ObjectId, ref: 'User' }
+},{
+  id: false
 });
 
 sessionSchema.path('date')

@@ -16,13 +16,8 @@ function indexRoute(req, res, next) {
 }
 
 function showRoute(req, res, next) {
-  User.findById(req.params.id)
-    .then(user => {
-      const session = user.sessions.filter(session => {
-        return session._id.toString() === req.params.sessionId;
-      })[0];
-      res.json(session);
-    })
+  Session.findById(req.params.sessionId)
+    .then(session => res.json(session))
     .catch(next);
 }
 

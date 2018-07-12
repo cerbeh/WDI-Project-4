@@ -19,6 +19,8 @@ const userSchema = new mongoose.Schema({
   height: Number,
   weight: Number
   // sessions: [ sessionSchema ]
+},{
+  id: false
 });
 
 userSchema.virtual('sessions', {
