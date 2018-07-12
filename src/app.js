@@ -20,7 +20,8 @@ import AuthRegister from './components/auth/Register';
 import Home from './components/pages/Home';
 import Navbar from './components/common/Navbar';
 import Footer from './components/common/Footer';
-import ProtectedRoute from './components/common/ProtectedRoute'
+import ProtectedRoute from './components/common/ProtectedRoute';
+import FlashMessages from './components/common/FlashMessages';
 
 import 'bulma';
 import './scss/style.scss';
@@ -31,6 +32,7 @@ class App extends React.Component {
       <BrowserRouter>
         <main>
           <Navbar />
+          <FlashMessages />
           <section className="section-content">
             <Switch>
               <ProtectedRoute path="/users/:id/edit" component={UsersEdit} />
