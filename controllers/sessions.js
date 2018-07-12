@@ -22,30 +22,19 @@ function showRoute(req, res, next) {
 }
 
 function updateRoute(req, res , next) {
-  console.log(req.body);
-  User.findById(req.params.id)
-    .then(user => {
-      user.update({ 'sessions._id': req.params.sessionId },
-        { '$set': {
-          'sessions.$.title': req.body.title
-        },
-        new: true });
-      res.json(user.sessions);
+  Session.findById(req.params.sessionId)
+    .then(session => {
+      session.set(req.body);
+      session.save();
+      res.json(session);
     })
     .catch(next);
 }
 
 function deleteRoute(req, res, next) {
-  User.findById(req.params.id)
-    .then(user => {
-      user.sessions.forEach((session, index) => {
-        if(session._id.toString() === req.params.sessionId) {
-          user.sessions.splice(index, 1);
-        }
-      });
-      user.save();
-      res.json(user.sessions);
-    })
+  Session.findById(req.params.sessionId)
+    .then(session => session.remove())
+    .then(() => res.sendStatus(204))
     .catch(next);
 }
 

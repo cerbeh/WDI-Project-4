@@ -22,10 +22,11 @@ class SessionsEdit extends React.Component {
 
   handleSubmit = (e) => {
     e.preventDefault();
+    
     axios({
       url: `/api/users/${this.props.match.params.id}/sessions/${this.props.match.params.sessionId}`,
       method: 'PUT',
-      data: this.state,
+      data: this.state.session,
       headers: { Authorization: `Bearer ${Auth.getToken()}`}
     })
       .then(() => this.props.history.push(`/users/${this.props.match.params.id}/sessions`));
