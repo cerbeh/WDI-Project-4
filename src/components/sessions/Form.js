@@ -14,7 +14,7 @@ const SessionsForm = ({ handleChange, handleSubmit, data}) => {
           onChange={handleChange}
           value={data.title || ''}
         />
-        {/* {data.errors.username && <small>{data.errors.username}</small>} */}
+        {data.errors.username && <small>{data.errors.username}</small>}
       </div>
 
       <div className="field">
@@ -26,7 +26,7 @@ const SessionsForm = ({ handleChange, handleSubmit, data}) => {
           onChange={handleChange}
           value={data.discipline || ''}
         />
-        {/* {data.errors.username && <small>{data.errors.username}</small>} */}
+        {data.errors.username && <small>{data.errors.username}</small>}
       </div>
 
       <div className="field">
@@ -39,7 +39,7 @@ const SessionsForm = ({ handleChange, handleSubmit, data}) => {
           onChange={handleChange}
           value={data.date || ''}
         />
-        {/* {data.errors.username && <small>{data.errors.username}</small>} */}
+        {data.errors.username && <small>{data.errors.username}</small>}
       </div>
 
       <div className="field">
@@ -51,7 +51,7 @@ const SessionsForm = ({ handleChange, handleSubmit, data}) => {
           onChange={handleChange}
           value={data.duration || ''}
         />
-        {/* {data.errors.username && <small>{data.errors.username}</small>} */}
+        {data.errors.username && <small>{data.errors.username}</small>}
       </div>
 
       <div className="field">
@@ -63,7 +63,7 @@ const SessionsForm = ({ handleChange, handleSubmit, data}) => {
           onChange={handleChange}
           value={data.notes || ''}
         ></textarea>
-        {/* {data.errors.username && <small>{data.errors.username}</small>} */}
+        {data.errors.username && <small>{data.errors.username}</small>}
       </div>
 
       <button className="button">Submit</button>

@@ -4,7 +4,9 @@ import Auth from '../../lib/Auth';
 
 class AuthLogin extends React.Component {
 
-  state:{}
+  state:{
+
+  }
 
   handleSubmit = (e) => {
     e.preventDefault();

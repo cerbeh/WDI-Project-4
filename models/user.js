@@ -3,8 +3,8 @@ const bcrypt = require('bcrypt');
 const moment = require('moment');
 
 const userSchema = new mongoose.Schema({
-  username: { type: String, required: true },
-  email: { type: String, required: true },
+  username: { type: String, required: 'This field is required' },
+  email: { type: String, required: 'This field is required' },
   password: { type: String, required: true},
   gender: { type: String, enum: ['Male', 'Female']},
   grade: { type: String, enum: ['1st Kyu', '1st Dan', '2nd Dan', '3rd Dan', '4th Dan', '5th Dan', '6th Dan', '7th Dan', '8th Dan']},

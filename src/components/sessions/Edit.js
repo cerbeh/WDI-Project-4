@@ -7,7 +7,8 @@ import Auth from '../../lib/Auth';
 class SessionsEdit extends React.Component {
 
   state = {
-    session: {}
+    session: {},
+    errors: {}
   }
 
   componentDidMount() {
@@ -29,7 +30,8 @@ class SessionsEdit extends React.Component {
       data: this.state.session,
       headers: { Authorization: `Bearer ${Auth.getToken()}`}
     })
-      .then(() => this.props.history.push(`/users/${this.props.match.params.id}/sessions`));
+      .then(() => this.props.history.push(`/users/${this.props.match.params.id}/sessions`))
+      .catch(err => this.setState({errors: err.response.data.errors}));
   }
 
   render() {
