@@ -53,20 +53,27 @@ class UsersShow extends React.Component{
     axios.get(`/api/users/${this.props.match.params.id}`)
       .then(res => {
 
-        const label = _.uniq(res.data.sessions
-          .map(session => {
-            return session.discipline;
-          }));
-        console.log(label, 'label');
-
-        // uniqueArray = a.filter(function(item, pos) {
-        //   return a.indexOf(item) === pos;
-        // })
+        const label = _.uniq(res.data.sessions.map(session => {
+          return session.discipline;
+        }));
 
         const data = res.data.sessions.map(session => {
           return session.duration;
         });
 
+        const datasets = label.map(discipline => {
+          return {
+            label: discipline,
+            backgroundColor: 'rgba(255, 206, 86, 0.6)',
+            data: res.data.sessions.filter(session => {
+              if (session.discipline === discipline) return session;
+            }).map(obj => {
+              return obj.duration;
+            })
+          };
+        });
+
+        console.log(datasets);
 
         const labels = res.data.sessions.map(session => {
           return session.date;
@@ -77,13 +84,7 @@ class UsersShow extends React.Component{
           user: res.data,
           chartData: {
             labels,
-            datasets: [
-              {
-                data: data,
-                label: 'Kendo',
-                backgroundColor: 'rgba(255, 206, 86, 0.6)'
-              }
-            ]
+            datasets
           }
         });
       })
