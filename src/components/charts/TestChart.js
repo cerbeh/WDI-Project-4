@@ -14,8 +14,6 @@ const TestChart = ({chartData}) => {
 
       <Line
         data={chartData}
-        width={100}
-        height={50}
         options={{
           maintainAspectRatio: true,
           title: {
