@@ -2,8 +2,7 @@ import React from 'react';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
 import Auth from '../../lib/Auth';
-// import Chart from '../charts/Chart';
-import TestChart from '../charts/TestChart';
+import Chart from '../charts/Chart';
 import _ from 'lodash';
 
 
@@ -37,15 +36,6 @@ class UsersShow extends React.Component{
     this.state={
       errors: {},
       user: {}
-      // chartData: {
-      //   labels: [],
-      //   datasets: [
-      //     {
-      //       label: '',
-      //       data: []
-      //     }
-      //   ]
-      // }
     };
   }
 
@@ -57,23 +47,21 @@ class UsersShow extends React.Component{
           return session.discipline;
         }));
 
-        const data = res.data.sessions.map(session => {
-          return session.duration;
-        });
-
         const datasets = label.map(discipline => {
           return {
+
             label: discipline,
+
             backgroundColor: 'rgba(255, 206, 86, 0.6)',
+
             data: res.data.sessions.filter(session => {
               if (session.discipline === discipline) return session;
             }).map(obj => {
               return obj.duration;
             })
+
           };
         });
-
-        console.log(datasets);
 
         const labels = res.data.sessions.map(session => {
           return session.date;
@@ -111,7 +99,7 @@ class UsersShow extends React.Component{
         </div>
 
         {this.state.chartData &&
-          <TestChart
+          <Chart
             chartData={this.state.chartData}
           />
         }
