@@ -2,6 +2,8 @@ import React from 'react';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
 
+import SessionTimeline from './Timeline';
+
 class SessionsIndex extends React.Component {
 
   state = {};
@@ -15,26 +17,15 @@ class SessionsIndex extends React.Component {
     return(
       <section>
         <h1 className="title is-3">Sessions</h1>
-        <div>
-          <ul>
-            { this.state.sessions && this.state.sessions.map(session =>
-              <li key={session._id} className="session-list">
-                <Link to={`/users/${this.props.match.params.id}/sessions/${session._id}`}>
-                  {session.title}
-                </Link>
-                <p>
-                  {session.date}
-                </p>
-                <Link to={`/users/${this.props.match.params.id}/sessions/${session._id}/edit`}>
-                  Edit
-                </Link>
-              </li>
-            )}
-          </ul>
-          <Link className="button" to={`/users/${this.props.match.params.id}/sessions/new`}>
-            NEW SESH
-          </Link>
-        </div>
+
+        <Link className="button" to={`/users/${this.props.match.params.id}/sessions/new`}>
+          NEW SESH
+        </Link>
+
+        { this.state.sessions &&
+          <SessionTimeline data={this.state.sessions} />
+        }
+        
       </section>
     );
   }
