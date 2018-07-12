@@ -3,6 +3,7 @@ import axios from 'axios';
 import { Link } from 'react-router-dom';
 import Auth from '../../lib/Auth';
 import Chart from '../charts/Chart';
+import TestChart from '../charts/TestChart';
 
 
 class UsersShow extends React.Component{
@@ -84,12 +85,18 @@ class UsersShow extends React.Component{
           <h2 className="subtitle"><strong>{this.state.user.grade}</strong></h2>
         </div>
 
-        {this.state.chartData &&
+        {/* {this.state.chartData &&
           <Chart
             chartData={this.state.chartData}
             discipline="Keiko"
             legendPosition="bottom"
-          />}
+          />} */}
+
+        {this.state.chartData &&
+          <TestChart
+            chartData={this.state.chartData}
+          />
+        }
 
         <div className="bottomBtn">
           <Link to={`/users/${Auth.getPayload().sub}/edit`}>
