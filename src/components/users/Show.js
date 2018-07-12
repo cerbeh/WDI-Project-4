@@ -36,22 +36,33 @@ class UsersShow extends React.Component{
     super();
     this.state={
       errors: {},
-      user: {},
-      chartData: {
-        labels: [],
-        datasets: [
-          {
-            label: '',
-            data: []
-          }
-        ]
-      }
+      user: {}
+      // chartData: {
+      //   labels: [],
+      //   datasets: [
+      //     {
+      //       label: '',
+      //       data: []
+      //     }
+      //   ]
+      // }
     };
   }
 
   componentDidMount(){
     axios.get(`/api/users/${this.props.match.params.id}`)
       .then(res => {
+
+        const label = _.uniq(res.data.sessions
+          .map(session => {
+            return session.discipline;
+          }));
+        console.log(label, 'label');
+
+        // uniqueArray = a.filter(function(item, pos) {
+        //   return a.indexOf(item) === pos;
+        // })
+
         const data = res.data.sessions.map(session => {
           return session.duration;
         });
@@ -60,6 +71,7 @@ class UsersShow extends React.Component{
         const labels = res.data.sessions.map(session => {
           return session.date;
         });
+
 
         this.setState({
           user: res.data,
@@ -75,11 +87,12 @@ class UsersShow extends React.Component{
           }
         });
       })
+
+
       .catch(err => this.setState({ error: err.message }));
   }
 
   render(){
-    console.log(this.state.chartData);
     if(this.state.error) return <h2 className="title is-2">{this.state.error}</h2>;
     if(!this.state.user) return <h2 className="title">Loading...</h2>;
     return(
