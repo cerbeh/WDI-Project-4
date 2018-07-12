@@ -68,7 +68,7 @@ class UsersShow extends React.Component{
             datasets: [
               {
                 data: data,
-                label: 'Kata',
+                label: 'Kendo',
                 backgroundColor: 'rgba(255, 206, 86, 0.6)'
               }
             ]
