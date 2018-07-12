@@ -2,7 +2,7 @@ import React from 'react';
 
 const SessionsForm = ({ handleChange, handleSubmit, data}) => {
 
-  // console.log(data);
+  console.log(data);
   return(
     <form onSubmit={handleSubmit}>
       <div className="field">
@@ -14,7 +14,7 @@ const SessionsForm = ({ handleChange, handleSubmit, data}) => {
           onChange={handleChange}
           value={data.title || ''}
         />
-        {data.errors.username && <small>{data.errors.username}</small>}
+        {/* {data.errors.title && <small>{data.errors.title}</small>} */}
       </div>
 
       <div className="field">
@@ -26,7 +26,7 @@ const SessionsForm = ({ handleChange, handleSubmit, data}) => {
           onChange={handleChange}
           value={data.discipline || ''}
         />
-        {data.errors.username && <small>{data.errors.username}</small>}
+        {/* {data.errors.discipline && <small>{data.errors.discipline}</small>} */}
       </div>
 
       <div className="field">
@@ -39,7 +39,7 @@ const SessionsForm = ({ handleChange, handleSubmit, data}) => {
           onChange={handleChange}
           value={data.date || ''}
         />
-        {data.errors.username && <small>{data.errors.username}</small>}
+        {/* {data.errors.date && <small>{data.errors.date}</small>} */}
       </div>
 
       <div className="field">
@@ -51,7 +51,7 @@ const SessionsForm = ({ handleChange, handleSubmit, data}) => {
           onChange={handleChange}
           value={data.duration || ''}
         />
-        {data.errors.username && <small>{data.errors.username}</small>}
+        {/* {data.errors.duration && <small>{data.errors.duration}</small>} */}
       </div>
 
       <div className="field">
@@ -63,7 +63,7 @@ const SessionsForm = ({ handleChange, handleSubmit, data}) => {
           onChange={handleChange}
           value={data.notes || ''}
         ></textarea>
-        {data.errors.username && <small>{data.errors.username}</small>}
+        {/* {data.errors.notes && <small>{data.errors.notes}</small>} */}
       </div>
 
       <button className="button">Submit</button>

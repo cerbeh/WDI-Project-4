@@ -1,14 +1,14 @@
 import React from 'react';
 import axios from 'axios';
+import Auth from '../../lib/Auth';
 
 import Form from './Form';
-import Auth from '../../lib/Auth';
 
 class SessionsEdit extends React.Component {
 
   state = {
-    session: {},
-    errors: {}
+    errors: {},
+    session: {}
   }
 
   componentDidMount() {
@@ -35,12 +35,14 @@ class SessionsEdit extends React.Component {
   }
 
   render() {
+    console.log(this.state.session);
     return(
       <div>
         <Form
           handleChange={this.handleChange}
           handleSubmit={this.handleSubmit}
           data={this.state.session}
+          errors={this.state.errors}
         />
       </div>
     );

@@ -31,7 +31,7 @@ class App extends React.Component {
     return (
       <BrowserRouter>
         <main>
-          <Navbar />
+          {/* <Navbar /> */}
           <FlashMessages />
           <section className="section-content">
             <Switch>

@@ -2,11 +2,13 @@
 @import '~bulma';
 @import 'variables';
 @import 'pages/home';
+@import 'pages/registration-login';
 @import 'components/button';
 
 
-
-
+.is-overlay{
+  background: transparent;
+}
 
 canvas{
   margin-bottom: 10%;
@@ -80,6 +82,13 @@ canvas{
         /* styles for wide screens */
         .hero {
             background-image: url("https://imgur.com/86pvG6E.jpg");
+            background-size: cover;
+            background-color: #999;
+            width: 100%;
+            margin: 0;
+        }
+        .registrationBackground {
+            background-image: url("https://imgur.com/fhqTHUW.jpg");
             background-size: cover;
             background-color: #999;
             width: 100%;
