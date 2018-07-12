@@ -93,42 +93,42 @@ mongoose.connect(dbURI, (err, db) => {
       return Session.create([{
         title: 'Practice for finals',
         discipline: 'Keiko',
-        date: 20180710,
+        date: new Date('Mar 20, 2018'),
         duration: 60,
         notes: 'Smashed it.',
         creator: users[0]
       },{
         title: 'Practice for semis',
         discipline: 'Keiko',
-        date: 20180710,
+        date: new Date('Mar 16, 2018'),
         duration: 45,
         notes: 'Sesh',
         creator: users[0]
       },{
         title: 'Practice for semis',
         discipline: 'Keiko',
-        date: 20180710,
+        date: new Date('Mar 18, 2018'),
         duration: 50,
         notes: 'Sesh',
         creator: users[0]
       },{
         title: 'Practice for semis',
         discipline: 'Keiko',
-        date: 20180710,
+        date: new Date('Mar 15, 2018'),
         duration: 50,
         notes: 'Sesh',
         creator: users[0]
       },{
         title: 'Practice for semis',
         discipline: 'Kata',
-        date: 20180710,
+        date: new Date('Mar 17, 2018'),
         duration: 50,
         notes: 'Sesh',
         creator: users[0]
       },{
         title: 'Practice for semis',
         discipline: 'Kata',
-        date: 20180710,
+        date: new Date('Apr 17, 2018'),
         duration: 50,
         notes: 'Sesh',
         creator: users[0]
@@ -138,42 +138,42 @@ mongoose.connect(dbURI, (err, db) => {
         date: 20180710,
         duration: 45,
         notes: 'Sesh',
-        creator: users[0]
+        creator: users[1]
       },{
         title: 'Practice for semis',
         discipline: 'Shiai',
         date: 20180710,
         duration: 30,
         notes: 'Sesh',
-        creator: users[0]
+        creator: users[1]
       },{
         title: 'Practice for semis',
         discipline: 'Shiai',
         date: 20180710,
         duration: 45,
         notes: 'Sesh',
-        creator: users[0]
+        creator: users[1]
       },{
         title: 'Practice for semis',
         discipline: 'Shiai',
         date: 20180710,
         duration: 30,
         notes: 'Sesh',
-        creator: users[0]
+        creator: users[1]
       },{
         title: 'Practice for semis',
         discipline: 'Shiai',
         date: 20180710,
         duration: 45,
         notes: 'Sesh',
-        creator: users[0]
+        creator: users[1]
       },{
         title: 'Practice for semis',
         discipline: 'Kata',
         date: 20180710,
         duration: 10,
         notes: 'Sesh',
-        creator: users[0]
+        creator: users[1]
       }]);
     })
     .catch(err => console.log(err))

@@ -25,7 +25,7 @@ class SessionsIndex extends React.Component {
         { this.state.sessions &&
           <SessionTimeline data={this.state.sessions} />
         }
-        
+
       </section>
     );
   }
