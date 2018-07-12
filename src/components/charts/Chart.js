@@ -2,14 +2,14 @@ import React from 'react';
 import { Line } from 'react-chartjs-2';
 
 class Chart extends React.Component{
-  constructor(props){
-    super(props);
+  constructor(){
+    super();
     this.state = {
-      chartData: props.chartData
+      chartData: {}
     };
   }
 
-  componentDidMount() {
+  componentDidUpdate() {
     console.log(this.state.chartData, 'chart');
   }
 
