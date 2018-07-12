@@ -1,13 +1,14 @@
-import React, {Component} from 'react';
+import React from 'react';
 import { Line } from 'react-chartjs-2';
 
-class Chart extends Component{
+class Chart extends React.Component{
   constructor(props){
     super(props);
     this.state = {
       chartData: props.chartData
     };
   }
+
 
   static defaultProps = {
     displayTitle: true,
@@ -21,7 +22,10 @@ class Chart extends Component{
 
         <Line
           data={this.state.chartData}
+          width={100}
+          height={50}
           options={{
+            maintainAspectRatio: true,
             title: {
               display: this.props.displayTitle,
               text: 'Total Practice Time',

@@ -14,9 +14,13 @@ class SessionsIndex extends React.Component {
 
   render() {
     return(
-      <section>
-        <h1 className="title is-3">Sessions</h1>
-        <div>
+      <section className="section">
+        <div className="container">
+
+          <h1 className="title is-3">Sessions</h1>
+        </div>
+        <hr />
+        <div className="container">
           <ul>
             { this.state.sessions && this.state.sessions.map(session =>
               <li key={session._id} className="session-list">
@@ -32,8 +36,10 @@ class SessionsIndex extends React.Component {
               </li>
             )}
           </ul>
-          <Link className="button" to={`/users/${this.props.match.params.id}/sessions/new`}>
-            NEW SESH
+        </div>
+        <div className="container bottomBtn">
+          <Link to={`/users/${this.props.match.params.id}/sessions/new`}>
+            <i className="fas fa-arrow-alt-circle-right fa-2x"></i>
           </Link>
         </div>
       </section>

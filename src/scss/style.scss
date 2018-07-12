@@ -27,13 +27,16 @@
   color: $accent-colour;
 }
 
+canvas{
+  margin-bottom: 10%;
+}
 
 .edit {
   border-style: none;
   background: transparent;
 }
 
-#bottomBtn {
+.bottomBtn {
   position: fixed;
   bottom: 10%;
   right: 5%;
