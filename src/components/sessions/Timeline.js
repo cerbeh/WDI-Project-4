@@ -4,17 +4,14 @@ import { Link } from 'react-router-dom';
 
 const SessionTimeline = ({data}) => {
 
-  const sortedSessions = data.sort((a,b) => {
-    return b.date - a.date;
+
+  data.sort(function(a,b){
+    return new Date(b.date) - new Date(a.date);
   });
-  // console.log(sortedSessions, 'sortedSessions');
-  // console.log(data);
 
   return(
     <Timeline>
-      {data.sort((a,b) => {
-        return b.date - a.date;
-      }).map(session =>
+      {data.map(session =>
         <Link
           key={session._id}
           to={`/users/${session.creator}/sessions/${session._id}`}>

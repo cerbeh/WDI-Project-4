@@ -1,7 +1,7 @@
 import React from 'react';
 import { Line } from 'react-chartjs-2';
 
-const TestChart = ({chartData}) => {
+const Chart = ({chartData}) => {
 
   const defaultProps = {
     displayTitle: true,
@@ -42,4 +42,4 @@ const TestChart = ({chartData}) => {
 };
 
 
-export default TestChart;
+export default Chart;

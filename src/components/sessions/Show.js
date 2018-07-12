@@ -1,6 +1,8 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import axios from 'axios';
 
+import Auth from '../../lib/Auth';
 
 class SessionsShow extends React.Component {
 
@@ -9,6 +11,15 @@ class SessionsShow extends React.Component {
   componentDidMount() {
     axios.get(`/api/users/${this.props.match.params.id}/sessions/${this.props.match.params.sessionId}`)
       .then(res => this.setState({ session: res.data }));
+  }
+
+  handleDelete = () => {
+    axios({
+      url: `/api/users/${this.props.match.params.id}/sessions/${this.props.match.params.sessionId}`,
+      method: 'DELETE',
+      headers: { Authorization: `Bearer ${Auth.getToken()}`}
+    })
+      .then(() => this.props.history.push(`/users/${this.props.match.params.id}/sessions`));
   }
 
   render() {
@@ -28,6 +39,12 @@ class SessionsShow extends React.Component {
             <p>
               {this.state.session.notes}
             </p>
+            <button onClick={this.handleDelete} className="button">Delete</button>
+            <Link
+              to={`/users/${this.props.match.params.id}/sessions/${this.props.match.params.sessionId}/edit`}
+              className="button"
+            >Edit
+            </Link>
           </div>
         }
       </section>
