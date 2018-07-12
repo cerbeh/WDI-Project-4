@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+// import { Link } from 'react-router-dom';
 import ReactDOM from 'react-dom';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
 
@@ -19,7 +19,8 @@ import AuthLogin from './components/auth/Login';
 import AuthRegister from './components/auth/Register';
 
 import Home from './components/pages/Home';
-import Navbar from './components/common/Navbar';
+// import Navbar from './components/common/Navbar';
+import NotFound from './components/common/NotFound';
 import Footer from './components/common/Footer';
 import ProtectedRoute from './components/common/ProtectedRoute';
 import FlashMessages from './components/common/FlashMessages';
@@ -46,6 +47,7 @@ class App extends React.Component {
               <Route path="/login" component={AuthLogin} />
               <Route path="/register" component={AuthRegister} />
               <Route exact path="/" component={Home} />
+              <Route component={NotFound} />
             </Switch>
           </section>
           <Footer />

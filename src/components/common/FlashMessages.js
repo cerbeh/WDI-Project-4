@@ -2,6 +2,7 @@ import React from 'react';
 import Flash from '../../lib/Flash';
 
 const FlashMessages = () =>{
+  //stores messages for when we run the method getMessages through Flash
   const messages = Flash.getMessages();
   Flash.clearMessages();
   return(
