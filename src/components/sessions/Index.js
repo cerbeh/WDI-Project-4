@@ -18,8 +18,10 @@ class SessionsIndex extends React.Component {
       <section className="section">
         <div className="columns is-multiline is-mobile">
           <div className="column is-10">
-            <h1 className="title is-3">Sessions</h1>
+            <h1 className="title is-3">HISTORY</h1>
+            <h5 className="is-5">Sessions logged so far: </h5>
           </div>
+          <hr />
           <div className="column is-1">
             <div className="container">
               <Link to={`/users/${this.props.match.params.id}/sessions/new`}>

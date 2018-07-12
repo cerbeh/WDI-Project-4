@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom'
 import axios from 'axios';
 import Auth from '../../lib/Auth';
 
@@ -35,16 +36,23 @@ class SessionsEdit extends React.Component {
   }
 
   render() {
-    console.log(this.state.session);
     return(
-      <div>
-        <Form
-          handleChange={this.handleChange}
-          handleSubmit={this.handleSubmit}
-          data={this.state.session}
-          errors={this.state.errors}
-        />
-      </div>
+      <section className="section">
+        <div className="container">
+          <h1 className="title">Edit Session</h1>
+          <Form
+            handleChange={this.handleChange}
+            handleSubmit={this.handleSubmit}
+            data={this.state.session}
+            errors={this.state.errors}
+          />
+          <section className="section">
+            <Link className="has-text-centered" to={`/users/${Auth.getPayload().sub}/sessions`}>
+              <p className="is-size-7">Cancel</p>
+            </Link>
+          </section>
+        </div>
+      </section>
     );
   }
 }

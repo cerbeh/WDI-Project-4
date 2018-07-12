@@ -2,6 +2,7 @@
 @import '~bulma';
 @import 'variables';
 @import 'pages/home';
+@import 'pages/form';
 @import 'pages/registration-login';
 @import 'components/button';
 
@@ -50,32 +51,7 @@ canvas{
 }
 
 
-.social {
-        color: grey;
-        text-align: center;
-        font-size: 1.5rem;
-        margin-top: 40px;
-        margin-bottom: 2rem;
 
-        ul {
-            display: inline;
-
-            li {
-                display: inline-block;
-                list-style: none;
-                margin-right: 1.5rem;
-
-                a, a:visited, a:active {
-                    text-decoration: none;
-                    color: inherit;
-                }
-
-                &:last-child {
-                    margin-right: 0;
-                }
-            }
-        }
-    }
 
 
     @media only screen and (min-width: 768px) {

@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import axios from 'axios';
 import Auth from '../../lib/Auth';
 
@@ -37,12 +38,22 @@ class UsersEdit extends React.Component{
 
   render(){
     return(
-      <UsersForm
-        handleChange={this.handleChange}
-        handleSubmit={this.handleSubmit}
-        data={this.state.user}
-        errors={this.state.errors}
-      />
+      <section className="section">
+        <div className="container">
+          <h1 className="title">Edit Session</h1>
+          <UsersForm
+            handleChange={this.handleChange}
+            handleSubmit={this.handleSubmit}
+            data={this.state.user}
+            errors={this.state.errors}
+          />
+        </div>
+        <section className="section">
+          <Link className="has-text-centered" to={`/users/${Auth.getPayload().sub}`}>
+            <p className="is-size-7">Cancel</p>
+          </Link>
+        </section>
+      </section>
     );
   }
 }

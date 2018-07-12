@@ -34,19 +34,19 @@ class AuthRegister extends React.Component {
           <h1 className="title">Register</h1>
           <form onSubmit={this.handleSubmit}>
             <div className="field">
-              <label className="username">Username</label>
+              <label className="username">Username<span className="req">*</span></label>
               <input className="input" name="username"  onChange={this.handleChange} />
             </div>
             <div className="field">
-              <label className="email">Email</label>
+              <label className="email">Email<span className="req">*</span></label>
               <input className="input" name="email"  onChange={this.handleChange} />
             </div>
             <div className="field">
-              <label className="password">Password</label>
+              <label className="password">Password<span className="req">*</span></label>
               <input className="input" type="password" name="password" onChange={this.handleChange} />
             </div>
             <div className="field">
-              <label className="passwordConfirmation">Password Confirmation</label>
+              <label className="passwordConfirmation">Password Confirmation<span className="req">*</span></label>
               <input className="input" type="password" name="passwordConfirmation"  onChange={this.handleChange} />
             </div>
 

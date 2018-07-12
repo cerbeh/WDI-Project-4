@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import axios from 'axios';
 
 import Auth from '../../lib/Auth';
@@ -6,7 +7,9 @@ import Form from './Form';
 
 class sessionsNew extends React.Component {
 
-  state = {}
+  state = {
+    errors: {}
+  }
 
   handleChange = ({ target: {name, value }}) => {
     this.setState({ [name]: value });
@@ -29,11 +32,22 @@ class sessionsNew extends React.Component {
 
   render(){
     return(
-      <Form
-        handleChange={this.handleChange}
-        handleSubmit={this.handleSubmit}
-        data={this.state}
-      />
+      <section className="section">
+        <div className="container">
+          <h1 className="title">Add New Session</h1>
+          <Form
+            handleChange={this.handleChange}
+            handleSubmit={this.handleSubmit}
+            data={this.state}
+            errors={this.state.errors}
+          />
+        </div>
+        <section className="section">
+          <Link className="has-text-centered" to={`/users/${Auth.getPayload().sub}/sessions`}>
+            <p className="is-size-7">Cancel</p>
+          </Link>
+        </section>
+      </section>
     );
   }
 }

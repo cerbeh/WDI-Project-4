@@ -1,8 +1,7 @@
 import React from 'react';
 
-const SessionsForm = ({ handleChange, handleSubmit, data}) => {
+const SessionsForm = ({ handleChange, handleSubmit, data, errors}) => {
 
-  console.log(data);
   return(
     <form onSubmit={handleSubmit}>
       <div className="field">
@@ -14,19 +13,23 @@ const SessionsForm = ({ handleChange, handleSubmit, data}) => {
           onChange={handleChange}
           value={data.title || ''}
         />
-        {/* {data.errors.title && <small>{data.errors.title}</small>} */}
+        {errors.title && <small>{errors.title}</small>}
       </div>
+
 
       <div className="field">
         <label className="label">Discipline</label>
-        <input
-          className="input"
-          name="discipline"
-          placeholder="Discipline"
-          onChange={handleChange}
-          value={data.discipline || ''}
-        />
-        {/* {data.errors.discipline && <small>{data.errors.discipline}</small>} */}
+        <div className="control">
+          <div className="select is-fullwidth">
+            {data &&  <select name="gender" onChange={handleChange} value={data.discipline || ''}>
+              <option value="" disabled>Please choose</option>
+              <option>Kata</option>
+              <option>Keiko</option>
+              <option>Shiai</option>
+            </select>}
+          </div>
+        </div>
+        {errors.discipline && <small>{errors.discipline}</small>}
       </div>
 
       <div className="field">
@@ -39,11 +42,11 @@ const SessionsForm = ({ handleChange, handleSubmit, data}) => {
           onChange={handleChange}
           value={data.date || ''}
         />
-        {/* {data.errors.date && <small>{data.errors.date}</small>} */}
+        {errors.date && <small>{errors.date}</small>}
       </div>
 
       <div className="field">
-        <label className="label">Duration</label>
+        <label className="label">Duration in minutes</label>
         <input
           className="input"
           name="duration"
@@ -51,7 +54,7 @@ const SessionsForm = ({ handleChange, handleSubmit, data}) => {
           onChange={handleChange}
           value={data.duration || ''}
         />
-        {/* {data.errors.duration && <small>{data.errors.duration}</small>} */}
+        {errors.duration && <small>{errors.duration}</small>}
       </div>
 
       <div className="field">
@@ -63,10 +66,10 @@ const SessionsForm = ({ handleChange, handleSubmit, data}) => {
           onChange={handleChange}
           value={data.notes || ''}
         ></textarea>
-        {/* {data.errors.notes && <small>{data.errors.notes}</small>} */}
+        {errors.notes && <small>{errors.notes}</small>}
       </div>
 
-      <button className="button">Submit</button>
+      <button className="submitBtn button">Submit</button>
 
     </form>
   );
