@@ -6,7 +6,8 @@ import UsersForm from './Form';
 
 class UsersEdit extends React.Component{
   state ={
-    errors: {}
+    errors: {},
+    user: {}
   }
 
   componentDidMount() {
@@ -17,8 +18,9 @@ class UsersEdit extends React.Component{
       .catch(err => this.setState({ error: err.message }));
   }
 
-  handleChange=({ target: { name, value }})=>{
-    this.setState({ user: {[name]: value}});
+  handleChange=({ target: { name, value }})=> {
+    const newState = { ...this.state.user, [name]: value };
+    this.setState({ user: newState });
   }
 
   handleSubmit = (e) => {
@@ -38,7 +40,8 @@ class UsersEdit extends React.Component{
       <UsersForm
         handleChange={this.handleChange}
         handleSubmit={this.handleSubmit}
-        data={this.state}
+        data={this.state.user}
+        errors={this.state.errors}
       />
     );
   }

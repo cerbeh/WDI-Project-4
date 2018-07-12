@@ -1,63 +1,40 @@
 const User = require('../models/user');
+const Session = require('../models/session');
 
 function createRoute(req, res, next) {
-  User.findById(req.currentUser._id)
-    .then(user => {
-      user.sessions.push(req.body);
-      return user.save();
-    })
-    .then(user => res.json(user))
+  req.body.creator = req.currentUser._id;
+  Session.create(req.body)
+    .then(session => res.json(session))
     .catch(next);
 }
 
 function indexRoute(req, res, next) {
   User.findById(req.params.id)
+    .populate('sessions')
     .then(user => res.json(user.sessions))
     .catch(next);
 }
 
 function showRoute(req, res, next) {
-  User.findById(req.params.id)
-    .then(user => {
-      const session = user.sessions.filter(session => {
-        return session._id.toString() === req.params.sessionId;
-      })[0];
+  Session.findById(req.params.sessionId)
+    .then(session => res.json(session))
+    .catch(next);
+}
+
+function updateRoute(req, res , next) {
+  Session.findById(req.params.sessionId)
+    .then(session => {
+      session.set(req.body);
+      session.save();
       res.json(session);
     })
     .catch(next);
 }
 
-function updateRoute(req, res , next) {
-  User.findById(req.params.id)
-    .then(user => {
-      let updatedSession;
-      user.sessions.map(session => {
-        if(session._id.toString() === req.params.sessionId) {
-          session.title = req.body.title;
-          session.discipline = req.body.discipline;
-          session.duration = req.body.duration;
-          session.notes = req.body.notes;
-          return updatedSession = session;
-        }
-        return session;
-      });
-      user.save();
-      res.json(updatedSession);
-    })
-    .catch(next);
-}
-
 function deleteRoute(req, res, next) {
-  User.findById(req.params.id)
-    .then(user => {
-      user.sessions.forEach((session, index) => {
-        if(session._id.toString() === req.params.sessionId) {
-          user.sessions.splice(index, 1);
-        }
-      });
-      user.save();
-      res.json(user.sessions);
-    })
+  Session.findById(req.params.sessionId)
+    .then(session => session.remove())
+    .then(() => res.sendStatus(204))
     .catch(next);
 }
 

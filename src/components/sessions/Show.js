@@ -12,7 +12,6 @@ class SessionsShow extends React.Component {
   }
 
   render() {
-    console.log(this.state.session);
     return(
       <section>
         {this.state.session &&

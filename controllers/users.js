@@ -4,15 +4,15 @@ const { secret } = require('../config/environment');
 
 
 function indexRoute(req, res, next) {
-  User
-    .find()
+  User.find()
+    .populate('sessions')
     .then(users => res.json(users))
     .catch(next);
 }
 
 function showRoute(req, res, next) {
-  User
-    .findById(req.params.id)
+  User.findById(req.params.id)
+    .populate('sessions')
     .then(user => res.json(user))
     .catch(next);
 }
