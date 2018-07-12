@@ -2,6 +2,7 @@ const mongoose = require('mongoose');
 mongoose.Promise = require('bluebird');
 const { dbURI }= require('../config/environment');
 const User = require('../models/user');
+const Session = require('../models/session');
 
 
 mongoose.connect(dbURI, (err, db) => {
@@ -15,81 +16,8 @@ mongoose.connect(dbURI, (err, db) => {
       grade: '8th Dan',
       dob: '1987-10-24',
       height: 200,
-      weight: 70,
-      sessions: [{
-        title: 'Practice for finals',
-        discipline: 'Keiko',
-        // date: 2018-07-10,
-        duration: 60,
-        notes: 'Smashed it.'
-      },{
-        title: 'Practice for semis',
-        discipline: 'Keiko',
-        // date: 2018-07-10,
-        duration: 45,
-        notes: 'Sesh'
-      },{
-        title: 'Practice for semis',
-        discipline: 'Keiko',
-        // date: 2018-07-10,
-        duration: 50,
-        notes: 'Sesh'
-      },{
-        title: 'Practice for semis',
-        discipline: 'Keiko',
-        // date: 2018-07-10,
-        duration: 50,
-        notes: 'Sesh'
-      },{
-        title: 'Practice for semis',
-        discipline: 'Kata',
-        // date: 2018-07-10,
-        duration: 50,
-        notes: 'Sesh'
-      },{
-        title: 'Practice for semis',
-        discipline: 'Kata',
-        // date: 2018-07-10,
-        duration: 50,
-        notes: 'Sesh'
-      },{
-        title: 'Practice for semis',
-        discipline: 'Kata',
-        // date: 2018-07-10,
-        duration: 45,
-        notes: 'Sesh'
-      },{
-        title: 'Practice for semis',
-        discipline: 'Shiai',
-        // date: 2018-07-10,
-        duration: 30,
-        notes: 'Sesh'
-      },{
-        title: 'Practice for semis',
-        discipline: 'Shiai',
-        // date: 2018-07-10,
-        duration: 45,
-        notes: 'Sesh'
-      },{
-        title: 'Practice for semis',
-        discipline: 'Shiai',
-        // date: 2018-07-10,
-        duration: 30,
-        notes: 'Sesh'
-      },{
-        title: 'Practice for semis',
-        discipline: 'Shiai',
-        // date: 2018-07-10,
-        duration: 45,
-        notes: 'Sesh'
-      },{
-        title: 'Practice for semis',
-        discipline: 'Kata',
-        // date: 2018-07-10,
-        duration: 10,
-        notes: 'Sesh'
-      }]
-    }, {
+      weight: 70
+    },{
       username: 'othermartin',
       email: 'othermartin@othermartin.com',
       password: 'othermartin',
@@ -98,15 +26,8 @@ mongoose.connect(dbURI, (err, db) => {
       grade: '8th Dan',
       dob: '1987-10-24',
       height: 200,
-      weight: 70,
-      sessions: [{
-        title: 'Practice for finals',
-        discipline: 'Keiko',
-        // date: 2018-07-10,
-        duration: 60,
-        notes: 'Smashed it.'
-      }]
-    }, {
+      weight: 70
+    },{
       username: 'Linda Lê',
       email: 'linda@linda.com',
       password: 'linda',
@@ -115,15 +36,8 @@ mongoose.connect(dbURI, (err, db) => {
       grade: '2nd Dan',
       dob: '1993-08-17',
       height: 157,
-      weight: 51,
-      sessions: [{
-        title: 'Practice at Tora',
-        discipline: 'Keiko',
-        // date: 2018-07-10,
-        duration: 60,
-        notes: 'Smashed it.'
-      }]
-    }, {
+      weight: 51
+    },{
       username: 'mike',
       email: 'mike@mike.com',
       password: 'mike',
@@ -132,15 +46,8 @@ mongoose.connect(dbURI, (err, db) => {
       grade: '8th Dan',
       dob: '1987-10-24',
       height: 200,
-      weight: 70,
-      sessions: [{
-        title: 'Practice for finals',
-        discipline: 'Keiko',
-        // date: 2018-07-10,
-        duration: 60,
-        notes: 'Smashed it.'
-      }]
-    }, {
+      weight: 70
+    },{
       username: 'nic',
       email: 'nic@nic.com',
       password: 'nic',
@@ -149,15 +56,8 @@ mongoose.connect(dbURI, (err, db) => {
       grade: '8th Dan',
       dob: '1987-10-24',
       height: 200,
-      weight: 70,
-      sessions: [{
-        title: 'Practice for finals',
-        discipline: 'Keiko',
-        // date: 2018-07-10,
-        duration: 60,
-        notes: 'Smashed it.'
-      }]
-    }, {
+      weight: 70
+    },{
       username: 'stevan',
       email: 'stevan@stevan.com',
       password: 'stevan',
@@ -166,15 +66,8 @@ mongoose.connect(dbURI, (err, db) => {
       grade: '8th Dan',
       dob: '1987-10-24',
       height: 200,
-      weight: 70,
-      sessions: [{
-        title: 'Practice for finals',
-        discipline: 'Keiko',
-        // date: 2018-07-10,
-        duration: 60,
-        notes: 'Smashed it.'
-      }]
-    }, {
+      weight: 70
+    },{
       username: 'rich',
       email: 'rich@rich.com',
       password: 'rich',
@@ -183,15 +76,8 @@ mongoose.connect(dbURI, (err, db) => {
       grade: '8th Dan',
       dob: '1987-10-24',
       height: 200,
-      weight: 70,
-      sessions: [{
-        title: 'Practice for finals',
-        discipline: 'Keiko',
-        // date: 2018-07-10,
-        duration: 60,
-        notes: 'Smashed it.'
-      }]
-    }, {
+      weight: 70
+    },{
       username: 'avon',
       email: 'avon@avon.com',
       password: 'avon',
@@ -200,28 +86,96 @@ mongoose.connect(dbURI, (err, db) => {
       grade: '8th Dan',
       dob: '1987-10-24',
       height: 200,
-      weight: 70,
-      sessions: [{
-        title: 'Practice for finals',
-        discipline: 'Keiko',
-        // date: 2018-07-10,
-        duration: 60,
-        notes: 'Smashed it.'
-      }]
-    }, {
-      username: 'bianca',
-      email: 'bianca@bianca.com',
-      password: 'bianca',
-      passwordConfirmation: 'bianca',
-      sessions: [{
-        title: 'Practice for finals',
-        discipline: 'Keiko',
-        // date: 2018-07-10,
-        duration: 60,
-        notes: 'Smashed it.'
-      }]
+      weight: 70
     }]))
-    .then(users => console.log(`${users.length} kendoka created`))
+    .then(users => {
+      console.log(`${users.length} kendoka created`);
+      Session.create([{
+        title: 'Practice for finals',
+        discipline: 'Keiko',
+        date: 20180710,
+        duration: 60,
+        notes: 'Smashed it.',
+        creator: users[0]
+      },{
+        title: 'Practice for semis',
+        discipline: 'Keiko',
+        date: 20180710,
+        duration: 45,
+        notes: 'Sesh',
+        creator: users[0]
+      },{
+        title: 'Practice for semis',
+        discipline: 'Keiko',
+        date: 20180710,
+        duration: 50,
+        notes: 'Sesh',
+        creator: users[0]
+      },{
+        title: 'Practice for semis',
+        discipline: 'Keiko',
+        date: 20180710,
+        duration: 50,
+        notes: 'Sesh',
+        creator: users[0]
+      },{
+        title: 'Practice for semis',
+        discipline: 'Kata',
+        date: 20180710,
+        duration: 50,
+        notes: 'Sesh',
+        creator: users[0]
+      },{
+        title: 'Practice for semis',
+        discipline: 'Kata',
+        date: 20180710,
+        duration: 50,
+        notes: 'Sesh',
+        creator: users[0]
+      },{
+        title: 'Practice for semis',
+        discipline: 'Kata',
+        date: 20180710,
+        duration: 45,
+        notes: 'Sesh',
+        creator: users[0]
+      },{
+        title: 'Practice for semis',
+        discipline: 'Shiai',
+        date: 20180710,
+        duration: 30,
+        notes: 'Sesh',
+        creator: users[0]
+      },{
+        title: 'Practice for semis',
+        discipline: 'Shiai',
+        date: 20180710,
+        duration: 45,
+        notes: 'Sesh',
+        creator: users[0]
+      },{
+        title: 'Practice for semis',
+        discipline: 'Shiai',
+        date: 20180710,
+        duration: 30,
+        notes: 'Sesh',
+        creator: users[0]
+      },{
+        title: 'Practice for semis',
+        discipline: 'Shiai',
+        date: 20180710,
+        duration: 45,
+        notes: 'Sesh',
+        creator: users[0]
+      },{
+        title: 'Practice for semis',
+        discipline: 'Kata',
+        date: 20180710,
+        duration: 10,
+        notes: 'Sesh',
+        creator: users[0]
+      }]);
+    })
     .catch(err => console.log(err))
     .finally(() => mongoose.connection.close());
 });

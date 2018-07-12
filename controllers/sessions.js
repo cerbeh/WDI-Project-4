@@ -1,17 +1,16 @@
 const User = require('../models/user');
+const Session = require('../models/session');
 
 function createRoute(req, res, next) {
-  User.findById(req.currentUser._id)
-    .then(user => {
-      user.sessions.push(req.body);
-      return user.save();
-    })
-    .then(user => res.json(user))
+  req.body.creator = req.currentUser._id;
+  Session.create(req.body)
+    .then(session => res.json(session))
     .catch(next);
 }
 
 function indexRoute(req, res, next) {
   User.findById(req.params.id)
+    .populate('sessions')
     .then(user => res.json(user.sessions))
     .catch(next);
 }
@@ -31,17 +30,11 @@ function updateRoute(req, res , next) {
   console.log(req.body);
   User.findById(req.params.id)
     .then(user => {
-      user.update({ 'sessions._id': req.body.sessionId },
+      user.update({ 'sessions._id': req.params.sessionId },
         { '$set': {
           'sessions.$.title': req.body.title
-        }},
-      );
-
-      // user.update({ 'sessions.$': req.params.sessionId },
-      //   {'$set': {
-      //     'sessions.$.title': req.body.title
-      //   }}
-      // );
+        },
+        new: true });
       res.json(user.sessions);
     })
     .catch(next);

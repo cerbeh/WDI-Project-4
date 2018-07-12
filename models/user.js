@@ -9,15 +9,6 @@ const moment = require('moment');
 // });
 
 
-const sessionSchema = new mongoose.Schema({
-  title: String,
-  discipline: { type: String, required: true },
-  date: Date,
-  duration: Number,
-  notes: String
-});
-
-
 const userSchema = new mongoose.Schema({
   username: { type: String, required: true },
   email: { type: String, required: true },
@@ -26,19 +17,19 @@ const userSchema = new mongoose.Schema({
   grade: { type: String, enum: ['1st Kyu', '1st Dan', '2nd Dan', '3rd Dan', '4th Dan', '5th Dan', '6th Dan', '7th Dan', '8th Dan']},
   dob: Date,
   height: Number,
-  weight: Number,
-  sessions: [ sessionSchema ]
+  weight: Number
+  // sessions: [ sessionSchema ]
 });
 
+userSchema.virtual('sessions', {
+  localField: '_id',
+  foreignField: 'creator',
+  ref: 'Session'
+});
 
 userSchema.path('dob')
   .get(function formatDate(dob) {
     return moment(dob).format('YYYY-MM-DD');
-  });
-
-sessionSchema.path('date')
-  .get(function formatDate(date) {
-    return moment(date).format('YYYY-MM-DD');
   });
 
 userSchema.set('toJSON', {
@@ -72,18 +63,5 @@ userSchema.pre('save', function hashPassword(next) {
 userSchema.methods.validatePassword = function validatePassword(password) {
   return bcrypt.compareSync(password, this.password);
 };
-
-sessionSchema.set('toJSON', {
-  virtuals: true,
-  getters: true
-});
-
-sessionSchema
-  .virtual('extraNotes')
-  .get(function(){
-    if (this.notes) {
-      return this.notes.length > 100 ? this.notes.substring(0, 100) + '...' : this.notes;
-    }
-  });
 
 module.exports = mongoose.model('User', userSchema);
