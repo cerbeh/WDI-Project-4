@@ -16,18 +16,18 @@ const Footer = () => {
           <i className="far fa-calendar-alt"></i>
           <p className="is-size-7">Schedule</p>
         </a>
-        <a className="navbar-item is-expanded is-block has-text-centered">
-          <i className="far fa-compass"></i>
-          <p className="is-size-7">Session</p>
-        </a>
+        <Link className="navbar-item is-expanded is-block has-text-centered" to={`/users/${Auth.getPayload().sub}/sessions/new`}>
+          <i className="fa fa-compass"></i>
+          <p className="is-size-7">Add Session</p>
+        </Link>
         <a className="navbar-item is-expanded  is-block has-text-centered">
           <i className="fas fa-chart-line"></i>
           <p className="is-size-7">Statistics</p>
         </a>
-        <a className="navbar-item is-expanded  is-block has-text-centered">
-          <i className="fas fa-history"></i>
+        <Link className="navbar-item is-expanded is-block has-text-centered" to={`/users/${Auth.getPayload().sub}/sessions`}>
+          <i className="fa fa-history"></i>
           <p className="is-size-7">History</p>
-        </a>
+        </Link>
       </div>
     </nav>
       }

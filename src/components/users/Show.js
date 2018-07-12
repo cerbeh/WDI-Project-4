@@ -98,20 +98,6 @@ class UsersShow extends React.Component{
               <p>Edit Profile</p>
             </button>
           </Link>
-          <Link to={`/users/${this.props.match.params.id}/sessions`}>
-            <button className="edit">
-              <i className="fas fa-history fa-3x"></i>
-              <i className="fas fa-dumbbell fa-3x"></i>
-              <p>Past Sessions</p>
-            </button>
-          </Link>
-          <Link to={`/users/${this.props.match.params.id}/sessions/new`}>
-            <button className="edit">
-              <i className="fas fa-plus fa-3x"></i>
-              <i className="fas fa-dumbbell fa-3x"></i>
-              <p>New Sesh</p>
-            </button>
-          </Link>
         </div>
       </section>
     );
