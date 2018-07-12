@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom';
 import Auth from '../../lib/Auth';
 // import Chart from '../charts/Chart';
 import TestChart from '../charts/TestChart';
+import _ from 'lodash';
 
 
 class UsersShow extends React.Component{
@@ -34,13 +35,13 @@ class UsersShow extends React.Component{
   constructor(){
     super();
     this.state={
+      errors: {},
       user: {},
       chartData: {
         labels: [],
         datasets: [
           {
-            label: 'Kata',
-            backgroundColor: 'rgba(54, 162, 235, 0.6)',
+            label: '',
             data: []
           }
         ]
@@ -50,28 +51,35 @@ class UsersShow extends React.Component{
 
   componentDidMount(){
     axios.get(`/api/users/${this.props.match.params.id}`)
-      .then(res => this.setState({ user: res.data }))
-      .then(() => {
-        // let newLabels;
-        // this.state.user.sessions.forEach(session => {
-        //   console.log(session.discipline);
-        //   newLabels = this.state.chartData.labels.concat(session.date);
-        // });
-        // const newLabels = this.state.user.sessions.map(session => {
-        //   return session.date;
-        // });
-        // this.setState({chartData: { labels: newLabels}});
-        // this.setState({ this.chartData });
+      .then(res => {
+        const data = res.data.sessions.map(session => {
+          return session.duration;
+        });
+
+
+        const labels = res.data.sessions.map(session => {
+          return session.date;
+        });
+
+        this.setState({
+          user: res.data,
+          chartData: {
+            labels,
+            datasets: [
+              {
+                data: data,
+                label: 'Kendo',
+                backgroundColor: 'rgba(255, 206, 86, 0.6)'
+              }
+            ]
+          }
+        });
       })
       .catch(err => this.setState({ error: err.message }));
   }
 
-  // componentDidUpdate = () => {
-  //   const arrayData = []
-  // }
-
   render(){
-    console.log(this.state.chartData.labels);
+    console.log(this.state.chartData);
     if(this.state.error) return <h2 className="title is-2">{this.state.error}</h2>;
     if(!this.state.user) return <h2 className="title">Loading...</h2>;
     return(
@@ -88,13 +96,6 @@ class UsersShow extends React.Component{
           <h2 className="subtitle"><strong>{this.state.user.grade}</strong></h2>
         </div>
 
-        {/* {this.state.chartData &&
-          <Chart
-            chartData={this.state.chartData}
-            discipline="Keiko"
-            legendPosition="bottom"
-          />} */}
-
         {this.state.chartData &&
           <TestChart
             chartData={this.state.chartData}
@@ -106,20 +107,6 @@ class UsersShow extends React.Component{
             <button className="edit">
               <i className="fas fa-pencil-alt fa-3x"></i>
               <p>Edit Profile</p>
-            </button>
-          </Link>
-          <Link to={`/users/${this.props.match.params.id}/sessions`}>
-            <button className="edit">
-              <i className="fas fa-history fa-3x"></i>
-              <i className="fas fa-dumbbell fa-3x"></i>
-              <p>Past Sessions</p>
-            </button>
-          </Link>
-          <Link to={`/users/${this.props.match.params.id}/sessions/new`}>
-            <button className="edit">
-              <i className="fas fa-plus fa-3x"></i>
-              <i className="fas fa-dumbbell fa-3x"></i>
-              <p>New Sesh</p>
             </button>
           </Link>
         </div>

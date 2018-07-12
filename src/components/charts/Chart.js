@@ -9,7 +9,8 @@ class Chart extends React.Component{
     };
   }
 
-  componentDidUpdate() {
+  componentDidUpdate
+  () {
     console.log(this.state.chartData, 'chart');
   }
 
