@@ -1,9 +1,10 @@
 import React from 'react';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
+import _ from 'lodash';
+
 import Auth from '../../lib/Auth';
 import Chart from '../charts/Chart';
-import _ from 'lodash';
 
 
 class UsersShow extends React.Component{
@@ -30,64 +31,45 @@ class UsersShow extends React.Component{
   }
 
   setImage(label) {
-    if(label === 'Kata') return <img src="https://i.imgur.com/K1DprdD.png" id="kata" onClick={this.toggleHidden.bind(this)}/>;
-    if(label === 'Keiko') return <img src="https://i.imgur.com/RBp1erT.jpg" id="keiko" onClick={this.toggleHidden.bind(this)}/>;
-    if(label === 'Shiai') return <img src="https://i.imgur.com/SF3GNT0.jpg" id="shiai" onClick={this.toggleHidden.bind(this)}/>;
-    // switch(label) {
-    //   case 'Kata':
-    //     return <img src="https://i.imgur.com/K1DprdD.png" id="kata" onClick={this.toggleHidden.bind(this)}/>;
-    //   case 'Keiko':
-    //     return <img src="https://i.imgur.com/RBp1erT.jpg" id="keiko" onClick={this.toggleHidden.bind(this)}/>;
-    //   case 'Shiai':
-    //     return <img src="https://i.imgur.com/SF3GNT0.jpg" id="shiai" onClick={this.toggleHidden.bind(this)}/>;
-    //   default:
-    //     <button className="button">BUTTON</button>;
-    // }
+    switch(label) {
+      case 'Kata':
+        return ([<img src="https://i.imgur.com/K1DprdD.png" key="kata" id="kata"/>]);
+      case 'Keiko':
+        return ([<img src="https://i.imgur.com/RBp1erT.jpg" key="keiko" id="keiko"/>]);
+      case 'Shiai':
+        return ([<img src="https://i.imgur.com/SF3GNT0.jpg" key="shiai" id="shiai"/>]);
+      default:
+        <button className="button">BUTTON</button>;
+    }
   }
-
-  setChartData(sessionsData, discipline) {
-
-    return {
-      labels:
-
-      sessionsData.filter(session => {
-        if(session.discipline === discipline) return session;
-      }).map(session => {
-        return session.date;
-      }),
-
-
-      datasets: this.getDisciplines(sessionsData).map(discipline => {
-        return {
-          label: discipline,
-          backgroundColor: 'rgba(255, 206, 86, 0.6)',
-          data: sessionsData.filter(session => {
-            if (session.discipline === discipline) return session;
-          }).map(obj => {
-            return obj.duration;
-          })
-        };
-      })
-    };
-  }
-
-
 
   setDatasets(sessionsData, discipline) {
     return {
-      labels: sessionsData.filter(session => {
-        if(session.discipline === discipline) return session;
-      }).map(session => {
-        return session.date;
-      }),
+
+      labels: sessionsData
+        .filter(session => {
+          if(session.discipline === discipline) return session;
+        })
+        .sort((a,b) => {
+          return new Date(a.date) - new Date(b.date) ;
+        })
+        .map(session => {
+          return session.date;
+        }),
+
       datasets: [{
         label: discipline,
         backgroundColor: 'rgba(255, 206, 86, 0.6)',
-        data: sessionsData.filter(session => {
-          if (session.discipline === discipline) return session;
-        }).map(obj => {
-          return obj.duration;
-        })
+        data: sessionsData
+          .filter(session => {
+            if (session.discipline === discipline) return session;
+          })
+          .sort((a,b) => {
+            return new Date(a.date) - new Date(b.date) ;
+          })
+          .map(obj => {
+            return obj.duration;
+          })
       }]
     };
   }
@@ -104,7 +86,6 @@ class UsersShow extends React.Component{
             return this.setDatasets(res.data.sessions, discipline);
           })
         });
-        console.log(this.state.chartData);
       })
 
       .catch(err => this.setState({ error: err.message }));
@@ -146,16 +127,15 @@ class UsersShow extends React.Component{
                 <div className="column is-12" key={index}>
                   <div
                     className="container chart-data-btn"
+                    onClick={this.toggleHidden.bind(this)}
                   >
-                    {console.log(this.setImage(chart.datasets[0].label))}
-                    {/* {this.setImage(chart.datasets[0].label)} */}
+                    {this.setImage(chart.datasets[0].label)}
                     {!this.state.isHidden &&
                     <Chart
                       data={chart}
                     />
                     }
                   </div>
-
                 </div>
               )}
         </div>
