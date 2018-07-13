@@ -20,12 +20,11 @@ class Navbar extends React.Component{
   }
   render(){
     return (
-      <nav className="navbar" role="navigation" aria-label="main navigation">
+      <nav className="navbar is-overlay" role="navigation" aria-label="main navigation">
         <div className="navbar-brand">
           <Link to="/" className="navbar-item">
             <img src="https://d30y9cdsu7xlg0.cloudfront.net/png/1915-200.png" height="50" />
           </Link>
-
           <a role="button"
             className={`navbar-burger${this.state.navbarOpen ? ' is-active' : ''}`}
             aria-label="menu"

@@ -1,10 +1,14 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import axios from 'axios';
 import Auth from '../../lib/Auth';
+import Flash from '../../lib/Flash';
 
 class AuthLogin extends React.Component {
 
-  state:{}
+  state= {
+    // errors: {}
+  }
 
   handleSubmit = (e) => {
     e.preventDefault();
@@ -13,38 +17,45 @@ class AuthLogin extends React.Component {
       method: 'POST',
       data: this.state
     })
-    //can only progress if it's a good request
-      .then(res => {
-        //stores the token in localStorage
-        Auth.setToken(res.data.token);
-        //redirect to usersindex
-        this.props.history.push('/users');
-        //which causes a re-render as history is an array.
-      })
+      .then(res => Auth.setToken(res.data.token))
+      .then(() => Flash.setMessage('success', 'Welcome Back'))
+      .then(() => this.props.history.push(`/users/${Auth.getPayload().sub}`))
+    //Replace will replace the last entry with login so when it goes back we havent moved.
       .catch(() => {
         this.props.history.replace('/login');
-        //Replace will replace the last entry with login so when it goes back we havent moved.
       });
+      // .catch(err => {
+      //   this.setState({ errors: err.response.data.errors });
+      //   // Flash.setMessage('danger', 'Invalid Credentials');
+      // });
   }
 
-  handleChange=({ target: { name, value}}) => {
-    this.setState({ [name]: value });
+  handleChange = ({ target: { name, value }}) => {
+    this.setState({ [name]: value }, () => console.log(this.state));
   }
 
   render() {
     return (
-      <form onSubmit={this.handleSubmit}>
-        <div className="field">
-          <label className="email">Email</label>
-          <input className="input" name="email" placeholder="Email"  onChange={this.handleChange} />
+      <section className="hero section registrationBackground is-fullheight ">
+        <div className="container">
+          <h1 className="title">Login</h1>
+          <form onSubmit={this.handleSubmit}>
+            <div className="field">
+              <label className="email">email</label>
+              <input className="input" name="email" onChange={this.handleChange} />
+              {/* {this.state.errors && <small>{this.state.errors.email}</small>} */}
+            </div>
+            <div className="field">
+              <label className="password">password</label>
+              <input className="input" type="password" name="password"  onChange={this.handleChange} />
+              {/* {this.state.errors && <small>{this.state.errors.password}</small>} */}
+            </div>
+            <button className="button text-is-centered">Submit</button>
+            <hr />
+            <Link className="navbar-item" to="/register">Not a member? Sign up now</Link>
+          </form>
         </div>
-        <div className="field">
-          <label className="password">Password</label>
-          <input className="input" type="password" name="password" placeholder="Password"  onChange={this.handleChange} />
-        </div>
-
-        <button className="button">Submit</button>
-      </form>
+      </section>
     );
   }
 }

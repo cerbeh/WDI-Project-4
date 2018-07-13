@@ -3,7 +3,7 @@ const moment = require('moment');
 
 const sessionSchema = new mongoose.Schema({
   title: String,
-  discipline: { type: String, required: true },
+  discipline: { type: String, required: 'Please provide a discipline' },
   date: Date,
   duration: Number,
   notes: String,
@@ -22,12 +22,5 @@ sessionSchema.set('toJSON', {
   getters: true
 });
 
-// sessionSchema
-//   .virtual('extraNotes')
-//   .get(function(){
-//     if (this.notes) {
-//       return this.notes.length > 100 ? this.notes.substring(0, 100) + '...' : this.notes;
-//     }
-//   });
 
 module.exports = mongoose.model('Session', sessionSchema);

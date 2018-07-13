@@ -24,6 +24,16 @@ const Chart = ({data}) => {
           legend: {
             display: defaultProps.displayLegend,
             position: defaultProps.legendPosition
+          },
+          options: {
+            scales: {
+              yAxes: [{
+                stacked: true,
+                ticks: {
+                  beginAtZero: true
+                }
+              }]
+            }
           }
         }}
       />

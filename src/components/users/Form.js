@@ -4,7 +4,7 @@ const UsersForm = ({ handleChange, handleSubmit, data, errors }) => {
   return (
     <form onSubmit={handleSubmit}>
       <div className="field">
-        <label className="label">Username</label>
+        <label className="label">Username<span className="req">*</span></label>
         {data.username && <input className="input" name="username" placeholder="Username" onChange={handleChange} value={data.username || ''}/>}
         {errors.username && <small>{errors.username}</small>}
       </div>
@@ -21,18 +21,22 @@ const UsersForm = ({ handleChange, handleSubmit, data, errors }) => {
               <option value="" disabled>Please choose</option>
               <option>Male</option>
               <option>Female</option>
+              <option>Transgender</option>
+              <option>Non-binary</option>
+              <option>Other</option>
+              <option>Prefer not to say</option>
             </select>}
           </div>
         </div>
         {errors.gender && <small>{errors.gender}</small>}
       </div>
       <div className="field">
-        <label className="label">Height</label>
+        <label className="label">Height(cm)</label>
         {data && <input className="input" name="image" placeholder="Height" onChange={handleChange} value={data.height || ''}/>}
         {errors.height && <small>{errors.height}</small>}
       </div>
       <div className="field">
-        <label className="label">Weight</label>
+        <label className="label">Weight(kg)</label>
         {data && <input className="input" name="image" placeholder="Weight" onChange={handleChange} value={data.weight || ''}/>}
         {errors.weight && <small>{errors.weight}</small>}
       </div>
@@ -56,7 +60,7 @@ const UsersForm = ({ handleChange, handleSubmit, data, errors }) => {
         </div>
         {errors.grade && <small>{errors.grade}</small>}
       </div>
-      <button className="button">Submit</button>
+      <button className="submitBtn button">Submit</button>
     </form>
   );
 };

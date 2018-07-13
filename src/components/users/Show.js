@@ -74,11 +74,6 @@ class UsersShow extends React.Component{
     axios.get(`/api/users/${this.props.match.params.id}`)
       .then(res => {
 
-        console.log();
-
-
-
-
         this.setState({
           user: res.data,
           chartData: this.getDisciplines(res.data.sessions).map(discipline => {
@@ -97,34 +92,51 @@ class UsersShow extends React.Component{
     if(!this.state.user) return <h2 className="title">Loading...</h2>;
     return(
       <section className="section">
-        <div>
-          <h1 className="title">{this.state.user.username}</h1>
-          <h5 className="is-5">I was born on:</h5>
-          <h2 className="subtitle"><strong>{this.state.user.dob}</strong></h2>
-          <h5 className="is-5">My height:</h5>
-          <h2 className="subtitle"><strong>{this.state.user.height}</strong> cm</h2>
-          <h5 className="is-5">My Weight:</h5>
-          <h2 className="subtitle"><strong>{this.state.user.weight}</strong> kilos</h2>
-          <h5 className="is-5">Grade:</h5>
-          <h2 className="subtitle"><strong>{this.state.user.grade}</strong></h2>
-        </div>
+        <div className="columns is-multiline is-mobile">
+          <div className="column is-10">
+            <h1 className="title is-3">{this.state.user.username}</h1>
+          </div>
+          <div className="column is-1">
+            <div className="container">
+              <Link to={`/users/${Auth.getPayload().sub}/edit`}>
+                <button className="edit">
+                  <i className="fas fa-pencil-alt   fa-2x"></i>
+                  <p className="is-8">Edit Profile</p>
+                </button>
+              </Link>
+            </div>
+          </div>
+          <div className="column is-10">
+            <h5 className="is-5">I was born on:</h5>
+            <h2 className="subtitle"><strong>{this.state.user.dob}</strong></h2>
+            <h5 className="is-5">My height:</h5>
+            <h2 className="subtitle"><strong>{this.state.user.height}</strong> cm</h2>
+            <h5 className="is-5">My Weight:</h5>
+            <h2 className="subtitle"><strong>{this.state.user.weight}</strong> kilos</h2>
+            <h5 className="is-5">Grade:</h5>
+            <h2 className="subtitle"><strong>{this.state.user.grade}</strong></h2>
+          </div>
+          {this.state.chartData &&
+            <div className="container text-is-centered">
+            </div>
+          }
 
-        {this.state.chartData &&
-          this.state.chartData.map((chart, index) => 
-            <Chart
-              key={index}
-              data={chart}
-            />
-          )
-        }
+          {this.state.chartData &&
+                this.state.chartData.map((chart, index) =>
+                  <Chart
+                    key={index}
+                    data={chart}
+                  />
+                )}
 
-        <div className="bottomBtn">
-          <Link to={`/users/${Auth.getPayload().sub}/edit`}>
-            <button className="edit">
-              <i className="fas fa-pencil-alt fa-3x"></i>
-              <p>Edit Profile</p>
-            </button>
-          </Link>
+          <div className="bottomBtn">
+            <Link to={`/users/${Auth.getPayload().sub}/edit`}>
+              <button className="edit">
+                <i className="fas fa-pencil-alt fa-3x"></i>
+                <p>Edit Profile</p>
+              </button>
+            </Link>
+          </div>
         </div>
       </section>
     );

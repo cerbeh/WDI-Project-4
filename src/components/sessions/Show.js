@@ -26,26 +26,34 @@ class SessionsShow extends React.Component {
     return(
       <section>
         {this.state.session &&
-          <div>
-            <h2>{this.state.session.title}</h2>
-            <ul>
-              <li>
-                {this.state.session.discipline}
-              </li>
-              <li>
-                {this.state.session.duration}
-              </li>
-            </ul>
-            <p>
-              {this.state.session.notes}
-            </p>
-            <button onClick={this.handleDelete} className="button">Delete</button>
-            <Link
-              to={`/users/${this.props.match.params.id}/sessions/${this.props.match.params.sessionId}/edit`}
-              className="button"
-            >Edit
-            </Link>
-          </div>
+          <section className ="section">
+            <div className="container">
+              <h1 className="title">{this.state.session.title} on {this.state.session.date}</h1>
+              <hr />
+              <h2 className="subtitle">Session Type:</h2>
+              <strong>{this.state.session.discipline}</strong>
+              <h2 className="subtitle">Duration:</h2>
+              <i className="far fa-clock "></i><strong>{this.state.session.duration}</strong> minutes
+              <h2 className="subtitle">Notes:</h2>
+              <p>
+                <strong>{this.state.session.notes}</strong>
+              </p>
+            </div>
+            <section>
+              <div className="container">
+                <button onClick={this.handleDelete} className="button">Delete</button>
+                <Link
+                  to={`/users/${this.props.match.params.id}/sessions/${this.props.match.params.sessionId}/edit`}
+                  className="button"
+                >Edit
+                </Link>
+
+              </div>
+
+            </section>
+
+
+          </section>
         }
       </section>
     );
