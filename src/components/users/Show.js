@@ -30,19 +30,19 @@ class UsersShow extends React.Component{
   }
 
   setImage(label) {
-    if(label === 'Kata') return <img src="https://i.imgur.com/K1DprdD.png" id="kata" onClick={this.toggleHidden.bind(this)}/>;
-    if(label === 'Keiko') return <img src="https://i.imgur.com/RBp1erT.jpg" id="keiko" onClick={this.toggleHidden.bind(this)}/>;
-    if(label === 'Shiai') return <img src="https://i.imgur.com/SF3GNT0.jpg" id="shiai" onClick={this.toggleHidden.bind(this)}/>;
-    // switch(label) {
-    //   case 'Kata':
-    //     return <img src="https://i.imgur.com/K1DprdD.png" id="kata" onClick={this.toggleHidden.bind(this)}/>;
-    //   case 'Keiko':
-    //     return <img src="https://i.imgur.com/RBp1erT.jpg" id="keiko" onClick={this.toggleHidden.bind(this)}/>;
-    //   case 'Shiai':
-    //     return <img src="https://i.imgur.com/SF3GNT0.jpg" id="shiai" onClick={this.toggleHidden.bind(this)}/>;
-    //   default:
-    //     <button className="button">BUTTON</button>;
-    // }
+    // if(label === 'Kata') return <img src="https://i.imgur.com/K1DprdD.png" id="kata" onClick={this.toggleHidden.bind(this)}/>;
+    // if(label === 'Keiko') return <img src="https://i.imgur.com/RBp1erT.jpg" id="keiko" onClick={this.toggleHidden.bind(this)}/>;
+    // if(label === 'Shiai') return <img src="https://i.imgur.com/SF3GNT0.jpg" id="shiai" onClick={this.toggleHidden.bind(this)}/>;
+    switch(label) {
+      case 'Kata':
+        return ([<img src="https://i.imgur.com/K1DprdD.png" key="kata" id="kata" onClick={this.toggleHidden.bind(this)}/>]);
+      case 'Keiko':
+        return ([<img src="https://i.imgur.com/RBp1erT.jpg" key="keiko" id="keiko" onClick={this.toggleHidden.bind(this)}/>]);
+      case 'Shiai':
+        return ([<img src="https://i.imgur.com/SF3GNT0.jpg" key="shiai" id="shiai" onClick={this.toggleHidden.bind(this)}/>]);
+      default:
+        <button className="button">BUTTON</button>;
+    }
   }
 
   setChartData(sessionsData, discipline) {
@@ -147,14 +147,13 @@ class UsersShow extends React.Component{
                     className="container chart-data-btn"
                   >
                     {console.log(this.setImage(chart.datasets[0].label))}
-                    {/* {this.setImage(chart.datasets[0].label)} */}
+                    {this.setImage(chart.datasets[0].label)}
                     {!this.state.isHidden &&
                     <Chart
                       data={chart}
                     />
-                  }
+                    }
                   </div>
-
                 </div>
               )}
         </div>
