@@ -114,6 +114,20 @@ mongoose.connect(dbURI, (err, db) => {
       },{
         title: 'Practice for semis',
         discipline: 'Keiko',
+        date: new Date('Mar 18, 2018'),
+        duration: 50,
+        notes: 'Sesh',
+        creator: users[0]
+      },{
+        title: 'Practice for semis',
+        discipline: 'Keiko',
+        date: new Date('Mar 18, 2018'),
+        duration: 50,
+        notes: 'Sesh',
+        creator: users[0]
+      },{
+        title: 'Practice for semis',
+        discipline: 'Keiko',
         date: new Date('Mar 15, 2018'),
         duration: 50,
         notes: 'Sesh',
