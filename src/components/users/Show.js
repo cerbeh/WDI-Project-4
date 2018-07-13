@@ -93,13 +93,12 @@ class UsersShow extends React.Component{
 
 
   render(){
-    if(this.state.error) return <h2 className="title is-2">{this.state.error}</h2>;
-    if(!this.state.user) return <h2 className="title">Loading...</h2>;
     return(
       <section className="section">
         <div className="columns is-multiline is-mobile">
           <div className="column is-10">
             <h1 className="title is-3">{this.state.user.username}</h1>
+            <hr />
           </div>
           <div className="column is-1">
             <div className="container">
@@ -111,16 +110,32 @@ class UsersShow extends React.Component{
               </Link>
             </div>
           </div>
-          <div className="column is-10">
-            <h5 className="is-5">I was born on:</h5>
-            <h2 className="subtitle"><strong>{this.state.user.dob}</strong></h2>
-            <h5 className="is-5">My height:</h5>
-            <h2 className="subtitle"><strong>{this.state.user.height}</strong> cm</h2>
-            <h5 className="is-5">My Weight:</h5>
-            <h2 className="subtitle"><strong>{this.state.user.weight}</strong> kilos</h2>
-            <h5 className="is-5">Grade:</h5>
-            <h2 className="subtitle"><strong>{this.state.user.grade}</strong></h2>
-          </div>
+
+          {this.state.user && !this.state.user.gender  &&
+          <section className="section">
+            <div className="no-sessions container ">
+              <img src="https://imgur.com/Vsd3i2Y.png"/>
+            </div>
+            <p className="is-3 has-text-centered">You havent edited your profile yet.
+              <Link to={`/users/${this.props.match.params.id}/edit`} className="is-3 "> Click here edit!</Link></p>
+          </section>
+          }
+
+          {this.state.user && this.state.user.gender &&
+          <section>
+            <div className="column is-10">
+              <h5 className="is-5">I was born on:</h5>
+              <h2 className="subtitle"><strong>{this.state.user.dob}</strong></h2>
+              <h5 className="is-5">My height:</h5>
+              <h2 className="subtitle"><strong>{this.state.user.height}</strong> cm</h2>
+              <h5 className="is-5">My Weight:</h5>
+              <h2 className="subtitle"><strong>{this.state.user.weight}</strong> kilos</h2>
+              <h5 className="is-5">Grade:</h5>
+              <h2 className="subtitle"><strong>{this.state.user.grade}</strong></h2>
+            </div>
+          </section>
+          }
+
 
           {this.state.chartData &&
               this.state.chartData.map((chart, index) =>
