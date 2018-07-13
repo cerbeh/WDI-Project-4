@@ -95,28 +95,29 @@ class UsersShow extends React.Component{
             <h5 className="is-5">Grade:</h5>
             <h2 className="subtitle"><strong>{this.state.user.grade}</strong></h2>
           </div>
+
           {this.state.chartData &&
 
-            <section className="section text-is-centered">
-              <div className="container chart-data-btn">
-                <img src="https://i.imgur.com/RBp1erT.jpg" id="keiko" onClick={this.toggleHidden.bind(this)}/>
-                {!this.state.isHidden && <Chart
-                  chartData={this.state.chartData}
-                />}
-              </div>
-              <div className="container chart-data-btn">
-                <img src="https://i.imgur.com/SF3GNT0.jpg" id="shiai" onClick={this.toggleHidden.bind(this)}/>
-                {!this.state.isHidden && <Chart
-                  chartData={this.state.chartData}
-                />}
-              </div>
-              <div className="container chart-data-btn">
-                <img src="https://i.imgur.com/K1DprdD.png" id="kata" onClick={this.toggleHidden.bind(this)}/>
-                {!this.state.isHidden && <Chart
-                  onclick="toggleChart()" chartData={this.state.chartData}
-                />}
-              </div>
-            </section>
+                <section className="section text-is-centered">
+                  <div className="container chart-data-btn">
+                    <img src="https://i.imgur.com/RBp1erT.jpg" id="keiko" onClick={this.toggleHidden.bind(this)}/>
+                    {!this.state.isHidden && <Chart
+                      chartData={this.state.chartData}
+                    />}
+                  </div>
+                  <div className="container chart-data-btn">
+                    <img src="https://i.imgur.com/SF3GNT0.jpg" id="shiai" onClick={this.toggleHidden.bind(this)}/>
+                    {!this.state.isHidden && <Chart
+                      chartData={this.state.chartData}
+                    />}
+                  </div>
+                  <div className="container chart-data-btn">
+                    <img src="https://i.imgur.com/K1DprdD.png" id="kata" onClick={this.toggleHidden.bind(this)}/>
+                    {!this.state.isHidden && <Chart
+                      onclick="toggleChart()" chartData={this.state.chartData}
+                    />}
+                  </div>
+                </section>
           }
 
         </div>
