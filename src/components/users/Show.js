@@ -16,31 +16,24 @@ class UsersShow extends React.Component{
     };
   }
 
-  setChartData(data) {
-
-
-    //Generate an array with unique disciplines
-    const label = _.uniq(data.sessions.map(session => {
+  getDisciplines(sessionsData) {
+    return _.uniq(sessionsData.map(session => {
       return session.discipline;
     }));
+  }
 
+  setChartData(sessionsData) {
     return {
-      labels: data.sessions.map(session => {
+      labels: sessionsData.map(session => {
         return session.date;
       }),
-
-      //Manipulate data from models to be formatted how chartjs wants to be fed
-      datasets: label.map(discipline => {
+      datasets: this.getDisciplines(sessionsData).map(discipline => {
         return {
-          //label for the dataset from the previous lodash variable
           label: discipline,
-
           backgroundColor: 'rgba(255, 206, 86, 0.6)',
-          //filters the user.sessions to only show objects that have the property from the current discipline
-          data: data.sessions.filter(session => {
+          data: sessionsData.filter(session => {
             if (session.discipline === discipline) return session;
           }).map(obj => {
-          //manipulates objects returns from filter to only show their duration
             return obj.duration;
           })
         };
@@ -55,7 +48,7 @@ class UsersShow extends React.Component{
 
         this.setState({
           user: res.data,
-          keiko: this.setChartData(res.data)
+          chartData: this.setChartData(res.data.sessions)
         });
       })
 
