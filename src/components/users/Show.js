@@ -24,9 +24,36 @@ class UsersShow extends React.Component{
     }));
   }
 
-  toggleHidden(){
-    this.setState({
-      isHidden: !this.state.isHidden
+  getKeyData(sessionsData, discipline, key) {
+    return sessionsData
+      //Return only the session that match the discipline
+      .filter(session => {
+        if(session.discipline === discipline) return session;
+      })
+      //Organise from oldest to newest dates
+      .sort((a,b) => {
+        return new Date(a.date) - new Date(b.date) ;
+      })
+      //Return only the data from session object from key provided
+      .map(session => {
+        return session[key];
+      });
+  }
+
+  setDatasets(sessionsData, discipline) {
+    return {
+      labels: this.getKeyData(sessionsData, discipline, 'date'),
+      datasets: [{
+        label: discipline,
+        backgroundColor: 'rgba(255, 206, 86, 0.6)',
+        data: this.getKeyData(sessionsData, discipline, 'duration')
+      }]
+    };
+  }
+
+  setChartData(sessionsData) {
+    return this.getDisciplines(sessionsData).map(discipline => {
+      return this.setDatasets(sessionsData, discipline);
     });
   }
 
@@ -39,41 +66,15 @@ class UsersShow extends React.Component{
       case 'Shiai':
         return ([<img src="https://i.imgur.com/SF3GNT0.jpg" key="shiai" alt="shiai"/>]);
       default:
-        ([<img key={index} src="http://fillmurray.com/200/200"/>]);
+        return ([<img key={index} src="http://fillmurray.com/200/200"/>]);
     }
   }
 
-  setDatasets(sessionsData, discipline) {
-    return {
-
-      labels: sessionsData
-        .filter(session => {
-          if(session.discipline === discipline) return session;
-        })
-        .sort((a,b) => {
-          return new Date(a.date) - new Date(b.date) ;
-        })
-        .map(session => {
-          return session.date;
-        }),
-
-      datasets: [{
-        label: discipline,
-        backgroundColor: 'rgba(255, 206, 86, 0.6)',
-        data: sessionsData
-          .filter(session => {
-            if (session.discipline === discipline) return session;
-          })
-          .sort((a,b) => {
-            return new Date(a.date) - new Date(b.date) ;
-          })
-          .map(obj => {
-            return obj.duration;
-          })
-      }]
-    };
+  toggleHidden(){
+    this.setState({
+      isHidden: !this.state.isHidden
+    });
   }
-
 
   componentDidMount(){
     axios.get(`/api/users/${this.props.match.params.id}`)
@@ -81,10 +82,7 @@ class UsersShow extends React.Component{
 
         this.setState({
           user: res.data,
-          chartData: this.getDisciplines(res.data.sessions).map(discipline => {
-            //returns an array of objects with a key labels and the array inside is of the unique dates for that discipline
-            return this.setDatasets(res.data.sessions, discipline);
-          })
+          chartData: this.setChartData(res.data.sessions)
         });
       })
 
