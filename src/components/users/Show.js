@@ -99,21 +99,21 @@ class UsersShow extends React.Component{
 
             <section className="section text-is-centered">
               <div className="container chart-data-btn">
-                <img src="https://i.imgur.com/RBp1erT.jpg" onClick={this.toggleHidden.bind(this)}/>
+                <img src="https://i.imgur.com/RBp1erT.jpg" id="keiko" onClick={this.toggleHidden.bind(this)}/>
                 {!this.state.isHidden && <Chart
                   chartData={this.state.chartData}
                 />}
               </div>
               <div className="container chart-data-btn">
-                <img src="https://i.imgur.com/SF3GNT0.jpg" onClick={this.toggleHidden.bind(this)}/>
+                <img src="https://i.imgur.com/SF3GNT0.jpg" id="shiai" onClick={this.toggleHidden.bind(this)}/>
                 {!this.state.isHidden && <Chart
                   chartData={this.state.chartData}
                 />}
               </div>
               <div className="container chart-data-btn">
-                <img src="https://i.imgur.com/K1DprdD.png" onClick={this.toggleHidden.bind(this)}/>
+                <img src="https://i.imgur.com/K1DprdD.png" id="kata" onClick={this.toggleHidden.bind(this)}/>
                 {!this.state.isHidden && <Chart
-                  chartData={this.state.chartData}
+                  onclick="toggleChart()" chartData={this.state.chartData}
                 />}
               </div>
             </section>

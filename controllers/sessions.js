@@ -31,6 +31,23 @@ function updateRoute(req, res , next) {
     .catch(next);
 }
 
+//       session.forEach(entry => {
+//         entry._id.toString() === req.params.session ? Object.assign(entry, req.body) : null;
+//       });
+//       return session.save();
+//     })
+//     .then(session => {
+//       let newEntry;
+//       session.forEach(entry => {
+//         entry._id.toString() === req.params.sessionId ? newEntry = entry : null;
+//       });
+//       res.status(200).json(newEntry);
+//     })
+//     .catch(next);
+// }
+
+
+
 function deleteRoute(req, res, next) {
   Session.findById(req.params.sessionId)
     .then(session => session.remove())
