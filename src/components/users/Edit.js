@@ -40,7 +40,7 @@ class UsersEdit extends React.Component{
     return(
       <section className="section">
         <div className="container">
-          <h1 className="title">Edit Session</h1>
+          <h1 className="title">Edit Profile</h1>
           <UsersForm
             handleChange={this.handleChange}
             handleSubmit={this.handleSubmit}
