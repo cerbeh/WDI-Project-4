@@ -50,8 +50,6 @@ class UsersShow extends React.Component{
 
 
 
-
-
   setDatasets(sessionsData, discipline) {
     return {
       labels: sessionsData.filter(session => {
@@ -59,7 +57,7 @@ class UsersShow extends React.Component{
       }).map(session => {
         return session.date;
       }),
-      datasets: {
+      datasets: [{
         label: discipline,
         backgroundColor: 'rgba(255, 206, 86, 0.6)',
         data: sessionsData.filter(session => {
@@ -67,7 +65,7 @@ class UsersShow extends React.Component{
         }).map(obj => {
           return obj.duration;
         })
-      }
+      }]
     };
   }
 
@@ -76,27 +74,19 @@ class UsersShow extends React.Component{
     axios.get(`/api/users/${this.props.match.params.id}`)
       .then(res => {
 
-        // const disciplines = this.getDisciplines(res.data.sessions);
-
-        // console.log(disciplines, 'disciplines');
-
-
-        console.log(this.getDisciplines(res.data.sessions).map(discipline => {
-          //returns an array of objects with a key labels and the array inside is of the unique dates for that discipline
-          return this.setDatasets(res.data.sessions, discipline);
-        }));
-
-        // console.log(this.setDatasets(res.data.sessions, 'Kata'),'setDatasets'); //works
+        console.log();
 
 
 
 
         this.setState({
           user: res.data,
-          chartData: this.setChartData(res.data.sessions, 'Keiko')
+          chartData: this.getDisciplines(res.data.sessions).map(discipline => {
+            //returns an array of objects with a key labels and the array inside is of the unique dates for that discipline
+            return this.setDatasets(res.data.sessions, discipline);
+          })
         });
-        // console.log(this.getDisciplines(res.data.sessions));
-        // console.log(this.state.chartData);
+        console.log(this.state.chartData);
       })
 
       .catch(err => this.setState({ error: err.message }));
@@ -120,9 +110,12 @@ class UsersShow extends React.Component{
         </div>
 
         {this.state.chartData &&
-          <Chart
-            data={this.state.chartData}
-          />
+          this.state.chartData.map((chart, index) => 
+            <Chart
+              key={index}
+              data={chart}
+            />
+          )
         }
 
         <div className="bottomBtn">
