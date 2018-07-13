@@ -17,50 +17,95 @@ class UsersShow extends React.Component{
     };
   }
 
+  getDisciplines(sessionsData) {
+    return _.uniq(sessionsData.map(session => {
+      return session.discipline;
+    }));
+  }
+
   toggleHidden(){
     this.setState({
       isHidden: !this.state.isHidden
     });
   }
 
+  setImage(label) {
+    if(label === 'Kata') return <img src="https://i.imgur.com/K1DprdD.png" id="kata" onClick={this.toggleHidden.bind(this)}/>;
+    if(label === 'Keiko') return <img src="https://i.imgur.com/RBp1erT.jpg" id="keiko" onClick={this.toggleHidden.bind(this)}/>;
+    if(label === 'Shiai') return <img src="https://i.imgur.com/SF3GNT0.jpg" id="shiai" onClick={this.toggleHidden.bind(this)}/>;
+    // switch(label) {
+    //   case 'Kata':
+    //     return <img src="https://i.imgur.com/K1DprdD.png" id="kata" onClick={this.toggleHidden.bind(this)}/>;
+    //   case 'Keiko':
+    //     return <img src="https://i.imgur.com/RBp1erT.jpg" id="keiko" onClick={this.toggleHidden.bind(this)}/>;
+    //   case 'Shiai':
+    //     return <img src="https://i.imgur.com/SF3GNT0.jpg" id="shiai" onClick={this.toggleHidden.bind(this)}/>;
+    //   default:
+    //     <button className="button">BUTTON</button>;
+    // }
+  }
+
+  setChartData(sessionsData, discipline) {
+
+    return {
+      labels:
+
+      sessionsData.filter(session => {
+        if(session.discipline === discipline) return session;
+      }).map(session => {
+        return session.date;
+      }),
+
+
+      datasets: this.getDisciplines(sessionsData).map(discipline => {
+        return {
+          label: discipline,
+          backgroundColor: 'rgba(255, 206, 86, 0.6)',
+          data: sessionsData.filter(session => {
+            if (session.discipline === discipline) return session;
+          }).map(obj => {
+            return obj.duration;
+          })
+        };
+      })
+    };
+  }
+
+
+
+  setDatasets(sessionsData, discipline) {
+    return {
+      labels: sessionsData.filter(session => {
+        if(session.discipline === discipline) return session;
+      }).map(session => {
+        return session.date;
+      }),
+      datasets: [{
+        label: discipline,
+        backgroundColor: 'rgba(255, 206, 86, 0.6)',
+        data: sessionsData.filter(session => {
+          if (session.discipline === discipline) return session;
+        }).map(obj => {
+          return obj.duration;
+        })
+      }]
+    };
+  }
+
+
   componentDidMount(){
     axios.get(`/api/users/${this.props.match.params.id}`)
       .then(res => {
 
-        const label = _.uniq(res.data.sessions.map(session => {
-          return session.discipline;
-        }));
-
-        const datasets = label.map(discipline => {
-          return {
-
-            label: discipline,
-
-            backgroundColor: 'rgba(255, 206, 86, 0.6)',
-
-            data: res.data.sessions.filter(session => {
-              if (session.discipline === discipline) return session;
-            }).map(obj => {
-              return obj.duration;
-            })
-
-          };
-        });
-
-        const labels = res.data.sessions.map(session => {
-          return session.date;
-        });
-
-
         this.setState({
           user: res.data,
-          chartData: {
-            labels,
-            datasets
-          }
+          chartData: this.getDisciplines(res.data.sessions).map(discipline => {
+            //returns an array of objects with a key labels and the array inside is of the unique dates for that discipline
+            return this.setDatasets(res.data.sessions, discipline);
+          })
         });
+        console.log(this.state.chartData);
       })
-
 
       .catch(err => this.setState({ error: err.message }));
   }
@@ -97,29 +142,22 @@ class UsersShow extends React.Component{
           </div>
 
           {this.state.chartData &&
+              this.state.chartData.map((chart, index) =>
+                <div className="column is-12" key={index}>
+                  <div
+                    className="container chart-data-btn"
+                  >
+                    {console.log(this.setImage(chart.datasets[0].label))}
+                    {/* {this.setImage(chart.datasets[0].label)} */}
+                    {!this.state.isHidden &&
+                    <Chart
+                      data={chart}
+                    />
+                    }
+                  </div>
 
-                <section className="section text-is-centered">
-                  <div className="container chart-data-btn">
-                    <img src="https://i.imgur.com/RBp1erT.jpg" id="keiko" onClick={this.toggleHidden.bind(this)}/>
-                    {!this.state.isHidden && <Chart
-                      chartData={this.state.chartData}
-                    />}
-                  </div>
-                  <div className="container chart-data-btn">
-                    <img src="https://i.imgur.com/SF3GNT0.jpg" id="shiai" onClick={this.toggleHidden.bind(this)}/>
-                    {!this.state.isHidden && <Chart
-                      chartData={this.state.chartData}
-                    />}
-                  </div>
-                  <div className="container chart-data-btn">
-                    <img src="https://i.imgur.com/K1DprdD.png" id="kata" onClick={this.toggleHidden.bind(this)}/>
-                    {!this.state.isHidden && <Chart
-                      onclick="toggleChart()" chartData={this.state.chartData}
-                    />}
-                  </div>
-                </section>
-          }
-
+                </div>
+              )}
         </div>
       </section>
     );
