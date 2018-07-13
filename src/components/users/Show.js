@@ -141,6 +141,7 @@ class UsersShow extends React.Component{
             <h5 className="is-5">Grade:</h5>
             <h2 className="subtitle"><strong>{this.state.user.grade}</strong></h2>
           </div>
+
           {this.state.chartData &&
               this.state.chartData.map((chart, index) =>
                 <div className="column is-12" key={index}>

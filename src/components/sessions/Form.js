@@ -2,6 +2,8 @@ import React from 'react';
 
 const SessionsForm = ({ handleChange, handleSubmit, data, errors}) => {
 
+  console.log(data);
+
   return(
     <form onSubmit={handleSubmit}>
       <div className="field">
@@ -21,7 +23,7 @@ const SessionsForm = ({ handleChange, handleSubmit, data, errors}) => {
         <label className="label">Discipline</label>
         <div className="control">
           <div className="select is-fullwidth">
-            {data &&  <select name="gender" onChange={handleChange} value={data.discipline || ''}>
+            {data &&  <select name="discipline" onChange={handleChange} value={data.discipline || ''}>
               <option value="" disabled>Please choose</option>
               <option>Kata</option>
               <option>Keiko</option>
