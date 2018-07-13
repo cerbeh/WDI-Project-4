@@ -18,7 +18,7 @@ class AuthLogin extends React.Component {
       data: this.state
     })
       .then(res => Auth.setToken(res.data.token))
-      .then(() => Flash.setMessage('success', 'Welcome Back'))
+      .then(() => Flash.setMessage('success', 'Welcome Back!'))
       .then(() => this.props.history.push(`/users/${Auth.getPayload().sub}`))
     //Replace will replace the last entry with login so when it goes back we havent moved.
       .catch(() => {

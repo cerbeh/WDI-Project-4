@@ -11,6 +11,7 @@ class UsersShow extends React.Component{
   constructor(){
     super();
     this.state={
+      isHidden: true,
       errors: {},
       user: {}
     };
@@ -20,6 +21,28 @@ class UsersShow extends React.Component{
     return _.uniq(sessionsData.map(session => {
       return session.discipline;
     }));
+  }
+
+  toggleHidden(){
+    this.setState({
+      isHidden: !this.state.isHidden
+    });
+  }
+
+  setImage(label) {
+    switch(label) {
+      case 'Kata':
+        <img src="https://i.imgur.com/K1DprdD.png" id="kata" onClick={this.toggleHidden.bind(this)}/>;
+        break;
+      case 'Keiko':
+        <img src="https://i.imgur.com/RBp1erT.jpg" id="keiko" onClick={this.toggleHidden.bind(this)}/>;
+        break;
+      case 'Shiai':
+        <img src="https://i.imgur.com/SF3GNT0.jpg" id="shiai" onClick={this.toggleHidden.bind(this)}/>;
+        break;
+      default:
+        <img src="http://fullmurray.com/200/200"/>;
+    }
   }
 
   setChartData(sessionsData, discipline) {
@@ -87,6 +110,7 @@ class UsersShow extends React.Component{
       .catch(err => this.setState({ error: err.message }));
   }
 
+
   render(){
     if(this.state.error) return <h2 className="title is-2">{this.state.error}</h2>;
     if(!this.state.user) return <h2 className="title">Loading...</h2>;
@@ -116,27 +140,23 @@ class UsersShow extends React.Component{
             <h5 className="is-5">Grade:</h5>
             <h2 className="subtitle"><strong>{this.state.user.grade}</strong></h2>
           </div>
-          {this.state.chartData &&
-            <div className="container text-is-centered">
-            </div>
-          }
 
           {this.state.chartData &&
                 this.state.chartData.map((chart, index) =>
-                  <Chart
+                  <div
+                    className="container chart-data-btn"
                     key={index}
-                    data={chart}
-                  />
-                )}
+                  >
+                    {console.log(chart.datasets[0].label)}
+                    {/* {this.setImage(chart.datasets[0].label)} */}
+                    {!this.state.isHidden &&
+                      <Chart
+                        data={chart}
+                      />
+                    }
 
-          <div className="bottomBtn">
-            <Link to={`/users/${Auth.getPayload().sub}/edit`}>
-              <button className="edit">
-                <i className="fas fa-pencil-alt fa-3x"></i>
-                <p>Edit Profile</p>
-              </button>
-            </Link>
-          </div>
+                  </div>
+                )}
         </div>
       </section>
     );
@@ -144,3 +164,28 @@ class UsersShow extends React.Component{
 }
 
 export default UsersShow;
+
+
+
+
+// chartData: {
+//   labels: [ '2018-07-01', '2018-07-02','2018-07-03','2018-07-04','2018-07-05','2018-07-06','2018-07-07'],
+//   datasets: [
+//     {
+//       label: 'Kata',
+//       backgroundColor: 'rgba(54, 162, 235, 0.6)',
+//       data: [20, 30, 80, 20, 40, 10, 60]
+//     }, {
+//       label: 'Keiko',
+//       backgroundColor: 'rgba(255, 206, 86, 0.6)',
+//       data: [60, 10, 40, 30, 80, 30, 20]
+//     },
+//     {
+//       label: 'Shiai',
+//       data: [
+//         120,60,30,45,50,25,20
+//       ],
+//       backgroundColor: 'rgba(255, 99, 132, 0.6)'
+//     }
+//   ]
+// }
