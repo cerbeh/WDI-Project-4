@@ -104,6 +104,18 @@ class UsersShow extends React.Component{
                   chartData={this.state.chartData}
                 />}
               </div>
+              <div className="container chart-data-btn">
+                <img src="https://i.imgur.com/SF3GNT0.jpg" onClick={this.toggleHidden.bind(this)}/>
+                {!this.state.isHidden && <Chart
+                  chartData={this.state.chartData}
+                />}
+              </div>
+              <div className="container chart-data-btn">
+                <img src="https://i.imgur.com/K1DprdD.png" onClick={this.toggleHidden.bind(this)}/>
+                {!this.state.isHidden && <Chart
+                  chartData={this.state.chartData}
+                />}
+              </div>
             </section>
           }
 
