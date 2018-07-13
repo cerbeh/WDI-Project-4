@@ -30,16 +30,13 @@ class UsersShow extends React.Component{
   }
 
   setImage(label) {
-    // if(label === 'Kata') return <img src="https://i.imgur.com/K1DprdD.png" id="kata" onClick={this.toggleHidden.bind(this)}/>;
-    // if(label === 'Keiko') return <img src="https://i.imgur.com/RBp1erT.jpg" id="keiko" onClick={this.toggleHidden.bind(this)}/>;
-    // if(label === 'Shiai') return <img src="https://i.imgur.com/SF3GNT0.jpg" id="shiai" onClick={this.toggleHidden.bind(this)}/>;
     switch(label) {
       case 'Kata':
-        return ([<img src="https://i.imgur.com/K1DprdD.png" key="kata" id="kata" onClick={this.toggleHidden.bind(this)}/>]);
+        return ([<img src="https://i.imgur.com/K1DprdD.png" key="kata" id="kata"/>]);
       case 'Keiko':
-        return ([<img src="https://i.imgur.com/RBp1erT.jpg" key="keiko" id="keiko" onClick={this.toggleHidden.bind(this)}/>]);
+        return ([<img src="https://i.imgur.com/RBp1erT.jpg" key="keiko" id="keiko"/>]);
       case 'Shiai':
-        return ([<img src="https://i.imgur.com/SF3GNT0.jpg" key="shiai" id="shiai" onClick={this.toggleHidden.bind(this)}/>]);
+        return ([<img src="https://i.imgur.com/SF3GNT0.jpg" key="shiai" id="shiai"/>]);
       default:
         <button className="button">BUTTON</button>;
     }
@@ -54,7 +51,11 @@ class UsersShow extends React.Component{
         if(session.discipline === discipline) return session;
       }).map(session => {
         return session.date;
-      }),
+      })
+      // .sort(function(a,b){
+      //   return new Date(b.date) - new Date(a.date);
+      // })
+      ,
 
 
       datasets: this.getDisciplines(sessionsData).map(discipline => {
@@ -142,11 +143,11 @@ class UsersShow extends React.Component{
           </div>
           {this.state.chartData &&
               this.state.chartData.map((chart, index) =>
-                <div className="column is-12" key={index}>
+                <div className="column is-6" key={index}>
                   <div
                     className="container chart-data-btn"
+                    onClick={this.toggleHidden.bind(this)}
                   >
-                    {console.log(this.setImage(chart.datasets[0].label))}
                     {this.setImage(chart.datasets[0].label)}
                     {!this.state.isHidden &&
                     <Chart
