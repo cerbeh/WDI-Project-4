@@ -1,7 +1,7 @@
 import React from 'react';
 import { Line } from 'react-chartjs-2';
 
-const Chart = ({chartData}) => {
+const Chart = ({data}) => {
 
   const defaultProps = {
     displayTitle: true,
@@ -13,7 +13,7 @@ const Chart = ({chartData}) => {
     <div className="chart">
 
       <Line
-        data={chartData}
+        data={data}
         options={{
           maintainAspectRatio: true,
           title: {
