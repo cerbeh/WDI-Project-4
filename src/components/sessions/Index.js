@@ -32,10 +32,13 @@ class SessionsIndex extends React.Component {
         </div>
 
         {this.state.sessions && this.state.sessions.length === 0 &&
-          <div className="container">
-            <p className="is-3">You have no sessions yet.
-              <Link to={`/users/${this.props.match.params.id}/sessions/new`} className="is-3 has-text-centered"> Click here to add some!</Link></p>
-          </div>
+          <section className="section">
+            <div className="no-sessions container  ">
+              <img src="https://i.imgur.com/sjrwESY.png"/>
+            </div>
+            <p className="is-3 has-text-centered">You have no sessions yet.
+              <Link to={`/users/${this.props.match.params.id}/sessions/new`} className="is-3 "> Click here to add some!</Link></p>
+          </section>
         }
 
         { this.state.sessions &&
