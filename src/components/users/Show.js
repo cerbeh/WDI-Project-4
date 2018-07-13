@@ -49,22 +49,54 @@ class UsersShow extends React.Component{
   }
 
 
+
+
+
+  setDatasets(sessionsData, discipline) {
+    return {
+      labels: sessionsData.filter(session => {
+        if(session.discipline === discipline) return session;
+      }).map(session => {
+        return session.date;
+      }),
+      datasets: {
+        label: discipline,
+        backgroundColor: 'rgba(255, 206, 86, 0.6)',
+        data: sessionsData.filter(session => {
+          if (session.discipline === discipline) return session;
+        }).map(obj => {
+          return obj.duration;
+        })
+      }
+    };
+  }
+
+
   componentDidMount(){
     axios.get(`/api/users/${this.props.match.params.id}`)
       .then(res => {
+
+        // const disciplines = this.getDisciplines(res.data.sessions);
+
+        // console.log(disciplines, 'disciplines');
+
+
+        console.log(this.getDisciplines(res.data.sessions).map(discipline => {
+          //returns an array of objects with a key labels and the array inside is of the unique dates for that discipline
+          return this.setDatasets(res.data.sessions, discipline);
+        }));
+
+        // console.log(this.setDatasets(res.data.sessions, 'Kata'),'setDatasets'); //works
+
+
+
 
         this.setState({
           user: res.data,
           chartData: this.setChartData(res.data.sessions, 'Keiko')
         });
-        console.log(this.getDisciplines(res.data.sessions)
-          // .forEach(discipline => {
-          //   return discipline;
-          // })
-          // .map(discipline => {
-          //   console.log(discipline);
-          // })
-        );
+        // console.log(this.getDisciplines(res.data.sessions));
+        // console.log(this.state.chartData);
       })
 
       .catch(err => this.setState({ error: err.message }));
