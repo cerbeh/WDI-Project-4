@@ -17,9 +17,20 @@ const SessionsForm = ({ handleChange, handleSubmit, data, errors}) => {
         />
         {errors.title && <small>{errors.title}</small>}
       </div>
-
-
       <div className="field">
+        <label className="label">Discipline</label>
+        <input
+          className="input"
+          name="discipline"
+          placeholder="Discipline"
+          onChange={handleChange}
+          value={data.discipline || ''}
+        />
+        {errors.discipline && <small>{errors.discipline}</small>}
+      </div>
+
+
+      {/* <div className="field">
         <label className="label">Discipline</label>
         <div className="control">
           <div className="select is-fullwidth">
@@ -32,7 +43,7 @@ const SessionsForm = ({ handleChange, handleSubmit, data, errors}) => {
           </div>
         </div>
         {errors.discipline && <small>{errors.discipline}</small>}
-      </div>
+      </div> */}
 
       <div className="field">
         <label className="label">Date</label>
