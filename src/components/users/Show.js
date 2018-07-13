@@ -22,11 +22,18 @@ class UsersShow extends React.Component{
     }));
   }
 
-  setChartData(sessionsData) {
+  setChartData(sessionsData, discipline) {
+
     return {
-      labels: sessionsData.map(session => {
+      labels:
+
+      sessionsData.filter(session => {
+        if(session.discipline === discipline) return session;
+      }).map(session => {
         return session.date;
       }),
+
+
       datasets: this.getDisciplines(sessionsData).map(discipline => {
         return {
           label: discipline,
@@ -48,10 +55,17 @@ class UsersShow extends React.Component{
 
         this.setState({
           user: res.data,
-          chartData: this.setChartData(res.data.sessions)
+          chartData: this.setChartData(res.data.sessions, 'Keiko')
         });
+        console.log(this.getDisciplines(res.data.sessions)
+          // .forEach(discipline => {
+          //   return discipline;
+          // })
+          // .map(discipline => {
+          //   console.log(discipline);
+          // })
+        );
       })
-
 
       .catch(err => this.setState({ error: err.message }));
   }
