@@ -3,26 +3,26 @@ import React, { Component } from 'react';
 class BmiOutput extends Component {
   // convert cm into ft
   toFeet = (num) => {
-    let realFeet = ((num * 0.393700) / 12);
-    let feet = Math.floor(realFeet);
-    let inches = Math.round((realFeet - feet) * 12);
+    const realFeet = ((num * 0.393700) / 12);
+    const feet = Math.floor(realFeet);
+    const inches = Math.round((realFeet - feet) * 12);
     return `${feet}'${inches}`;
   }
   // convert kg to lbs
   toLbs = (num) => {
-    let nearExact = num/0.45359237;
-    let lbs = Math.floor(nearExact);
+    const nearExact = num/0.45359237;
+    const lbs = Math.floor(nearExact);
     return lbs;
   }
 
   render() {
-    let height = this.props.data.height;
-    let weight = this.props.data.weight;
-    let bmi = this.props.data.bmi;
-    let bmiClass = this.props.data.bmiClass;
+    const height = this.props.data.height;
+    const weight = this.props.data.weight;
+    const bmi = this.props.data.bmi;
+    const bmiClass = this.props.data.bmiClass;
     // conversions
-    let heightFeet = this.toFeet(height);
-    let pounds = this.toLbs(weight);
+    const heightFeet = this.toFeet(height);
+    const pounds = this.toLbs(weight);
 
     return (
       <div className="output">
