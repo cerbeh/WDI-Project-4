@@ -1,0 +1,43 @@
+.dashboard{
+  height: 100vh;
+  .column{
+    height: 19.5vh;
+  }
+  i{
+    padding-top: 7%;
+    color: white;
+  }
+  p{
+    color: white;
+  }
+  .home{
+    background: #ff5a4a;
+  }
+  .account{
+      background: #ff7b6e;
+  }
+  .new{
+     background: #7b1042;
+  }
+  .sessions{
+     background: #953f67;
+  }
+  .users{
+    background: #369c81;
+  }
+  .calc{
+     background: #5eaf9a;
+  }
+  .statistics{
+    background: #2973a5;
+  }
+  .calendar{
+    background: #538fb7;
+  }
+  .about{
+    background: #FFCA00;
+  }
+  .logout{
+    background: #FFE273
+  }
+}
