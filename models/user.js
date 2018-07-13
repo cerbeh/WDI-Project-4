@@ -4,13 +4,14 @@ const moment = require('moment');
 
 const userSchema = new mongoose.Schema({
   username: { type: String, required: 'This field is required' },
-  email: { type: String, required: 'This field is required' },
-  password: { type: String, required: true},
-  gender: { type: String, enum: ['Male', 'Female']},
+  email: { type: String, required: 'This field is required address', unique: true },
+  password: { type: String, required: 'This field is required'},
+  gender: { type: String, enum: ['Male', 'Female', 'Non-binary', 'Transgender', 'Other', 'Prefer not to say']},
   grade: { type: String, enum: ['1st Kyu', '1st Dan', '2nd Dan', '3rd Dan', '4th Dan', '5th Dan', '6th Dan', '7th Dan', '8th Dan']},
   dob: Date,
   height: Number,
-  weight: Number
+  weight: Number,
+  created: { type: Date, default: new Date()}
 },{
   id: false
 });

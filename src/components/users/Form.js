@@ -21,6 +21,10 @@ const UsersForm = ({ handleChange, handleSubmit, data, errors }) => {
               <option value="" disabled>Please choose</option>
               <option>Male</option>
               <option>Female</option>
+              <option>Transgender</option>
+              <option>Non-binary</option>
+              <option>Other</option>
+              <option>Prefer not to say</option>
             </select>}
           </div>
         </div>

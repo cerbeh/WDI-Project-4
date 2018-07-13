@@ -19,9 +19,8 @@ class SessionsIndex extends React.Component {
         <div className="columns is-multiline is-mobile">
           <div className="column is-10">
             <h1 className="title is-3">HISTORY</h1>
-            <h5 className="is-5">Sessions logged so far: </h5>
+            <hr />
           </div>
-          <hr />
           <div className="column is-1">
             <div className="container">
               <Link to={`/users/${this.props.match.params.id}/sessions/new`}>
@@ -32,7 +31,12 @@ class SessionsIndex extends React.Component {
 
         </div>
 
-
+        {this.state.sessions && this.state.sessions.length === 0 &&
+          <div className="container">
+            <p className="is-3">You have no sessions yet.
+              <Link to={`/users/${this.props.match.params.id}/sessions/new`} className="is-3 has-text-centered"> Click here to add some!</Link></p>
+          </div>
+        }
 
         { this.state.sessions &&
           <SessionTimeline data={this.state.sessions} />
