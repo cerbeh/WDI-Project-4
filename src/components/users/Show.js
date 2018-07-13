@@ -49,7 +49,10 @@ class UsersShow extends React.Component{
       labels: this.getKeyData(sessionsData, discipline, 'date'),
       datasets: [{
         label: discipline,
-        backgroundColor: 'rgba(255, 206, 86, 0.6)',
+        backgroundColor:
+        ['rgba(255, 206, 86, 0.6)',
+          'rgba(54, 162, 235, 0.6)',
+          'rgba(255, 99, 132, 0.6)'],
         data: this.getKeyData(sessionsData, discipline, 'duration')
       }]
     };
@@ -66,11 +69,21 @@ class UsersShow extends React.Component{
   setImage(label, index) {
     switch(label) {
       case 'Kata':
-        return ([<img src="https://i.imgur.com/K1DprdD.png" key="kata" alt="kata"/>]);
+        return ([<img src="https://i.imgur.com/ojsP9fT.png" key="kata" alt="kata"/>]);
       case 'Keiko':
-        return ([<img src="https://i.imgur.com/RBp1erT.jpg" key="keiko" alt="keiko"/>]);
+        return ([<img src="https://i.imgur.com/rRAdVQL.png" key="keiko" alt="keiko"/>]);
       case 'Shiai':
-        return ([<img src="https://i.imgur.com/SF3GNT0.jpg" key="shiai" alt="shiai"/>]);
+        return ([<img src="https://i.imgur.com/1Wk6N6z.png" key="shiai" alt="shiai"/>]);
+      case 'Jodan':
+        return ([<img src="https://i.imgur.com/7Xc3Gml.png" key="jodan" alt="jodan"/>]);
+      case 'Nito':
+        return ([<img src="https://i.imgur.com/deWDhqH.png" key="nito" alt="nito"/>]);
+      case 'Shin-sa':
+        return ([<img src="https://i.imgur.com/tFwf0ca.png" key="shin-sa" alt="shin-sa"/>]);
+      case 'Mitori-geiko':
+        return ([<img src="https://i.imgur.com/kDsMFY4.png" key="mitori-geiko" alt="mitori-geiko"/>]);
+      case 'Asa-geiko':
+        return ([<img src="https://i.imgur.com/4GRTfgM.png" key="asa-geiko" alt="asa-geiko"/>]);
       default:
         return ([<img key={index} src="http://fillmurray.com/200/200"/>]);
     }
