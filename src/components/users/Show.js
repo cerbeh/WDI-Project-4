@@ -30,16 +30,16 @@ class UsersShow extends React.Component{
     });
   }
 
-  setImage(label) {
+  setImage(label, index) {
     switch(label) {
       case 'Kata':
-        return ([<img src="https://i.imgur.com/K1DprdD.png" key="kata" id="kata"/>]);
+        return ([<img src="https://i.imgur.com/K1DprdD.png" key="kata" alt="kata"/>]);
       case 'Keiko':
-        return ([<img src="https://i.imgur.com/RBp1erT.jpg" key="keiko" id="keiko"/>]);
+        return ([<img src="https://i.imgur.com/RBp1erT.jpg" key="keiko" alt="keiko"/>]);
       case 'Shiai':
-        return ([<img src="https://i.imgur.com/SF3GNT0.jpg" key="shiai" id="shiai"/>]);
+        return ([<img src="https://i.imgur.com/SF3GNT0.jpg" key="shiai" alt="shiai"/>]);
       default:
-        <button className="button">BUTTON</button>;
+        ([<img key={index} src="http://fillmurray.com/200/200"/>]);
     }
   }
 
@@ -129,7 +129,7 @@ class UsersShow extends React.Component{
                     className="container chart-data-btn"
                     onClick={this.toggleHidden.bind(this)}
                   >
-                    {this.setImage(chart.datasets[0].label)}
+                    {this.setImage(chart.datasets[0].label, index)}
                     {!this.state.isHidden &&
                     <Chart
                       data={chart}

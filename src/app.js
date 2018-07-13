@@ -19,6 +19,7 @@ import AuthLogin from './components/auth/Login';
 import AuthRegister from './components/auth/Register';
 
 import Home from './components/pages/Home';
+import Bmi from './components/pages/Bmi';
 // import Navbar from './components/common/Navbar';
 import NotFound from './components/common/NotFound';
 import Footer from './components/common/Footer';
@@ -47,6 +48,7 @@ class App extends React.Component {
               <Route path="/users" component={UsersIndex} />
               <Route path="/login" component={AuthLogin} />
               <Route path="/register" component={AuthRegister} />
+              <Route exact path="/bmi" component={Bmi} />
               <Route exact path="/" component={Home} />
               <Route component={NotFound} />
             </Switch>
