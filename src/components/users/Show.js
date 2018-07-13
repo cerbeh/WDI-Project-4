@@ -143,7 +143,7 @@ class UsersShow extends React.Component{
           </div>
           {this.state.chartData &&
               this.state.chartData.map((chart, index) =>
-                <div className="column is-6" key={index}>
+                <div className="column is-12" key={index}>
                   <div
                     className="container chart-data-btn"
                     onClick={this.toggleHidden.bind(this)}

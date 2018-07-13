@@ -10,7 +10,7 @@ const Chart = ({data}) => {
   };
 
   data.labels.sort(function(a,b){
-    return new Date(b.date) - new Date(a.date);
+    return new Date(a) - new Date(b);
   });
   console.log(data.labels);
 
