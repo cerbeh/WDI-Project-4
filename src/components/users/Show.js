@@ -19,6 +19,7 @@ class UsersShow extends React.Component{
   }
 
   getDisciplines(sessionsData) {
+    //Using lodash we iterate of the sessions from the user and return all the unique values from the key discipline
     return _.uniq(sessionsData.map(session => {
       return session.discipline;
     }));
@@ -41,6 +42,9 @@ class UsersShow extends React.Component{
   }
 
   setDatasets(sessionsData, discipline) {
+    //We return an object with the data laid out in the way that chartjs wants to receive it.
+    //We take the discipline passed to by setChartData to define which discipline we are creating a chart for.
+    //We also pass discipline through to getKeyData for us to the be able to extract specific pieces of data from the sessions array.
     return {
       labels: this.getKeyData(sessionsData, discipline, 'date'),
       datasets: [{
@@ -52,6 +56,8 @@ class UsersShow extends React.Component{
   }
 
   setChartData(sessionsData) {
+    //We use getDisciplines to go through sessionsData and return an array of unique disciplines.
+    //We then map over it so that we can pass each discipline down to setDatasets.
     return this.getDisciplines(sessionsData).map(discipline => {
       return this.setDatasets(sessionsData, discipline);
     });
