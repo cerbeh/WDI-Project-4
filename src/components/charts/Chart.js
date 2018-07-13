@@ -9,11 +9,6 @@ const Chart = ({data}) => {
     legendPosition: 'right'
   };
 
-  data.labels.sort(function(a,b){
-    return new Date(a) - new Date(b);
-  });
-  console.log(data.labels);
-
   return (
     <div className="chart">
 

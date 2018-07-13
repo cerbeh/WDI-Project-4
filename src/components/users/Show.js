@@ -1,9 +1,10 @@
 import React from 'react';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
+import _ from 'lodash';
+
 import Auth from '../../lib/Auth';
 import Chart from '../charts/Chart';
-import _ from 'lodash';
 
 
 class UsersShow extends React.Component{
@@ -42,53 +43,33 @@ class UsersShow extends React.Component{
     }
   }
 
-  setChartData(sessionsData, discipline) {
-
-    return {
-      labels:
-
-      sessionsData.filter(session => {
-        if(session.discipline === discipline) return session;
-      }).map(session => {
-        return session.date;
-      })
-      // .sort(function(a,b){
-      //   return new Date(b.date) - new Date(a.date);
-      // })
-      ,
-
-
-      datasets: this.getDisciplines(sessionsData).map(discipline => {
-        return {
-          label: discipline,
-          backgroundColor: 'rgba(255, 206, 86, 0.6)',
-          data: sessionsData.filter(session => {
-            if (session.discipline === discipline) return session;
-          }).map(obj => {
-            return obj.duration;
-          })
-        };
-      })
-    };
-  }
-
-
-
   setDatasets(sessionsData, discipline) {
     return {
-      labels: sessionsData.filter(session => {
-        if(session.discipline === discipline) return session;
-      }).map(session => {
-        return session.date;
-      }),
+
+      labels: sessionsData
+        .filter(session => {
+          if(session.discipline === discipline) return session;
+        })
+        .sort((a,b) => {
+          return new Date(a.date) - new Date(b.date) ;
+        })
+        .map(session => {
+          return session.date;
+        }),
+
       datasets: [{
         label: discipline,
         backgroundColor: 'rgba(255, 206, 86, 0.6)',
-        data: sessionsData.filter(session => {
-          if (session.discipline === discipline) return session;
-        }).map(obj => {
-          return obj.duration;
-        })
+        data: sessionsData
+          .filter(session => {
+            if (session.discipline === discipline) return session;
+          })
+          .sort((a,b) => {
+            return new Date(a.date) - new Date(b.date) ;
+          })
+          .map(obj => {
+            return obj.duration;
+          })
       }]
     };
   }
@@ -105,7 +86,6 @@ class UsersShow extends React.Component{
             return this.setDatasets(res.data.sessions, discipline);
           })
         });
-        console.log(this.state.chartData);
       })
 
       .catch(err => this.setState({ error: err.message }));
