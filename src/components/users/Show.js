@@ -8,35 +8,19 @@ import _ from 'lodash';
 
 class UsersShow extends React.Component{
 
-
-  // chartData: {
-  //   labels: [ '2018-07-01', '2018-07-02','2018-07-03','2018-07-04','2018-07-05','2018-07-06','2018-07-07'],
-  //   datasets: [
-  //     {
-  //       label: 'Kata',
-  //       backgroundColor: 'rgba(54, 162, 235, 0.6)',
-  //       data: [20, 30, 80, 20, 40, 10, 60]
-  //     }, {
-  //       label: 'Keiko',
-  //       backgroundColor: 'rgba(255, 206, 86, 0.6)',
-  //       data: [60, 10, 40, 30, 80, 30, 20]
-  //     },
-  //     {
-  //       label: 'Shiai',
-  //       data: [
-  //         120,60,30,45,50,25,20
-  //       ],
-  //       backgroundColor: 'rgba(255, 99, 132, 0.6)'
-  //     }
-  //   ]
-  // }
-
   constructor(){
     super();
     this.state={
+      isHidden: true,
       errors: {},
       user: {}
     };
+  }
+
+  toggleHidden(){
+    this.setState({
+      isHidden: !this.state.isHidden
+    });
   }
 
   componentDidMount(){
@@ -81,6 +65,7 @@ class UsersShow extends React.Component{
       .catch(err => this.setState({ error: err.message }));
   }
 
+
   render(){
     if(this.state.error) return <h2 className="title is-2">{this.state.error}</h2>;
     if(!this.state.user) return <h2 className="title">Loading...</h2>;
@@ -111,11 +96,15 @@ class UsersShow extends React.Component{
             <h2 className="subtitle"><strong>{this.state.user.grade}</strong></h2>
           </div>
           {this.state.chartData &&
-                <div className="container text-is-centered">
-                  <Chart
-                    chartData={this.state.chartData}
-                  />
-                </div>
+
+            <section className="section text-is-centered">
+              <div className="container chart-data-btn">
+                <img src="https://i.imgur.com/RBp1erT.jpg" onClick={this.toggleHidden.bind(this)}/>
+                {!this.state.isHidden && <Chart
+                  chartData={this.state.chartData}
+                />}
+              </div>
+            </section>
           }
 
         </div>
@@ -125,3 +114,28 @@ class UsersShow extends React.Component{
 }
 
 export default UsersShow;
+
+
+
+
+// chartData: {
+//   labels: [ '2018-07-01', '2018-07-02','2018-07-03','2018-07-04','2018-07-05','2018-07-06','2018-07-07'],
+//   datasets: [
+//     {
+//       label: 'Kata',
+//       backgroundColor: 'rgba(54, 162, 235, 0.6)',
+//       data: [20, 30, 80, 20, 40, 10, 60]
+//     }, {
+//       label: 'Keiko',
+//       backgroundColor: 'rgba(255, 206, 86, 0.6)',
+//       data: [60, 10, 40, 30, 80, 30, 20]
+//     },
+//     {
+//       label: 'Shiai',
+//       data: [
+//         120,60,30,45,50,25,20
+//       ],
+//       backgroundColor: 'rgba(255, 99, 132, 0.6)'
+//     }
+//   ]
+// }
