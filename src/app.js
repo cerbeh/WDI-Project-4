@@ -22,6 +22,7 @@ import AuthRegister from './components/auth/Register';
 import Home from './components/pages/Home';
 import Dashboard from './components/pages/Dashboard';
 import Bmi from './components/pages/Bmi';
+import Calendar from './components/pages/Calendar';
 // import Navbar from './components/common/Navbar';
 import NotFound from './components/common/NotFound';
 import Footer from './components/common/Footer';
@@ -51,6 +52,7 @@ class App extends React.Component {
               <Route path="/login" component={AuthLogin} />
               <Route path="/register" component={AuthRegister} />
               <Route exact path="/bmi" component={Bmi} />
+              <Route exact path="/calendar" component={Calendar} />
               <Route exact path="/dashboard" component={Dashboard} />
               <ProtectedRoute path="/statistics" component={Statistics} />
               <Route exact path="/" component={Home} />
