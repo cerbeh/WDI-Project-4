@@ -1,23 +1,50 @@
 import React from 'react';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
+import _ from 'lodash';
+
 import Auth from '../../lib/Auth';
+import Chart from '../charts/Chart';
+import DoughnutChart from '../charts/PieChart';
 
 
-class UsersShow extends React.Component{
+class Statistics extends React.Component{
 
   constructor(){
     super();
     this.state={
       isHidden: true,
+      errors: {},
       user: {}
     };
   }
 
+  getDisciplines(sessionsData) {
+    //Using lodash we iterate of the sessions from the user and return all the unique values from the key discipline
+    return _.uniq(sessionsData.map(session => {
+      return session.discipline;
+    }));
+  }
+
+  getKeyData(sessionsData, discipline, key) {
+    return sessionsData
+    //Return only the session that match the discipline
+      .filter(session => {
+        if(session.discipline === discipline) return session;
+      })
+      //Organise from oldest to newest dates
+      .sort((a,b) => {
+        return new Date(a.date) - new Date(b.date) ;
+      })
+      //Return only the data from session object from key provided
+      .map(session => {
+        return session[key];
+      });
+  }
 
   setDatasets(sessionsData, discipline) {
     //We return an object with the data laid out in the way that chartjs wants to receive it.
-    //We use discipline passed to us by setChartData to define which discipline we are creating a chart for.
+    //We take the discipline passed to by setChartData to define which discipline we are creating a chart for.
     //We also pass discipline through to getKeyData for us to the be able to extract specific pieces of data from the sessions array.
     return {
       labels: this.getKeyData(sessionsData, discipline, 'date'),
@@ -39,11 +66,10 @@ class UsersShow extends React.Component{
 
   setChartData(sessionsData) {
     //We use getDisciplines to go through sessionsData and return an array of unique disciplines.
-    return this.getDisciplines(sessionsData)
     //We then map over it so that we can pass each discipline down to setDatasets.
-      .map(discipline => {
-        return this.setDatasets(sessionsData, discipline);
-      });
+    return this.getDisciplines(sessionsData).map(discipline => {
+      return this.setDatasets(sessionsData, discipline);
+    });
   }
 
   setImage(label, index) {
@@ -65,9 +91,10 @@ class UsersShow extends React.Component{
       case 'Asa-geiko':
         return ([<img src="https://i.imgur.com/4GRTfgM.png" key="asa-geiko" alt="asa-geiko"/>]);
       default:
-        return ([<img key={index} src="http://fillmurray.com/100/40"/>]);
+        return ([<img key={index} src="http://fillmurray.com/200/200"/>]);
     }
   }
+
 
   toggleHidden(){
     this.setState({
@@ -76,12 +103,14 @@ class UsersShow extends React.Component{
   }
 
   componentDidMount(){
-    axios.get(`/api/users/${this.props.match.params.id}`)
+    axios.get(`api/users/${Auth.getPayload().sub}`)
       .then(res => {
 
         this.setState({
-          user: res.data
+          user: res.data,
+          chartData: this.setChartData(res.data.sessions)
         });
+        console.log(this.state.user);
       })
 
       .catch(err => this.setState({ error: err.message }));
@@ -93,48 +122,56 @@ class UsersShow extends React.Component{
       <section className="section">
         <div className="columns is-multiline is-mobile">
           <div className="column is-10">
-            <h1 className="title is-3">{this.state.user.username}</h1>
+            <h1 className="title is-3">Statistics</h1>
             <hr />
           </div>
           <div className="column is-1">
             <div className="container">
-              <Link to={`/users/${Auth.getPayload().sub}/edit`}>
+              <Link to={`/users/${Auth.getPayload().sub}/sessions`}>
                 <button className="edit">
                   <i className="fas fa-pencil-alt   fa-2x"></i>
-                  <p className="is-8">Edit Profile</p>
+                  <p className="is-8">Sessions</p>
                 </button>
               </Link>
             </div>
           </div>
 
-          {this.state.user && !this.state.user.gender  &&
+          {/* {!this.state.chartData &&
           <section className="section">
             <div className="no-sessions container ">
               <img src="https://imgur.com/Vsd3i2Y.png"/>
             </div>
-            <p className="is-3 has-text-centered">You havent edited your profile yet.
-              <Link to={`/users/${this.props.match.params.id}/edit`} className="is-3 "> Click here edit!</Link></p>
+            <p className="is-3 has-text-centered">No sessions have been recorded.
+              <Link to={`/users/${this.props.match.params.id}/edit`} className="is-3 "> Click here to add your first session</Link></p>
           </section>
-          }
+          } */}
 
-          {this.state.user && this.state.user.gender &&
-            <section>
-              <div className="column is-10">
-                <h5 className="is-5">I was born on:</h5>
-                <h2 className="subtitle"><strong>{this.state.user.dob}</strong></h2>
-                <h5 className="is-5">My height:</h5>
-                <h2 className="subtitle"><strong>{this.state.user.height}</strong> cm</h2>
-                <h5 className="is-5">My Weight:</h5>
-                <h2 className="subtitle"><strong>{this.state.user.weight}</strong> kilos</h2>
-                <h5 className="is-5">Grade:</h5>
-                <h2 className="subtitle"><strong>{this.state.user.grade}</strong></h2>
+          {this.state.chartData &&
+            this.state.chartData.map((chart, index) =>
+              <div className="column is-12" key={index}>
+                <div
+                  className="container chart-data-btn"
+                  onClick={this.toggleHidden.bind(this)}
+                >
+                  {this.setImage(chart.datasets[0].label, index)}
+                  {!this.state.isHidden &&
+                    <section>
+
+                      <Chart
+                        data={chart}
+                      />
+                      <DoughnutChart
+                        data={chart}
+                      />
+                    </section>
+                  }
+                </div>
               </div>
-            </section>
-          }
+            )}
         </div>
       </section>
     );
   }
 }
 
-export default UsersShow;
+export default Statistics;

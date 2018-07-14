@@ -21,7 +21,7 @@ class Home extends React.Component {
             <h2 className="subtitle">
               Focus on being better than you were yesterday
             </h2>
-            {!Auth.isAuthenticated() && <Link className="navbar-item" to="/register"><i className="fas fa-arrow-alt-circle-right fa-5x"></i></Link>}
+            {!Auth.isAuthenticated() && <Link className="navbar-item" to="/login"><i className="fas fa-arrow-alt-circle-right fa-5x"></i></Link>}
             {Auth.isAuthenticated() && <Link className="navbar-item" to={`/users/${Auth.getPayload().sub}`}><i className="fas fa-arrow-alt-circle-right fa-2x"></i></Link>}
 
           </div>

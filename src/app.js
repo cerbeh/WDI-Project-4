@@ -6,6 +6,7 @@ import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import 'bulma';
 import './scss/style.scss';
 
+import Statistics from './components/users/Statistics';
 import UsersIndex from './components/users/Index';
 import UsersShow from './components/users/Show';
 import UsersEdit from './components/users/Edit';
@@ -51,6 +52,7 @@ class App extends React.Component {
               <Route path="/register" component={AuthRegister} />
               <Route exact path="/bmi" component={Bmi} />
               <Route exact path="/dashboard" component={Dashboard} />
+              <ProtectedRoute path="/statistics" component={Statistics} />
               <Route exact path="/" component={Home} />
               <Route component={NotFound} />
             </Switch>

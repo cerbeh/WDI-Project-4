@@ -48,10 +48,10 @@ class Dashboard extends React.Component{
             </Link>
           </div>
           <div className="column is-half statistics">
-            <a className="navbar-item is-expanded  is-block has-text-centered">
+            <Link to="/statistics" className="navbar-item is-expanded  is-block has-text-centered">
               <i className="fa-2x fas fa-chart-line"></i>
               <p className="is-size-7">Statistics</p>
-            </a>
+            </Link>
           </div>
           <div className="column is-half calendar">
             <a className="navbar-item is-expanded is-block has-text-centered">

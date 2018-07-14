@@ -7,7 +7,6 @@ import Flash from '../../lib/Flash';
 class AuthLogin extends React.Component {
 
   state= {
-    // errors: {}
   }
 
   handleSubmit = (e) => {
@@ -21,13 +20,11 @@ class AuthLogin extends React.Component {
       .then(() => Flash.setMessage('success', 'Welcome Back!'))
       .then(() => this.props.history.push(`/users/${Auth.getPayload().sub}`))
     //Replace will replace the last entry with login so when it goes back we havent moved.
-      .catch(() => {
+      .then(() => {
         this.props.history.replace('/login');
-      });
-      // .catch(err => {
-      //   this.setState({ errors: err.response.data.errors });
-      //   // Flash.setMessage('danger', 'Invalid Credentials');
-      // });
+      })
+      .catch(() => Flash.setMessage('danger', 'Invalid Credentials')
+      );
   }
 
   handleChange = ({ target: { name, value }}) => {
