@@ -19,6 +19,18 @@ class Statistics extends React.Component{
     };
   }
 
+  selectColour() {
+    return _.sample([
+      'rgba(128, 255, 0, 0.6)',
+      'rgba(54, 162, 235, 0.6)',
+      'rgba(100, 85, 73, 0.6)',
+      'rgba(75, 192, 192, 0.6)',
+      'rgba(153, 102, 255, 0.6)',
+      'rgba(85, 65, 13, 0.6)',
+      'rgba(55, 27, 7, 0.6)'
+    ]);
+  }
+
   getDisciplines(sessionsData) {
     //Using lodash we iterate of the sessions from the user and return all the unique values from the key discipline
     return _.uniq(sessionsData.map(session => {
@@ -45,18 +57,27 @@ class Statistics extends React.Component{
   setDatasets(sessionsData, chartType, discipline) {
 
     const setLabelsType = () => {
+
       if(chartType === 'line') {
         return {
           labels: this.getKeyData(sessionsData, discipline, 'date'),
-          data: this.getKeyData(sessionsData, discipline, 'duration')
+          data: this.getKeyData(sessionsData, discipline, 'duration'),
+          backgroundColor: this.selectColour()
         };
       }
+
       if(chartType === 'doughnut') {
         const disciplines = this.getDisciplines(sessionsData);
         return {
           labels: disciplines,
           data: disciplines.map(discipline => {
-            return this.getKeyData(sessionsData, discipline, 'duration');
+            return this.getKeyData(sessionsData, discipline, 'duration')
+              .reduce((duration, value) => {
+                return duration + value;
+              });
+          }),
+          backgroundColor: disciplines.map(() => {
+            return this.selectColour();
           })
         };
       }
@@ -68,15 +89,7 @@ class Statistics extends React.Component{
       labels: setLabelsType().labels,
       datasets: [{
         label: discipline || '',
-        backgroundColor: _.sample([
-          'rgba(128, 255, 0, 0.6)',
-          'rgba(54, 162, 235, 0.6)',
-          'rgba(100, 85, 73, 0.6)',
-          'rgba(75, 192, 192, 0.6)',
-          'rgba(153, 102, 255, 0.6)',
-          'rgba(85, 65, 13, 0.6)',
-          'rgba(55, 27, 7, 0.6)'
-        ]),
+        backgroundColor: setLabelsType().backgroundColor,
         data: setLabelsType().data
       }]
     };
@@ -183,10 +196,14 @@ class Statistics extends React.Component{
                 </div>
               </div>
             )}
-          {this.state.pieChart &&
-          <DoughnutChart
-            data={this.state.pieChart}
-          />}
+          <div className="column is-12">
+            <div className="container">
+              {this.state.pieChart &&
+                <DoughnutChart
+                  data={this.state.pieChart}
+                />}
+            </div>
+          </div>
         </div>
       </section>
     );
