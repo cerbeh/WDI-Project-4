@@ -5,6 +5,7 @@ import _ from 'lodash';
 
 import Auth from '../../lib/Auth';
 import Chart from '../charts/Chart';
+import DoughnutChart from '../charts/PieChart';
 
 
 class UsersShow extends React.Component{
@@ -169,9 +170,15 @@ class UsersShow extends React.Component{
                 >
                   {this.setImage(chart.datasets[0].label, index)}
                   {!this.state.isHidden &&
-                    <Chart
-                      data={chart}
-                    />
+                    <section>
+
+                      <Chart
+                        data={chart}
+                      />
+                      <DoughnutChart
+                        data={chart}
+                      />
+                    </section>
                   }
                 </div>
               </div>

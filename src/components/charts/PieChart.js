@@ -1,7 +1,7 @@
 import React from 'react';
 import { Doughnut } from 'react-chartjs-2';
 
-const PieChart = ({data}) => {
+const DoughnutChart = ({data}) => {
 
 
   // const labels = data.discipline.map( type => type.name);
@@ -47,4 +47,4 @@ const PieChart = ({data}) => {
 };
 
 
-export default PieChart;
+export default DoughnutChart;
