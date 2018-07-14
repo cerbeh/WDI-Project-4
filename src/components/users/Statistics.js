@@ -43,18 +43,21 @@ class Statistics extends React.Component{
   }
 
   setDatasets(sessionsData, chartType, discipline) {
+
     const setLabelsType = () => {
       if(chartType === 'line') {
-        return this.getKeyData(sessionsData, discipline, 'date');
+        return {
+          labels: this.getKeyData(sessionsData, discipline, 'date'),
+          data: this.getKeyData(sessionsData, discipline, 'duration')
+        };
       }
       if(chartType === 'doughnut') return this.getDisciplines(sessionsData);
-      else return 'HELLO';
     };
     //We return an object with the data laid out in the way that chartjs wants to receive it.
     //We take the discipline passed to by setChartData to define which discipline we are creating a chart for.
     //We also pass discipline through to getKeyData for us to the be able to extract specific pieces of data from the sessions array.
     return {
-      labels: setLabelsType(),
+      labels: setLabelsType().labels,
       datasets: [{
         label: discipline,
         backgroundColor: _.sample([
@@ -66,7 +69,7 @@ class Statistics extends React.Component{
           'rgba(85, 65, 13, 0.6)',
           'rgba(55, 27, 7, 0.6)'
         ]),
-        data: this.getKeyData(sessionsData, discipline, 'duration')
+        data: setLabelsType().data
       }]
     };
   }
