@@ -19,7 +19,7 @@ const SessionTimeline = ({data}) => {
             title={session.title}
             subtitle={session.discipline}
             createdAt={session.date}
-            // icon={<i className="fas fa-dumbbell fa-2x"></i>}
+            icon={<i className="fas fa-dumbbell"></i>}
           >
             {session.notes}
           </TimelineEvent>
