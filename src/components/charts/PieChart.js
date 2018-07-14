@@ -1,7 +1,12 @@
 import React from 'react';
-import { Pie } from 'react-chartjs-2';
+import { Doughnut } from 'react-chartjs-2';
 
 const PieChart = ({data}) => {
+
+
+  // const labels = data.discipline.map( type => type.name);
+  // const data = {
+//}
 
   const defaultProps = {
     displayTitle: true,
@@ -12,7 +17,7 @@ const PieChart = ({data}) => {
   return (
     <div className="chart">
 
-      <Pie
+      <Doughnut
         data={data}
         options={{
           maintainAspectRatio: true,

@@ -27,7 +27,7 @@ class UsersShow extends React.Component{
 
   getKeyData(sessionsData, discipline, key) {
     return sessionsData
-      //Return only the session that match the discipline
+    //Return only the session that match the discipline
       .filter(session => {
         if(session.discipline === discipline) return session;
       })
@@ -49,10 +49,15 @@ class UsersShow extends React.Component{
       labels: this.getKeyData(sessionsData, discipline, 'date'),
       datasets: [{
         label: discipline,
-        backgroundColor:
-        ['rgba(255, 206, 86, 0.6)',
+        backgroundColor: _.sample([
+          'rgba(255, 99, 132, 0.6)',
           'rgba(54, 162, 235, 0.6)',
-          'rgba(255, 99, 132, 0.6)'],
+          'rgba(255, 206, 86, 0.6)',
+          'rgba(75, 192, 192, 0.6)',
+          'rgba(153, 102, 255, 0.6)',
+          'rgba(255, 159, 64, 0.6)',
+          'rgba(255, 99, 132, 0.6)'
+        ]),
         data: this.getKeyData(sessionsData, discipline, 'duration')
       }]
     };
@@ -88,6 +93,7 @@ class UsersShow extends React.Component{
         return ([<img key={index} src="http://fillmurray.com/200/200"/>]);
     }
   }
+
 
   toggleHidden(){
     this.setState({
@@ -139,37 +145,37 @@ class UsersShow extends React.Component{
           }
 
           {this.state.user && this.state.user.gender &&
-          <section>
-            <div className="column is-10">
-              <h5 className="is-5">I was born on:</h5>
-              <h2 className="subtitle"><strong>{this.state.user.dob}</strong></h2>
-              <h5 className="is-5">My height:</h5>
-              <h2 className="subtitle"><strong>{this.state.user.height}</strong> cm</h2>
-              <h5 className="is-5">My Weight:</h5>
-              <h2 className="subtitle"><strong>{this.state.user.weight}</strong> kilos</h2>
-              <h5 className="is-5">Grade:</h5>
-              <h2 className="subtitle"><strong>{this.state.user.grade}</strong></h2>
-            </div>
-          </section>
+            <section>
+              <div className="column is-10">
+                <h5 className="is-5">I was born on:</h5>
+                <h2 className="subtitle"><strong>{this.state.user.dob}</strong></h2>
+                <h5 className="is-5">My height:</h5>
+                <h2 className="subtitle"><strong>{this.state.user.height}</strong> cm</h2>
+                <h5 className="is-5">My Weight:</h5>
+                <h2 className="subtitle"><strong>{this.state.user.weight}</strong> kilos</h2>
+                <h5 className="is-5">Grade:</h5>
+                <h2 className="subtitle"><strong>{this.state.user.grade}</strong></h2>
+              </div>
+            </section>
           }
 
 
           {this.state.chartData &&
-              this.state.chartData.map((chart, index) =>
-                <div className="column is-12" key={index}>
-                  <div
-                    className="container chart-data-btn"
-                    onClick={this.toggleHidden.bind(this)}
-                  >
-                    {this.setImage(chart.datasets[0].label, index)}
-                    {!this.state.isHidden &&
+            this.state.chartData.map((chart, index) =>
+              <div className="column is-12" key={index}>
+                <div
+                  className="container chart-data-btn"
+                  onClick={this.toggleHidden.bind(this)}
+                >
+                  {this.setImage(chart.datasets[0].label, index)}
+                  {!this.state.isHidden &&
                     <Chart
                       data={chart}
                     />
-                    }
-                  </div>
+                  }
                 </div>
-              )}
+              </div>
+            )}
         </div>
       </section>
     );
@@ -177,28 +183,3 @@ class UsersShow extends React.Component{
 }
 
 export default UsersShow;
-
-
-
-
-// chartData: {
-//   labels: [ '2018-07-01', '2018-07-02','2018-07-03','2018-07-04','2018-07-05','2018-07-06','2018-07-07'],
-//   datasets: [
-//     {
-//       label: 'Kata',
-//       backgroundColor: 'rgba(54, 162, 235, 0.6)',
-//       data: [20, 30, 80, 20, 40, 10, 60]
-//     }, {
-//       label: 'Keiko',
-//       backgroundColor: 'rgba(255, 206, 86, 0.6)',
-//       data: [60, 10, 40, 30, 80, 30, 20]
-//     },
-//     {
-//       label: 'Shiai',
-//       data: [
-//         120,60,30,45,50,25,20
-//       ],
-//       backgroundColor: 'rgba(255, 99, 132, 0.6)'
-//     }
-//   ]
-// }
