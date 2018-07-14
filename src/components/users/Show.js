@@ -28,11 +28,7 @@ class UsersShow extends React.Component{
 
   getKeyData(sessionsData, discipline, key) {
     return sessionsData
-<<<<<<< HEAD
       //Return only the sessions that match the discipline
-=======
-    //Return only the session that match the discipline
->>>>>>> b75c6ebea7cc4c05a96d9a06b2050bedde8538c1
       .filter(session => {
         if(session.discipline === discipline) return session;
       })
