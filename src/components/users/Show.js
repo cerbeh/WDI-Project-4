@@ -5,6 +5,7 @@ import _ from 'lodash';
 
 import Auth from '../../lib/Auth';
 import Chart from '../charts/Chart';
+import DoughnutChart from '../charts/PieChart';
 
 
 class UsersShow extends React.Component{
@@ -27,7 +28,11 @@ class UsersShow extends React.Component{
 
   getKeyData(sessionsData, discipline, key) {
     return sessionsData
+<<<<<<< HEAD
       //Return only the sessions that match the discipline
+=======
+    //Return only the session that match the discipline
+>>>>>>> b75c6ebea7cc4c05a96d9a06b2050bedde8538c1
       .filter(session => {
         if(session.discipline === discipline) return session;
       })
@@ -49,7 +54,15 @@ class UsersShow extends React.Component{
       labels: this.getKeyData(sessionsData, discipline, 'date'),
       datasets: [{
         label: discipline,
-        backgroundColor: 'rgba(255, 206, 86, 0.6)',
+        backgroundColor: _.sample([
+          'rgba(255, 99, 132, 0.6)',
+          'rgba(54, 162, 235, 0.6)',
+          'rgba(255, 206, 86, 0.6)',
+          'rgba(75, 192, 192, 0.6)',
+          'rgba(153, 102, 255, 0.6)',
+          'rgba(255, 159, 64, 0.6)',
+          'rgba(255, 99, 132, 0.6)'
+        ]),
         data: this.getKeyData(sessionsData, discipline, 'duration')
       }]
     };
@@ -67,15 +80,26 @@ class UsersShow extends React.Component{
   setImage(label, index) {
     switch(label) {
       case 'Kata':
-        return ([<img src="https://i.imgur.com/K1DprdD.png" key="kata" alt="kata"/>]);
+        return ([<img src="https://i.imgur.com/ojsP9fT.png" key="kata" alt="kata"/>]);
       case 'Keiko':
-        return ([<img src="https://i.imgur.com/RBp1erT.jpg" key="keiko" alt="keiko"/>]);
+        return ([<img src="https://i.imgur.com/rRAdVQL.png" key="keiko" alt="keiko"/>]);
       case 'Shiai':
-        return ([<img src="https://i.imgur.com/SF3GNT0.jpg" key="shiai" alt="shiai"/>]);
+        return ([<img src="https://i.imgur.com/1Wk6N6z.png" key="shiai" alt="shiai"/>]);
+      case 'Jodan':
+        return ([<img src="https://i.imgur.com/7Xc3Gml.png" key="jodan" alt="jodan"/>]);
+      case 'Nito':
+        return ([<img src="https://i.imgur.com/deWDhqH.png" key="nito" alt="nito"/>]);
+      case 'Shin-sa':
+        return ([<img src="https://i.imgur.com/tFwf0ca.png" key="shin-sa" alt="shin-sa"/>]);
+      case 'Mitori-geiko':
+        return ([<img src="https://i.imgur.com/kDsMFY4.png" key="mitori-geiko" alt="mitori-geiko"/>]);
+      case 'Asa-geiko':
+        return ([<img src="https://i.imgur.com/4GRTfgM.png" key="asa-geiko" alt="asa-geiko"/>]);
       default:
         return ([<img key={index} src="http://fillmurray.com/100/40"/>]);
     }
   }
+
 
   toggleHidden(){
     this.setState({
@@ -98,13 +122,12 @@ class UsersShow extends React.Component{
 
 
   render(){
-    if(this.state.error) return <h2 className="title is-2">{this.state.error}</h2>;
-    if(!this.state.user) return <h2 className="title">Loading...</h2>;
     return(
       <section className="section">
         <div className="columns is-multiline is-mobile">
           <div className="column is-10">
             <h1 className="title is-3">{this.state.user.username}</h1>
+            <hr />
           </div>
           <div className="column is-1">
             <div className="container">
@@ -116,33 +139,55 @@ class UsersShow extends React.Component{
               </Link>
             </div>
           </div>
-          <div className="column is-10">
-            <h5 className="is-5">I was born on:</h5>
-            <h2 className="subtitle"><strong>{this.state.user.dob}</strong></h2>
-            <h5 className="is-5">My height:</h5>
-            <h2 className="subtitle"><strong>{this.state.user.height}</strong> cm</h2>
-            <h5 className="is-5">My Weight:</h5>
-            <h2 className="subtitle"><strong>{this.state.user.weight}</strong> kilos</h2>
-            <h5 className="is-5">Grade:</h5>
-            <h2 className="subtitle"><strong>{this.state.user.grade}</strong></h2>
-          </div>
+
+          {this.state.user && !this.state.user.gender  &&
+          <section className="section">
+            <div className="no-sessions container ">
+              <img src="https://imgur.com/Vsd3i2Y.png"/>
+            </div>
+            <p className="is-3 has-text-centered">You havent edited your profile yet.
+              <Link to={`/users/${this.props.match.params.id}/edit`} className="is-3 "> Click here edit!</Link></p>
+          </section>
+          }
+
+          {this.state.user && this.state.user.gender &&
+            <section>
+              <div className="column is-10">
+                <h5 className="is-5">I was born on:</h5>
+                <h2 className="subtitle"><strong>{this.state.user.dob}</strong></h2>
+                <h5 className="is-5">My height:</h5>
+                <h2 className="subtitle"><strong>{this.state.user.height}</strong> cm</h2>
+                <h5 className="is-5">My Weight:</h5>
+                <h2 className="subtitle"><strong>{this.state.user.weight}</strong> kilos</h2>
+                <h5 className="is-5">Grade:</h5>
+                <h2 className="subtitle"><strong>{this.state.user.grade}</strong></h2>
+              </div>
+            </section>
+          }
+
 
           {this.state.chartData &&
-              this.state.chartData.map((chart, index) =>
-                <div className="column is-12" key={index}>
-                  <div
-                    className="container chart-data-btn"
-                    onClick={this.toggleHidden.bind(this)}
-                  >
-                    {this.setImage(chart.datasets[0].label, index)}
-                    {!this.state.isHidden &&
-                    <Chart
-                      data={chart}
-                    />
-                    }
-                  </div>
+            this.state.chartData.map((chart, index) =>
+              <div className="column is-12" key={index}>
+                <div
+                  className="container chart-data-btn"
+                  onClick={this.toggleHidden.bind(this)}
+                >
+                  {this.setImage(chart.datasets[0].label, index)}
+                  {!this.state.isHidden &&
+                    <section>
+
+                      <Chart
+                        data={chart}
+                      />
+                      <DoughnutChart
+                        data={chart}
+                      />
+                    </section>
+                  }
                 </div>
-              )}
+              </div>
+            )}
         </div>
       </section>
     );
@@ -150,28 +195,3 @@ class UsersShow extends React.Component{
 }
 
 export default UsersShow;
-
-
-
-
-// chartData: {
-//   labels: [ '2018-07-01', '2018-07-02','2018-07-03','2018-07-04','2018-07-05','2018-07-06','2018-07-07'],
-//   datasets: [
-//     {
-//       label: 'Kata',
-//       backgroundColor: 'rgba(54, 162, 235, 0.6)',
-//       data: [20, 30, 80, 20, 40, 10, 60]
-//     }, {
-//       label: 'Keiko',
-//       backgroundColor: 'rgba(255, 206, 86, 0.6)',
-//       data: [60, 10, 40, 30, 80, 30, 20]
-//     },
-//     {
-//       label: 'Shiai',
-//       data: [
-//         120,60,30,45,50,25,20
-//       ],
-//       backgroundColor: 'rgba(255, 99, 132, 0.6)'
-//     }
-//   ]
-// }

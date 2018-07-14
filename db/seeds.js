@@ -99,17 +99,17 @@ mongoose.connect(dbURI, (err, db) => {
         creator: users[0]
       },{
         title: 'Practice for semis',
-        discipline: 'Keiko',
+        discipline: 'Asa-geiko',
         date: new Date('Mar 16, 2018'),
         duration: 45,
         notes: 'Sesh',
         creator: users[0]
       },{
-        title: 'Practice for semis',
-        discipline: 'Keiko',
-        date: new Date('Mar 18, 2018'),
-        duration: 50,
-        notes: 'Sesh',
+        title: 'I hate mornings',
+        discipline: 'Asa-geiko',
+        date: new Date('Mar 1, 2018'),
+        duration: 30,
+        notes: 'Morning practice sucks',
         creator: users[0]
       },{
         title: 'Practice for semis',
@@ -128,23 +128,121 @@ mongoose.connect(dbURI, (err, db) => {
       },{
         title: 'Practice for semis',
         discipline: 'Keiko',
+        date: new Date('Mar 18, 2018'),
+        duration: 120,
+        notes: 'Sesh',
+        creator: users[0]
+      },{
+        title: 'Gotta love them gradings',
+        discipline: 'Shin-sa',
+        date: new Date('Mar 18, 2018'),
+        duration: 30,
+        notes: 'Can I get 9th Dan?',
+        creator: users[0]
+      },{
+        title: 'Gotta love them gradings',
+        discipline: 'Shin-sa',
+        date: new Date('Mar 19, 2018'),
+        duration: 40,
+        notes: 'Can I get 9th Dan?',
+        creator: users[0]
+      },{
+        title: 'Gotta love them gradings',
+        discipline: 'Shin-sa',
+        date: new Date('Jun 19, 2018'),
+        duration: 50,
+        notes: 'Can I get 9th Dan?',
+        creator: users[0]
+      },{
+        title: 'Gotta love them gradings',
+        discipline: 'Shin-sa',
+        date: new Date('Jun 27, 2018'),
+        duration: 60,
+        notes: 'Can I get 9th Dan?',
+        creator: users[0]
+      },{
+        title: 'Injured had to watch',
+        discipline: 'Mitori-geiko',
         date: new Date('Mar 15, 2018'),
+        duration: 240,
+        notes: 'Solid as a rock',
+        creator: users[0]
+      },{
+        title: 'Injured had to watch',
+        discipline: 'Mitori-geiko',
+        date: new Date('Mar 16, 2018'),
+        duration: 20,
+        notes: 'Solid as a rock',
+        creator: users[0]
+      },{
+        title: 'Injured had to watch',
+        discipline: 'Mitori-geiko',
+        date: new Date('Mar 17, 2018'),
+        duration: 60,
+        notes: 'Solid as a rock',
+        creator: users[0]
+      },{
+        title: 'Adopted the heavenly kamae',
+        discipline: 'Jodan',
+        date: new Date('Feb 17, 2018'),
+        duration: 5,
+        notes: 'Was alright',
+        creator: users[0]
+      },{
+        title: 'Adopted the heavenly kamae',
+        discipline: 'Jodan',
+        date: new Date('Feb 17, 2018'),
+        duration: 45,
+        notes: 'Was alright',
+        creator: users[0]
+      },{
+        title: 'Adopted the heavenly kamae',
+        discipline: 'Jodan',
+        date: new Date('Feb 17, 2018'),
         duration: 50,
+        notes: 'Was alright',
+        creator: users[0]
+      },{
+        title: 'Adopted the heavenly kamae',
+        discipline: 'Jodan',
+        date: new Date('Feb 17, 2018'),
+        duration: 30,
+        notes: 'Was alright',
+        creator: users[0]
+      },{
+        title: 'Adopted the heavenly kamae',
+        discipline: 'Jodan',
+        date: new Date('Feb 17, 2018'),
+        duration: 15,
+        notes: 'Was alright',
+        creator: users[0]
+      },{
+        title: 'Practice for semis',
+        discipline: 'Kata',
+        date: new Date('Mar 17, 2018'),
+        duration: 30,
         notes: 'Sesh',
         creator: users[0]
       },{
         title: 'Practice for semis',
         discipline: 'Kata',
         date: new Date('Mar 17, 2018'),
-        duration: 50,
+        duration: 20,
         notes: 'Sesh',
         creator: users[0]
       },{
         title: 'Practice for semis',
         discipline: 'Kata',
         date: new Date('Apr 17, 2018'),
-        duration: 50,
+        duration: 15,
         notes: 'Sesh',
+        creator: users[0]
+      },{
+        title: 'Two-sword?!',
+        discipline: 'Nito',
+        date: new Date('Apr 17, 2018'),
+        duration: 15,
+        notes: 'Nah fam',
         creator: users[0]
       },{
         title: 'Practice for semis',
