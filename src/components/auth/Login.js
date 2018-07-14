@@ -20,15 +20,12 @@ class AuthLogin extends React.Component {
       .then(() => Flash.setMessage('success', 'Welcome Back!'))
       .then(() => this.props.history.push(`/users/${Auth.getPayload().sub}`))
     //Replace will replace the last entry with login so when it goes back we havent moved.
-      .then(() => {
-        this.props.history.replace('/login');
-      })
       .catch(() => Flash.setMessage('danger', 'Invalid Credentials')
       );
   }
 
   handleChange = ({ target: { name, value }}) => {
-    this.setState({ [name]: value }, () => console.log(this.state));
+    this.setState({ [name]: value });
   }
 
   render() {
@@ -40,12 +37,11 @@ class AuthLogin extends React.Component {
             <div className="field">
               <label className="email">email</label>
               <input className="input" name="email" onChange={this.handleChange} />
-              {/* {this.state.errors && <small>{this.state.errors.email}</small>} */}
             </div>
             <div className="field">
               <label className="password">password</label>
               <input className="input" type="password" name="password"  onChange={this.handleChange} />
-              {/* {this.state.errors && <small>{this.state.errors.password}</small>} */}
+
             </div>
             <button className="button text-is-centered">Submit</button>
             <hr />

@@ -1,6 +1,8 @@
 process.env.NODE_ENV = 'test';
 require('babel-register')();
+//allows us to write tests in ES6
 
+// prevents webpack from loading CSS and scss
 function nullFunc() {
   return null;
 }
@@ -10,8 +12,12 @@ require.extensions['.scss'] = nullFunc;
 require.extensions['.png'] = nullFunc;
 require.extensions['.jpg'] = nullFunc;
 require.extensions['.gif'] = nullFunc;
+require.extensions['.svg'] = nullFunc;
 
+
+//load in enzyme
 const { configure } = require('enzyme');
+//set enzyme up to use React 16,
 const Adapter = require('enzyme-adapter-react-16');
 
 configure({ adapter: new Adapter() });

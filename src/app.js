@@ -23,7 +23,6 @@ import Home from './components/pages/Home';
 import Dashboard from './components/pages/Dashboard';
 import Bmi from './components/pages/Bmi';
 import Calendar from './components/pages/Calendar';
-// import Navbar from './components/common/Navbar';
 import NotFound from './components/common/NotFound';
 import Footer from './components/common/Footer';
 import ProtectedRoute from './components/common/ProtectedRoute';
@@ -38,7 +37,6 @@ class App extends React.Component {
     return (
       <BrowserRouter>
         <main>
-          {/* <Navbar /> */}
           <FlashMessages />
           <section className="section-content">
             <Switch>
