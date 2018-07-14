@@ -19,7 +19,7 @@ class UsersShow extends React.Component{
   }
 
   getDisciplines(sessionsData) {
-    //Using lodash we iterate of the sessions from the user and return all the unique values from the key discipline
+    //Using lodash we iterate over the sessions array from the user and return all the unique values from the key discipline
     return _.uniq(sessionsData.map(session => {
       return session.discipline;
     }));
@@ -27,7 +27,7 @@ class UsersShow extends React.Component{
 
   getKeyData(sessionsData, discipline, key) {
     return sessionsData
-      //Return only the session that match the discipline
+      //Return only the sessions that match the discipline
       .filter(session => {
         if(session.discipline === discipline) return session;
       })
@@ -43,7 +43,7 @@ class UsersShow extends React.Component{
 
   setDatasets(sessionsData, discipline) {
     //We return an object with the data laid out in the way that chartjs wants to receive it.
-    //We take the discipline passed to by setChartData to define which discipline we are creating a chart for.
+    //We use discipline passed to us by setChartData to define which discipline we are creating a chart for.
     //We also pass discipline through to getKeyData for us to the be able to extract specific pieces of data from the sessions array.
     return {
       labels: this.getKeyData(sessionsData, discipline, 'date'),
@@ -57,10 +57,11 @@ class UsersShow extends React.Component{
 
   setChartData(sessionsData) {
     //We use getDisciplines to go through sessionsData and return an array of unique disciplines.
+    return this.getDisciplines(sessionsData)
     //We then map over it so that we can pass each discipline down to setDatasets.
-    return this.getDisciplines(sessionsData).map(discipline => {
-      return this.setDatasets(sessionsData, discipline);
-    });
+      .map(discipline => {
+        return this.setDatasets(sessionsData, discipline);
+      });
   }
 
   setImage(label, index) {
@@ -72,7 +73,7 @@ class UsersShow extends React.Component{
       case 'Shiai':
         return ([<img src="https://i.imgur.com/SF3GNT0.jpg" key="shiai" alt="shiai"/>]);
       default:
-        return ([<img key={index} src="http://fillmurray.com/200/200"/>]);
+        return ([<img key={index} src="http://fillmurray.com/100/40"/>]);
     }
   }
 
