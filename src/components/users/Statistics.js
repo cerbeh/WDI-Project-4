@@ -19,6 +19,18 @@ class Statistics extends React.Component{
     };
   }
 
+  selectColour() {
+    return _.sample([
+      'rgba(128, 255, 0, 0.6)',
+      'rgba(54, 162, 235, 0.6)',
+      'rgba(100, 85, 73, 0.6)',
+      'rgba(75, 192, 192, 0.6)',
+      'rgba(153, 102, 255, 0.6)',
+      'rgba(85, 65, 13, 0.6)',
+      'rgba(55, 27, 7, 0.6)'
+    ]);
+  }
+
   getDisciplines(sessionsData) {
     //Using lodash we iterate of the sessions from the user and return all the unique values from the key discipline
     return _.uniq(sessionsData.map(session => {
@@ -42,33 +54,52 @@ class Statistics extends React.Component{
       });
   }
 
-  setDatasets(sessionsData, discipline) {
+  setDatasets(sessionsData, chartType, discipline) {
+
+    const setLabelsType = () => {
+
+      if(chartType === 'line') {
+        return {
+          labels: this.getKeyData(sessionsData, discipline, 'date'),
+          data: this.getKeyData(sessionsData, discipline, 'duration'),
+          backgroundColor: this.selectColour()
+        };
+      }
+
+      if(chartType === 'doughnut') {
+        const disciplines = this.getDisciplines(sessionsData);
+        return {
+          labels: disciplines,
+          data: disciplines.map(discipline => {
+            return this.getKeyData(sessionsData, discipline, 'duration')
+              .reduce((duration, value) => {
+                return duration + value;
+              });
+          }),
+          backgroundColor: disciplines.map(() => {
+            return this.selectColour();
+          })
+        };
+      }
+    };
     //We return an object with the data laid out in the way that chartjs wants to receive it.
     //We take the discipline passed to by setChartData to define which discipline we are creating a chart for.
     //We also pass discipline through to getKeyData for us to the be able to extract specific pieces of data from the sessions array.
     return {
-      labels: this.getKeyData(sessionsData, discipline, 'date'),
+      labels: setLabelsType().labels,
       datasets: [{
-        label: discipline,
-        backgroundColor: _.sample([
-          'rgba(255, 99, 132, 0.6)',
-          'rgba(54, 162, 235, 0.6)',
-          'rgba(255, 206, 86, 0.6)',
-          'rgba(75, 192, 192, 0.6)',
-          'rgba(153, 102, 255, 0.6)',
-          'rgba(255, 159, 64, 0.6)',
-          'rgba(255, 99, 132, 0.6)'
-        ]),
-        data: this.getKeyData(sessionsData, discipline, 'duration')
+        label: discipline || '',
+        backgroundColor: setLabelsType().backgroundColor,
+        data: setLabelsType().data
       }]
     };
   }
 
-  setChartData(sessionsData) {
+  setChartData(sessionsData, chartType) {
     //We use getDisciplines to go through sessionsData and return an array of unique disciplines.
     //We then map over it so that we can pass each discipline down to setDatasets.
     return this.getDisciplines(sessionsData).map(discipline => {
-      return this.setDatasets(sessionsData, discipline);
+      return this.setDatasets(sessionsData, chartType, discipline);
     });
   }
 
@@ -108,9 +139,9 @@ class Statistics extends React.Component{
 
         this.setState({
           user: res.data,
-          chartData: this.setChartData(res.data.sessions)
+          chartData: this.setChartData(res.data.sessions, 'line'),
+          pieChart: this.setDatasets(res.data.sessions, 'doughnut')
         });
-        console.log(this.state.user);
       })
 
       .catch(err => this.setState({ error: err.message }));
@@ -160,14 +191,19 @@ class Statistics extends React.Component{
                       <Chart
                         data={chart}
                       />
-                      <DoughnutChart
-                        data={chart}
-                      />
                     </section>
                   }
                 </div>
               </div>
             )}
+          <div className="column is-12">
+            <div className="container">
+              {this.state.pieChart &&
+                <DoughnutChart
+                  data={this.state.pieChart}
+                />}
+            </div>
+          </div>
         </div>
       </section>
     );

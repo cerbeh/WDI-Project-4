@@ -3,11 +3,6 @@ import { Doughnut } from 'react-chartjs-2';
 
 const DoughnutChart = ({data}) => {
 
-
-  // const labels = data.discipline.map( type => type.name);
-  // const data = {
-//}
-
   const defaultProps = {
     displayTitle: true,
     displayLegend: true,
