@@ -19,7 +19,8 @@ const SessionTimeline = ({data}) => {
             title={session.title}
             subtitle={session.discipline}
             createdAt={session.date}
-            // icon={<i className="fas fa-dumbbell fa-2x"></i>}
+            icon={<img src="../../assets/image/kendo.svg"/>}
+            // icon={<i className="fas fa-dumbbell"></i>}
           >
             {session.notes}
           </TimelineEvent>
