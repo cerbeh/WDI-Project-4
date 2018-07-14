@@ -53,13 +53,10 @@ class Statistics extends React.Component{
       }
       if(chartType === 'doughnut') {
         const disciplines = this.getDisciplines(sessionsData);
-        let i = 0;
         return {
           labels: disciplines,
           data: disciplines.map(discipline => {
-            i++;
-            return i;
-            // return this.getKeyData(sessionsData, discipline, 'duration');
+            return this.getKeyData(sessionsData, discipline, 'duration');
           })
         };
       }
@@ -186,9 +183,10 @@ class Statistics extends React.Component{
                 </div>
               </div>
             )}
+          {this.state.pieChart &&
           <DoughnutChart
             data={this.state.pieChart}
-          />
+          />}
         </div>
       </section>
     );
