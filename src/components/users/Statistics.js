@@ -19,14 +19,6 @@ class Statistics extends React.Component{
     };
   }
 
-  setLabelsType(chartType) {
-    if(chartType === 'line') {
-      return this.getKeyData(sessionsData, discipline, 'date');
-    }
-    if(chartType === 'doughnut') return this.getDisciplines(sessionsData);
-    else return 'HELLO';
-  }
-
   getDisciplines(sessionsData) {
     //Using lodash we iterate of the sessions from the user and return all the unique values from the key discipline
     return _.uniq(sessionsData.map(session => {
