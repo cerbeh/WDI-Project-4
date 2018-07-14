@@ -14,6 +14,8 @@ const DoughnutChart = ({data}) => {
     legendPosition: 'right'
   };
 
+  console.log(data, 'piechart data log');
+
   return (
     <div className="chart">
 

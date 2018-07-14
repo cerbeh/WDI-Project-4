@@ -51,7 +51,18 @@ class Statistics extends React.Component{
           data: this.getKeyData(sessionsData, discipline, 'duration')
         };
       }
-      if(chartType === 'doughnut') return this.getDisciplines(sessionsData);
+      if(chartType === 'doughnut') {
+        const disciplines = this.getDisciplines(sessionsData);
+        let i = 0;
+        return {
+          labels: disciplines,
+          data: disciplines.map(discipline => {
+            i++;
+            return i;
+            // return this.getKeyData(sessionsData, discipline, 'duration');
+          })
+        };
+      }
     };
     //We return an object with the data laid out in the way that chartjs wants to receive it.
     //We take the discipline passed to by setChartData to define which discipline we are creating a chart for.
@@ -59,7 +70,7 @@ class Statistics extends React.Component{
     return {
       labels: setLabelsType().labels,
       datasets: [{
-        label: discipline,
+        label: discipline || '',
         backgroundColor: _.sample([
           'rgba(128, 255, 0, 0.6)',
           'rgba(54, 162, 235, 0.6)',
@@ -118,7 +129,8 @@ class Statistics extends React.Component{
 
         this.setState({
           user: res.data,
-          chartData: this.setChartData(res.data.sessions, 'line')
+          chartData: this.setChartData(res.data.sessions, 'line'),
+          pieChart: this.setDatasets(res.data.sessions, 'doughnut')
         });
       })
 
@@ -169,14 +181,14 @@ class Statistics extends React.Component{
                       <Chart
                         data={chart}
                       />
-                      <DoughnutChart
-                        data={chart}
-                      />
                     </section>
                   }
                 </div>
               </div>
             )}
+          <DoughnutChart
+            data={this.state.pieChart}
+          />
         </div>
       </section>
     );
