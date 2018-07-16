@@ -14,14 +14,14 @@ class UsersEdit extends React.Component{
   componentDidMount() {
     axios.get(`/api/users/${this.props.match.params.id}`)
       .then(res => {
-        this.setState({user: res.data});
+        this.setState({user: res.data}, () => console.log(this.state.user));
       })
       .catch(err => this.setState({ error: err.message }));
   }
 
   handleChange=({ target: { name, value }})=> {
     const newState = { ...this.state.user, [name]: value };
-    this.setState({ user: newState });
+    this.setState({ user: newState }, () => console.log(this.state.user));
   }
 
   handleSubmit = (e) => {

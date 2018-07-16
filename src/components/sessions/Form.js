@@ -2,8 +2,6 @@ import React from 'react';
 
 const SessionsForm = ({ handleChange, handleSubmit, data, errors}) => {
 
-  console.log(data);
-
   return(
     <form onSubmit={handleSubmit}>
       <div className="field">
