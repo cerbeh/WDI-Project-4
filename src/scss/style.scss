@@ -9,7 +9,7 @@
 @import 'pages/sessions';
 @import 'pages/dashboard';
 @import 'components/button';
-@import 'components/navbar';
+@import 'components/footer';
 @import 'components/flash';
 
 
@@ -55,27 +55,3 @@ canvas{
         background-color: transparent;
     }
 }
-
-
-
-
-
-    @media only screen and (min-width: 768px) {
-        /* styles for wide screens */
-        .hero {
-            background-image: url("https://imgur.com/86pvG6E.jpg");
-            background-size: cover;
-            background-color: #999;
-            width: 100%;
-            margin: 0;
-        }
-        .registrationBackground {
-            background-image: url("https://imgur.com/fhqTHUW.jpg");
-            background-size: cover;
-            background-color: #999;
-            width: 100%;
-            margin: 0;
-        }
-
-
-    }

@@ -14,8 +14,8 @@ const sessionSchema = new mongoose.Schema({
 });
 
 const userSchema = new mongoose.Schema({
-  username: { type: String, required: 'This field is required' },
-  email: { type: String, required: 'This field is required address', unique: true },
+  username: { type: String, required: 'This field is required'},
+  email: { type: String, required: 'This field is required', unique: true },
   password: { type: String, required: 'This field is required'},
   gender: { type: String, enum: ['Male', 'Female', 'Non-binary', 'Transgender', 'Other', 'Prefer not to say']},
   grade: { type: String, enum: ['1st Kyu', '1st Dan', '2nd Dan', '3rd Dan', '4th Dan', '5th Dan', '6th Dan', '7th Dan', '8th Dan']},
@@ -42,6 +42,19 @@ userSchema.set('toJSON', {
     return json;
   }
 });
+
+//
+// userSchema
+//   .virtual('totalPracticed')
+//   .get(function () {
+//     if (this.sessions) {
+//       const totalPracticedArray = this.sessions.map(entry => {
+//         return entry.totalPracticed;
+//       });
+//       return totalPracticedArray.reduce((a, i) => a + i, 0);
+//     }
+//   });
+
 
 userSchema.virtual('passwordConfirmation')
   .set(function setPasswordConfirmation(passwordConfirmation) {

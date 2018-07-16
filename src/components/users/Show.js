@@ -37,7 +37,8 @@ class UsersShow extends React.Component{
     return(
       <section className="section">
         <div className="columns is-multiline is-mobile">
-          <div className="column is-10">
+          <div className="column header is-10">
+            <img src="https://i.imgur.com/kPcMb4h.png" />
             <h1 className="title is-3">{this.state.user.username}</h1>
             <hr />
           </div>

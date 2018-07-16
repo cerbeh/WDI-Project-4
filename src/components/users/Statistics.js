@@ -21,6 +21,13 @@ class Statistics extends React.Component{
 
   selectColour() {
     return _.sample([
+      'rgba(255, 99, 132, 0.6)',
+      'rgba(54, 162, 235, 0.6)',
+      'rgba(255, 206, 86, 0.6)',
+      'rgba(75, 192, 192, 0.6)',
+      'rgba(153, 102, 255, 0.6)',
+      'rgba(255, 159, 64, 0.6)',
+      'rgba(255, 99, 132, 0.6)',
       'rgba(128, 255, 0, 0.6)',
       'rgba(54, 162, 235, 0.6)',
       'rgba(200, 5, 173, 0.6)',
@@ -69,13 +76,23 @@ class Statistics extends React.Component{
     }
 
     if(chartType === 'doughnut') {
-      console.log(userData.practicedDisciplines.map(discipline => discipline.discipline));
       return {
         labels: userData.practicedDisciplines.map(discipline => discipline.discipline),
+
+
+
+
+
+
         data: userData.practicedDisciplines.map(discipline => {
-          return this.getKeyData(userData, discipline, 'duration')
+          console.log(discipline);
+          return discipline.duration
             .reduce((duration, value) => duration + value);
         }),
+
+
+
+
         backgroundColor: userData.practicedDisciplines.map(() => {
           return this.selectColour();
         })
@@ -136,16 +153,18 @@ class Statistics extends React.Component{
   componentDidMount(){
     axios.get(`api/users/${Auth.getPayload().sub}`)
       .then(res => {
-        console.log(res.data.practicedDisciplines);
         this.setState({
           user: res.data,
-          // chartData: this.setLineChartData(res.data, 'line')
-          chartData: res.data.practicedDisciplines.map(discipline => this.getData(discipline, 'line'))
-          // pieChart: this.setDatasets(res.data, 'doughnut')
+          chartData: res.data.practicedDisciplines.map(discipline => this.getData(discipline, 'line')),
+          pieChart: this.getData(res.data, 'doughnut')
         });
       })
 
       .catch(err => this.setState({ error: err.message }));
+  }
+
+  reformatMinutes = (timeInMinutes) => {
+    return timeInMinutes / 60 > 1 ? `${Math.floor(timeInMinutes/60)} hours, ${timeInMinutes % 60} mins` : `${timeInMinutes} mins`;
   }
 
 
@@ -156,6 +175,8 @@ class Statistics extends React.Component{
           <div className="column is-10">
             <h1 className="title is-3">Statistics</h1>
             <hr />
+            <h3>A total of</h3>
+            {/* <h2>{this.reformatMinutes(this.state.sessions.totalPracticed)}</h2> */}
           </div>
           <div className="column is-1">
             <div className="container">

@@ -18,15 +18,15 @@ class SessionsIndex extends React.Component {
       <section className="section">
         <div className="columns is-multiline is-mobile">
           <div className="column is-10">
-            <h1 className="title is-3">HISTORY</h1>
+            <img src="https://i.imgur.com/b43XIhK.png" />
             <hr />
-          </div>
-          <div className="column is-1">
-            <div className="container">
+            { this.state.sessions &&
+            <p className="is-3">
               <Link to={`/users/${this.props.match.params.id}/sessions/new`}>
-                <i className="fas fa-plus-circle fa-3x"></i>
+                Add new session <i className="fas fa-plus-circle"></i>
               </Link>
-            </div>
+            </p>
+            }
           </div>
 
         </div>

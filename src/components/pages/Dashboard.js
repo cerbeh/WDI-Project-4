@@ -48,25 +48,25 @@ class Dashboard extends React.Component{
             </Link>
           </div>
           <div className="column is-half statistics">
-            <Link to="/statistics" className="navbar-item is-expanded  is-block has-text-centered">
+            <Link to="/statistics" className="is-expanded  is-block has-text-centered">
               <i className="fa-2x fas fa-chart-line"></i>
               <p className="is-size-7">Statistics</p>
             </Link>
           </div>
           <div className="column is-half calendar">
-            <a className="navbar-item is-expanded is-block has-text-centered">
+            <a className="is-expanded is-block has-text-centered">
               <i className="fa-2x fas far fa-calendar-alt"></i>
               <p className="is-size-7">Calendar</p>
             </a>
           </div>
           <div className="column is-half about">
-            <a className="navbar-item is-expanded is-block has-text-centered">
+            <a className="is-expanded is-block has-text-centered">
               <i className="fa-2x fas fa-angry"></i>
               <p className="is-size-7">About Us</p>
             </a>
           </div>
           <div className="column is-half logout">
-            <a className="navbar-item is-expanded is-block has-text-centered" onClick={this.handleLogout}>
+            <a className="is-expanded is-block has-text-centered" onClick={this.handleLogout}>
               <i className="fa-2x fas fa-sign-out-alt"></i>
               <p className="is-size-7">Logout</p>
             </a>

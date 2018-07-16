@@ -1,38 +1,34 @@
 process.env.NODE_ENV = 'test';
+
+// allows us to write tests in ES6
 require('babel-register')();
-//allows us to write tests in ES6
 
-// prevents webpack from loading CSS and scss
-function nullFunc() {
-  return null;
-}
-
+// prevent webpack from loading css and scss
+const nullFunc = () => null;
 require.extensions['.css'] = nullFunc;
 require.extensions['.scss'] = nullFunc;
-require.extensions['.png'] = nullFunc;
 require.extensions['.jpg'] = nullFunc;
 require.extensions['.gif'] = nullFunc;
-require.extensions['.svg'] = nullFunc;
+require.extensions['.png'] = nullFunc;
 
-
-//load in enzyme
+// load in enzyme
 const { configure } = require('enzyme');
-//set enzyme up to use React 16,
+// set enzyme up to use React 16, which is the version we are using
 const Adapter = require('enzyme-adapter-react-16');
-
 configure({ adapter: new Adapter() });
 
+// create a virtual DOM in the terminal
 const { JSDOM } = require('jsdom');
-
-const jsdom = new JSDOM('<!doctype html><html><body></body></html>');
+const jsdom = new JSDOM('<!DOCTYPE html><html><body></body></html>');
 const { window } = jsdom;
 
-window.localStorage = (function(){
-  var storage = {};
+global.document = window.document;
 
+window.localStorage = (function(){
+  const storage = {};
   return {
     getItem: function(key) {
-      return storage[key];
+      return storage[key] || null;
     },
     removeItem: function(key) {
       delete storage[key];
@@ -43,20 +39,10 @@ window.localStorage = (function(){
   };
 })();
 
-function Map() {
-  this.getCenter = function() {};
-}
-function Marker() {
-  this.setMap = function() {};
-}
-function Autocomplete() {}
-global.google = {
+global.google = window.google = {
   maps: {
-    Map,
-    Marker,
-    places: {
-      Autocomplete
-    }
+    Map: function Map() { },
+    Marker: function Marker() { }
   }
 };
 
@@ -66,9 +52,5 @@ function copyProps(src, target) {
     .map(prop => Object.getOwnPropertyDescriptor(src, prop));
   Object.defineProperties(target, props);
 }
-global.atob = require('atob');
-global.window = window;
-global.document = window.document;
-global.navigator = { userAgent: 'node.js' };
 
 copyProps(window, global);

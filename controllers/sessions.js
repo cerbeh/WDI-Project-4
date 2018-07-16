@@ -59,6 +59,7 @@ function updateRoute(req, res , next) {
     .catch(next);
 }
 
+<<<<<<< HEAD
 function updateRoute(req, res , next) {
   User.findById(req.params.id)
     .then(user => {
@@ -91,8 +92,8 @@ function deleteRoute(req, res, next) {
         }
       });
       user.save();
-      res.json(user.sessions);
     })
+    .then(() => res.status(204).json({ message: 'Deletion successful' }))
     .catch(next);
 }
 
