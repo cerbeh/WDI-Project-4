@@ -68,17 +68,17 @@ userSchema.methods.validatePassword = function validatePassword(password) {
 
 userSchema.virtual('practicedDisciplines')
   .get(function() {
-    return _.uniq(this.sessions.map(session => {
+    const disciplines = _.uniq(this.sessions.map(session => {
+      // const discipline = session.discipline;
       return session.discipline;
+      // {
+      // [discipline]: {
+      //   duration: 10
+      // }
+      // };
     }));
+    return disciplines;
   });
-
-  // boatSchema.virtual('avgRating')
-  // .get(function() {
-  //   return Math.floor(this.comments.reduce((sum, comment) => {
-  //     return sum + comment.rating;
-  //   }, 0) / this.comments.length);
-  // });
 
 sessionSchema.path('date')
   .get(function formatDate(date) {

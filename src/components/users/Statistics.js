@@ -36,13 +36,6 @@ class Statistics extends React.Component{
     ]);
   }
 
-  // getDisciplines(userData) {
-  //   //Using lodash we iterate of the sessions from the user and return all the unique values from the key discipline
-  //   return _.uniq(userData.map(session => {
-  //     return session.discipline;
-  //   }));
-  // }
-
   getKeyData(userData, discipline, key) {
     return userData.sessions
     //Return only the session that match the discipline
@@ -73,7 +66,6 @@ class Statistics extends React.Component{
     }
 
     if(chartType === 'doughnut') {
-      // const disciplines = this.getDisciplines(userData);
       return {
         labels: userData.practicedDisciplines,
         data: userData.practicedDisciplines.map(discipline => {
@@ -88,9 +80,6 @@ class Statistics extends React.Component{
   }
 
   setDatasets(userData, chartType, discipline) {
-    console.log(userData, 'userData');
-    console.log(chartType, 'chartType');
-    console.log(discipline, 'discipline');
     //We return an object with the data laid out in the way that chartjs wants to receive it.
     return {
       labels: this.getData(userData, chartType, discipline).labels,
@@ -143,7 +132,7 @@ class Statistics extends React.Component{
   componentDidMount(){
     axios.get(`api/users/${Auth.getPayload().sub}`)
       .then(res => {
-
+        console.log(res.data.practicedDisciplines);
         this.setState({
           user: res.data,
           // chartData: this.setLineChartData(res.data, 'line')
