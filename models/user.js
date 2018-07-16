@@ -27,12 +27,6 @@ const userSchema = new mongoose.Schema({
   id: false
 });
 
-userSchema.virtual('sessions', {
-  localField: '_id',
-  foreignField: 'creator',
-  ref: 'Session'
-});
-
 
 userSchema.path('dob')
   .get(function formatDate(dob) {
