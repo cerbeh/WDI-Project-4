@@ -32,9 +32,11 @@ function showRoute(req, res, next) {
 function updateRoute(req, res , next) {
   User.findById(req.params.id)
     .then(user => {
+      user.sessions.findById(req.params.sessionId)
+        .then(session => console.log(session));
       //Logic to find the session that was edited and update it.
     })
-    .then(session /*    ?    */ => res.json(session))
+    // .then(session /*    ?    */ => res.json(session))
     .catch(next);
 }
 

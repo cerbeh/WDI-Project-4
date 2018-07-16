@@ -24,8 +24,13 @@ class Statistics extends React.Component{
       'rgba(128, 255, 0, 0.6)',
       'rgba(54, 162, 235, 0.6)',
       'rgba(100, 85, 73, 0.6)',
+      'rgba(200, 105, 92, 0.6)',
+      'rgba(250, 85, 3, 0.6)',
+      'rgba(250, 5, 103, 0.6)',
       'rgba(75, 192, 192, 0.6)',
+      'rgba(25, 2, 122, 0.6)',
       'rgba(153, 102, 255, 0.6)',
+      'rgba(153, 252, 255, 0.6)',
       'rgba(85, 65, 13, 0.6)',
       'rgba(55, 27, 7, 0.6)'
     ]);
@@ -54,6 +59,8 @@ class Statistics extends React.Component{
       });
   }
 
+
+
   setDatasets(sessionsData, chartType, discipline) {
 
     const setLabelsType = () => {
@@ -72,9 +79,7 @@ class Statistics extends React.Component{
           labels: disciplines,
           data: disciplines.map(discipline => {
             return this.getKeyData(sessionsData, discipline, 'duration')
-              .reduce((duration, value) => {
-                return duration + value;
-              });
+              .reduce((duration, value) => duration + value);
           }),
           backgroundColor: disciplines.map(() => {
             return this.selectColour();
@@ -82,9 +87,10 @@ class Statistics extends React.Component{
         };
       }
     };
-    //We return an object with the data laid out in the way that chartjs wants to receive it.
     //We take the discipline passed to by setChartData to define which discipline we are creating a chart for.
     //We also pass discipline through to getKeyData for us to the be able to extract specific pieces of data from the sessions array.
+
+    //We return an object with the data laid out in the way that chartjs wants to receive it.
     return {
       labels: setLabelsType().labels,
       datasets: [{
@@ -142,6 +148,7 @@ class Statistics extends React.Component{
           chartData: this.setChartData(res.data.sessions, 'line'),
           pieChart: this.setDatasets(res.data.sessions, 'doughnut')
         });
+        console.log(this.state.chartData);
       })
 
       .catch(err => this.setState({ error: err.message }));
@@ -167,7 +174,7 @@ class Statistics extends React.Component{
             </div>
           </div>
 
-          {/* {!this.state.chartData &&
+          {this.state.chartData && this.state.chartData.length === 0 &&
           <section className="section">
             <div className="no-sessions container ">
               <img src="https://imgur.com/Vsd3i2Y.png"/>
@@ -175,9 +182,9 @@ class Statistics extends React.Component{
             <p className="is-3 has-text-centered">No sessions have been recorded.
               <Link to={`/users/${this.props.match.params.id}/edit`} className="is-3 "> Click here to add your first session</Link></p>
           </section>
-          } */}
+          }
 
-          {this.state.chartData &&
+          {this.state.chartData && this.state.chartData.length !== 0 &&
             this.state.chartData.map((chart, index) =>
               <div className="column is-12" key={index}>
                 <div
