@@ -78,24 +78,20 @@ class Statistics extends React.Component{
     if(chartType === 'doughnut') {
       return {
         labels: userData.practicedDisciplines.map(discipline => discipline.discipline),
+        datasets: [{
+          data: userData.practicedDisciplines.map(discipline => {
+            // console.log(discipline.sessions,'discipline.sessions');
+            return discipline.sessions
+              .reduce((session, value) => {
+                console.log(session, value);
+                session.duration + value;
+              });
+          }),
+          backgroundColor: userData.practicedDisciplines.map(() => {
+            return this.selectColour();
+          })
+        }]
 
-
-
-
-
-
-        data: userData.practicedDisciplines.map(discipline => {
-          console.log(discipline);
-          return discipline.duration
-            .reduce((duration, value) => duration + value);
-        }),
-
-
-
-
-        backgroundColor: userData.practicedDisciplines.map(() => {
-          return this.selectColour();
-        })
       };
     }
   }
@@ -158,6 +154,7 @@ class Statistics extends React.Component{
           chartData: res.data.practicedDisciplines.map(discipline => this.getData(discipline, 'line')),
           pieChart: this.getData(res.data, 'doughnut')
         });
+        console.log(this.state.pieChart);
       })
 
       .catch(err => this.setState({ error: err.message }));
