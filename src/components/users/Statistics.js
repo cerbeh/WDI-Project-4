@@ -133,7 +133,7 @@ class Statistics extends React.Component{
             <h1 className="title is-3">Statistics</h1>
             <hr />
             <h3>A total of</h3>
-            {/* <h2>{this.reformatMinutes(this.state.sessions.totalPracticed)}</h2> */}
+            <h2>{this.reformatMinutes(this.state.user.totalTimePracticed)}</h2>
           </div>
           <div className="column is-1">
             <div className="container">
