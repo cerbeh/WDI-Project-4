@@ -43,17 +43,13 @@ userSchema.set('toJSON', {
   }
 });
 
-//
-// userSchema
-//   .virtual('totalPracticed')
-//   .get(function () {
-//     if (this.sessions) {
-//       const totalPracticedArray = this.sessions.map(entry => {
-//         return entry.totalPracticed;
-//       });
-//       return totalPracticedArray.reduce((a, i) => a + i, 0);
-//     }
-//   });
+
+userSchema.virtual('totalTimePracticed')
+  .get(function () {
+    return this.sessions.reduce((sumOfPractice, session) =>{
+      return sumOfPractice + session.duration;
+    }, 0);
+  });
 
 
 userSchema.virtual('passwordConfirmation')
@@ -86,7 +82,7 @@ userSchema.virtual('practicedDisciplines')
     }))
       .map(discipline => {
         return {
-          
+
           discipline: discipline,
 
           sessions: this.sessions
