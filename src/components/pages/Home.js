@@ -29,8 +29,9 @@ class Home extends React.Component {
         </div>
         <div className="hero-body">
           <div className="container home-container has-text-left">
+            <div className="rectangle"></div>
             <h1 className="title">
-              kendo.<span>io</span>
+              kendo<em>.io</em>
             </h1>
             <h2 className="subtitle">
               Focus on being better than you were yesterday

@@ -6,12 +6,13 @@
     font-size: 3rem;
     letter-spacing: normal;
     font-style: italic;
-    font-weight: bold
+    font-weight: bold;
+    z-index: 1000;
   }
   h2{
     color: white;
   }
-  span{
+  em{
     color: $accent-colour;
   }
 }
@@ -59,3 +60,27 @@ animation: xfade 16s 12s infinite;
     opacity:0;
   }
 }
+
+
+@media only screen and (min-width: 768px) {
+  // styles for tablet//
+  .hero{
+    background-image: url("https://i.imgur.com/hcUixim.png")
+  }
+}
+
+@media only screen and (min-width: 1024px) {
+    // styles for wide screens //
+  .hero {
+      background-image: none;
+      background-size: cover;
+      background-color: black;
+      width: 100%;
+      margin: 0;
+      .image-gallery{
+          img{
+            visibility: visible;
+          }
+        }
+      }
+  }
