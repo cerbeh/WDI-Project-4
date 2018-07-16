@@ -1,40 +1,98 @@
 const User = require('../models/user');
-const Session = require('../models/session');
+
 
 function createRoute(req, res, next) {
-  req.body.creator = req.currentUser._id;
-  Session.create(req.body)
-    .then(session => res.json(session))
+  User.findById(req.params.id)
+    .then(user => {
+      user.sessions.push(req.body);
+      return user.save();
+    })
+    .then(user => res.json(user))
     .catch(next);
 }
 
 function indexRoute(req, res, next) {
   User.findById(req.params.id)
-    .populate('sessions')
     .then(user => res.json(user.sessions))
     .catch(next);
 }
 
 function showRoute(req, res, next) {
-  Session.findById(req.params.sessionId)
-    .then(session => res.json(session))
-    .catch(next);
-}
-
-function updateRoute(req, res , next) {
-  Session.findById(req.params.sessionId)
-    .then(session => {
-      session.set(req.body);
-      session.save();
+  User.findById(req.params.id)
+    .then(user => {
+      const session = user.sessions.filter(session => {
+        return session._id.toString() === req.params.sessionId;
+      })[0];
       res.json(session);
     })
     .catch(next);
 }
 
+//THIS ONE IS THE ONE THAT DOESNT WORK.
+function updateRoute(req, res , next) {
+  User.findById(req.params.id)
+    .then(user => {
+      user.sessions.findById(req.params.sessionId)
+        .then(session => console.log(session));
+      //Logic to find the session that was edited and update it.
+    })
+    // .then(session /*    ?    */ => res.json(session))
+    .catch(next);
+}
+
+
+
+/*
+Previous attempts at trying to make it  work when reading the mongoose docs
+
+function updateRoute(req, res , next) {
+  console.log(req.body);
+  User.findById(req.params.id)
+    .then(user => {
+      user.update({ 'sessions._id': req.params.sessionId },
+        { '$set': {
+          'sessions.$.title': req.body.title
+        },
+        new: true });
+      res.json(user.sessions);
+    })
+    .catch(next);
+}
+
+<<<<<<< HEAD
+function updateRoute(req, res , next) {
+  User.findById(req.params.id)
+    .then(user => {
+      let updatedSession;
+      user.sessions.map(session => {
+        if(session._id.toString() === req.params.sessionId) {
+          session.title = req.body.title;
+          session.discipline = req.body.discipline;
+          session.duration = req.body.duration;
+          session.notes = req.body.notes;
+          return updatedSession = session;
+        }
+        return session;
+      });
+      user.save();
+      res.json(updatedSession);
+    })
+    .catch(next);
+}
+
+*/
+
+
 function deleteRoute(req, res, next) {
-  Session.findById(req.params.sessionId)
-    .then(session => session.remove())
-    .then(() => res.sendStatus(204))
+  User.findById(req.params.id)
+    .then(user => {
+      user.sessions.forEach((session, index) => {
+        if(session._id.toString() === req.params.sessionId) {
+          user.sessions.splice(index, 1);
+        }
+      });
+      user.save();
+    })
     .then(() => res.status(204).json({ message: 'Deletion successful' }))
     .catch(next);
 }

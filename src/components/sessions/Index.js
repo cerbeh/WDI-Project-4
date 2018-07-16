@@ -2,7 +2,7 @@ import React from 'react';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
 
-import SessionTimeline from './Timeline';
+import SessionTimeline from '../charts/Timeline';
 
 class SessionsIndex extends React.Component {
 
@@ -31,7 +31,8 @@ class SessionsIndex extends React.Component {
 
         </div>
 
-        {this.state.sessions && this.state.sessions.length === 0 &&
+        {
+          this.state.sessions && this.state.sessions.length === 0 &&
           <section className="section">
             <div className="no-sessions container  ">
               <img src="https://i.imgur.com/sjrwESY.png"/>
@@ -41,7 +42,8 @@ class SessionsIndex extends React.Component {
           </section>
         }
 
-        { this.state.sessions &&
+        {
+          this.state.sessions &&
           <SessionTimeline data={this.state.sessions} />
         }
 

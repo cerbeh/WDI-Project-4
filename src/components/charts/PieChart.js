@@ -18,7 +18,7 @@ const DoughnutChart = ({data}) => {
           maintainAspectRatio: true,
           title: {
             display: defaultProps.displayTitle,
-            text: 'Total Practice Time',
+            text: 'Time per Discipline',
             fontSize: 25
           },
           legend: {

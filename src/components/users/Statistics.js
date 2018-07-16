@@ -30,84 +30,51 @@ class Statistics extends React.Component{
       'rgba(255, 99, 132, 0.6)',
       'rgba(128, 255, 0, 0.6)',
       'rgba(54, 162, 235, 0.6)',
-      'rgba(100, 85, 73, 0.6)',
+      'rgba(200, 5, 173, 0.6)',
+      'rgba(200, 105, 92, 0.6)',
+      'rgba(250, 85, 3, 0.6)',
+      'rgba(250, 5, 103, 0.6)',
       'rgba(75, 192, 192, 0.6)',
+      'rgba(25, 2, 122, 0.6)',
       'rgba(153, 102, 255, 0.6)',
-      'rgba(85, 65, 13, 0.6)',
-      'rgba(55, 27, 7, 0.6)'
+      'rgba(153, 252, 255, 0.6)',
+      'rgba(85, 165, 13, 0.6)',
+      'rgba(155, 27, 7, 0.6)'
     ]);
   }
 
-  getDisciplines(sessionsData) {
-    //Using lodash we iterate of the sessions from the user and return all the unique values from the key discipline
-    return _.uniq(sessionsData.map(session => {
-      return session.discipline;
-    }));
-  }
+  //We take the discipline passed to by setChartData to define which discipline we are creating a chart for.
+  //We also pass discipline through to getKeyData for us to the be able to extract specific pieces of data from the sessions array.
 
-  getKeyData(sessionsData, discipline, key) {
-    return sessionsData
-    //Return only the session that match the discipline
-      .filter(session => {
-        if(session.discipline === discipline) return session;
-      })
-      //Organise from oldest to newest dates
-      .sort((a,b) => {
-        return new Date(a.date) - new Date(b.date) ;
-      })
-      //Return only the data from session object from key provided
-      .map(session => {
-        return session[key];
-      });
-  }
+  setData(userData, chartType) {
 
-  setDatasets(sessionsData, chartType, discipline) {
+    if(chartType === 'line') {
+      return {
+        labels: userData.sessions.map(session => session.date),
+        datasets: [{
+          label: userData.discipline,
+          backgroundColor: this.selectColour(),
+          data: userData.sessions.map(session => session.duration)
+        }]
+      };
+    }
 
-    const setLabelsType = () => {
-
-      if(chartType === 'line') {
-        return {
-          labels: this.getKeyData(sessionsData, discipline, 'date'),
-          data: this.getKeyData(sessionsData, discipline, 'duration'),
-          backgroundColor: this.selectColour()
-        };
-      }
-
-      if(chartType === 'doughnut') {
-        const disciplines = this.getDisciplines(sessionsData);
-        return {
-          labels: disciplines,
-          data: disciplines.map(discipline => {
-            return this.getKeyData(sessionsData, discipline, 'duration')
-              .reduce((duration, value) => {
-                return duration + value;
-              });
+    if(chartType === 'doughnut') {
+      return {
+        labels: userData.practicedDisciplines.map(discipline => discipline.discipline),
+        datasets: [{
+          data: userData.practicedDisciplines.map(discipline => {
+            return discipline.sessions.reduce((sumOfDuration, session) => {
+              return sumOfDuration + session.duration;
+            }, 0);
           }),
-          backgroundColor: disciplines.map(() => {
+          backgroundColor: userData.practicedDisciplines.map(() => {
             return this.selectColour();
           })
-        };
-      }
-    };
-    //We return an object with the data laid out in the way that chartjs wants to receive it.
-    //We take the discipline passed to by setChartData to define which discipline we are creating a chart for.
-    //We also pass discipline through to getKeyData for us to the be able to extract specific pieces of data from the sessions array.
-    return {
-      labels: setLabelsType().labels,
-      datasets: [{
-        label: discipline || '',
-        backgroundColor: setLabelsType().backgroundColor,
-        data: setLabelsType().data
-      }]
-    };
-  }
+        }]
 
-  setChartData(sessionsData, chartType) {
-    //We use getDisciplines to go through sessionsData and return an array of unique disciplines.
-    //We then map over it so that we can pass each discipline down to setDatasets.
-    return this.getDisciplines(sessionsData).map(discipline => {
-      return this.setDatasets(sessionsData, chartType, discipline);
-    });
+      };
+    }
   }
 
   setImage(label, index) {
@@ -143,11 +110,10 @@ class Statistics extends React.Component{
   componentDidMount(){
     axios.get(`api/users/${Auth.getPayload().sub}`)
       .then(res => {
-
         this.setState({
           user: res.data,
-          chartData: this.setChartData(res.data.sessions, 'line'),
-          pieChart: this.setDatasets(res.data.sessions, 'doughnut')
+          chartData: res.data.practicedDisciplines.map(discipline => this.setData(discipline, 'line')),
+          pieChart: this.setData(res.data, 'doughnut')
         });
       })
 
@@ -160,7 +126,6 @@ class Statistics extends React.Component{
 
 
   render(){
-    console.log(this.state.sessions);
     return(
       <section className="section">
         <div className="columns is-multiline is-mobile">
@@ -181,7 +146,7 @@ class Statistics extends React.Component{
             </div>
           </div>
 
-          {/* {!this.state.chartData &&
+          {this.state.chartData && this.state.chartData.length === 0 &&
           <section className="section">
             <div className="no-sessions container ">
               <img src="https://imgur.com/Vsd3i2Y.png"/>
@@ -189,9 +154,9 @@ class Statistics extends React.Component{
             <p className="is-3 has-text-centered">No sessions have been recorded.
               <Link to={`/users/${this.props.match.params.id}/edit`} className="is-3 "> Click here to add your first session</Link></p>
           </section>
-          } */}
+          }
 
-          {this.state.chartData &&
+          {this.state.chartData && this.state.chartData.length !== 0 &&
             this.state.chartData.map((chart, index) =>
               <div className="column is-12" key={index}>
                 <div

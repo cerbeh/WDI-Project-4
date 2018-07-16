@@ -1,6 +1,17 @@
 const mongoose = require('mongoose');
 const bcrypt = require('bcrypt');
 const moment = require('moment');
+const  _ = require('lodash');
+
+const sessionSchema = new mongoose.Schema({
+  title: { type: String, required: 'Please provide a title' },
+  discipline: { type: String, enum: ['Kata', 'Keiko', 'Shiai', 'Jodan', 'Nito', 'Shin-sa', 'Mitori-geiko', 'Asa-geiko'], required: 'Please provide a discipline' },
+  date: Date,
+  duration: Number,
+  notes: String
+},{
+  id: false
+});
 
 const userSchema = new mongoose.Schema({
   username: { type: String, required: 'This field is required'},
@@ -11,15 +22,10 @@ const userSchema = new mongoose.Schema({
   dob: Date,
   height: Number,
   weight: Number,
-  created: { type: Date, default: new Date()}
+  created: { type: Date, default: new Date()},
+  sessions: [sessionSchema]
 },{
   id: false
-});
-
-userSchema.virtual('sessions', {
-  localField: '_id',
-  foreignField: 'creator',
-  ref: 'Session'
 });
 
 
@@ -72,5 +78,42 @@ userSchema.pre('save', function hashPassword(next) {
 userSchema.methods.validatePassword = function validatePassword(password) {
   return bcrypt.compareSync(password, this.password);
 };
+
+userSchema.virtual('practicedDisciplines')
+  .get(function() {
+    return _.uniq(this.sessions.map(session => {
+      return session.discipline;
+    }))
+      .map(discipline => {
+        return {
+          
+          discipline: discipline,
+
+          sessions: this.sessions
+            .filter(session => {
+              if(session.discipline === discipline) return session;
+            })
+            .sort((a, b) => {
+              return new Date(a.date) - new Date(b.date);
+            })
+            .map(session => {
+              return {
+                date: session.date,
+                duration: session.duration
+              };
+            })
+        };
+      });
+  });
+
+sessionSchema.path('date')
+  .get(function formatDate(date) {
+    return moment(date).format('YYYY-MM-DD');
+  });
+
+sessionSchema.set('toJSON', {
+  virtuals: true,
+  getters: true
+});
 
 module.exports = mongoose.model('User', userSchema);
