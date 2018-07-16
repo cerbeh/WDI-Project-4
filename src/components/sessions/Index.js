@@ -18,7 +18,7 @@ class SessionsIndex extends React.Component {
       <section className="section">
         <div className="columns is-multiline is-mobile">
           <div className="column is-10">
-            <img src="https://i.imgur.com/b43XIhK.png" />
+            <img src="https://i.imgur.com/zpPCFN8.png" />
             <hr />
             { this.state.sessions &&
             <p className="is-3">
