@@ -10,7 +10,8 @@ const SessionTimeline = ({data}) => {
   });
   console.log(data);
   return(
-    <Timeline>
+    <Timeline
+      lineColor={'#57d968'}>
       {data.map(session =>
         <Link
           key={session._id}
