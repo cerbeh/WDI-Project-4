@@ -43,8 +43,21 @@
 
 @media only screen and (min-width: 1024px) {
   .dashboard{
+    padding-top:4.5%;
     .column{
-      height: 23.6vh;
+      height: 24vh;
+    }
+    i{
+      padding-top: 10%;
+      color: white;
+    }
+
+  }
+}
+@media only screen and (min-width: 768px) {
+  .dashboard{
+    .column{
+      height: 24vh;
     }
     i{
       padding-top: 10%;

@@ -7,7 +7,7 @@ const Footer =() => {
   return (
     <div>
       {Auth.isAuthenticated() &&
-    <nav className="navbar is-link is-fixed-bottom" role="navigation" aria-label="main navigation">
+    <nav className="navbar is-link is-fixed-bottom is-hidden-tablet" role="navigation" aria-label="main navigation">
       <div className="navbar-brand is-expanded">
         <Link className="navbar-item is-expanded is-block has-text-centered" to="/dashboard">
           <i className="fas fa-tachometer-alt"></i>

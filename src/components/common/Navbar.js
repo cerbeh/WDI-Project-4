@@ -20,7 +20,7 @@ class Navbar extends React.Component{
   }
   render(){
     return (
-      <nav className="navbar is-fixed-top" role="navigation" aria-label="main navigation">
+      <nav className="navbar is-fixed-top is-hidden-mobile" role="navigation" aria-label="main navigation">
         <div className="navbar-brand">
           {/* <Link to="/" className="navbar-item">
             <img src="https://d30y9cdsu7xlg0.cloudfront.net/png/1915-200.png" height="50" />

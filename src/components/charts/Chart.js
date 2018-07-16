@@ -30,6 +30,7 @@ const Chart = ({data}) => {
               yAxes: [{
                 stacked: true,
                 ticks: {
+                  //Boolean- whether the scale should start at zero, or an order of magnitude from the lowest value
                   beginAtZero: true
                 }
               }]
