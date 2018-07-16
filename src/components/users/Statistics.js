@@ -101,11 +101,15 @@ class Statistics extends React.Component{
   }
 
 
-  toggleHidden({target }){
+  toggleHidden({target}){
     console.log(target.id);
     this.setState({
-      isHidden: !this.state.isHidden
+      isHidden: !this.state.isHidden,
+      toggleHidden: {
+        [target.id]: !this.state.toggleHidden[target.id]
+      }
     });
+    console.log(this.state.toggleHidden);
   }
 
   setHiddenStatus(data) {
