@@ -25,6 +25,7 @@ import Dashboard from './components/pages/Dashboard';
 import Bmi from './components/pages/Bmi';
 import Calendar from './components/pages/Calendar';
 import NotFound from './components/common/NotFound';
+import Navbar from './components/common/Navbar';
 import Footer from './components/common/Footer';
 import ProtectedRoute from './components/common/ProtectedRoute';
 import FlashMessages from './components/common/FlashMessages';
@@ -39,6 +40,7 @@ class App extends React.Component {
       <BrowserRouter>
         <main>
           <FlashMessages />
+          <Navbar />
           <section className="section-content">
             <Switch>
               <ProtectedRoute path="/users/:id/edit" component={UsersEdit} />

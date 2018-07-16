@@ -20,11 +20,11 @@ class Navbar extends React.Component{
   }
   render(){
     return (
-      <nav className="navbar is-overlay" role="navigation" aria-label="main navigation">
+      <nav className="navbar is-fixed-top" role="navigation" aria-label="main navigation">
         <div className="navbar-brand">
-          <Link to="/" className="navbar-item">
+          {/* <Link to="/" className="navbar-item">
             <img src="https://d30y9cdsu7xlg0.cloudfront.net/png/1915-200.png" height="50" />
-          </Link>
+          </Link> */}
           <a role="button"
             className={`navbar-burger${this.state.navbarOpen ? ' is-active' : ''}`}
             aria-label="menu"
@@ -38,10 +38,10 @@ class Navbar extends React.Component{
 
         <div className={`navbar-menu${this.state.navbarOpen ? ' is-active' : ''}`}>
           <div className="navbar-end">
-            {Auth.isAuthenticated() && <Link to="/users" className="navbar-item">All Users</Link>}
+            {Auth.isAuthenticated() && <Link to={`/users/${Auth.getPayload().sub}/sessions`} className="navbar-item">Sessions</Link>}
             {!Auth.isAuthenticated() && <Link className="navbar-item" to="/login">Login</Link>}
             {!Auth.isAuthenticated() && <Link className="navbar-item" to="/register">Register</Link>}
-            {Auth.isAuthenticated() && <Link className="navbar-item" to={`/users/${Auth.getPayload().sub}`}>My Profile</Link>}
+            {Auth.isAuthenticated() && <Link className="navbar-item" to={`/users/${Auth.getPayload().sub}`}>Profile</Link>}
             {Auth.isAuthenticated() && <a onClick={this.handleLogout} className="navbar-item">Logout</a>}
           </div>
         </div>
