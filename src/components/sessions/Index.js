@@ -2,7 +2,7 @@ import React from 'react';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
 
-import SessionTimeline from './Timeline';
+import SessionTimeline from '../charts/Timeline';
 
 class SessionsIndex extends React.Component {
 
