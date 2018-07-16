@@ -1,6 +1,7 @@
 const mongoose = require('mongoose');
 const bcrypt = require('bcrypt');
 const moment = require('moment');
+const  _ = require('lodash');
 
 const sessionSchema = new mongoose.Schema({
   title: { type: String, required: 'Please provide a title' },
@@ -64,6 +65,20 @@ userSchema.pre('save', function hashPassword(next) {
 userSchema.methods.validatePassword = function validatePassword(password) {
   return bcrypt.compareSync(password, this.password);
 };
+
+userSchema.virtual('practicedDisciplines')
+  .get(function() {
+    return _.uniq(this.sessions.map(session => {
+      return session.discipline;
+    }));
+  });
+
+  // boatSchema.virtual('avgRating')
+  // .get(function() {
+  //   return Math.floor(this.comments.reduce((sum, comment) => {
+  //     return sum + comment.rating;
+  //   }, 0) / this.comments.length);
+  // });
 
 sessionSchema.path('date')
   .get(function formatDate(date) {

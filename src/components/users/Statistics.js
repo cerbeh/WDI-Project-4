@@ -36,15 +36,15 @@ class Statistics extends React.Component{
     ]);
   }
 
-  getDisciplines(sessionsData) {
-    //Using lodash we iterate of the sessions from the user and return all the unique values from the key discipline
-    return _.uniq(sessionsData.map(session => {
-      return session.discipline;
-    }));
-  }
+  // getDisciplines(userData) {
+  //   //Using lodash we iterate of the sessions from the user and return all the unique values from the key discipline
+  //   return _.uniq(userData.map(session => {
+  //     return session.discipline;
+  //   }));
+  // }
 
-  getKeyData(sessionsData, discipline, key) {
-    return sessionsData
+  getKeyData(userData, discipline, key) {
+    return userData.sessions
     //Return only the session that match the discipline
       .filter(session => {
         if(session.discipline === discipline) return session;
@@ -62,48 +62,51 @@ class Statistics extends React.Component{
   //We take the discipline passed to by setChartData to define which discipline we are creating a chart for.
   //We also pass discipline through to getKeyData for us to the be able to extract specific pieces of data from the sessions array.
 
-  getData(sessionsData, chartType, discipline) {
+  getData(userData, chartType, discipline) {
 
     if(chartType === 'line') {
       return {
-        labels: this.getKeyData(sessionsData, discipline, 'date'),
-        data: this.getKeyData(sessionsData, discipline, 'duration'),
+        labels: this.getKeyData(userData, discipline, 'date'),
+        data: this.getKeyData(userData, discipline, 'duration'),
         backgroundColor: this.selectColour()
       };
     }
 
     if(chartType === 'doughnut') {
-      const disciplines = this.getDisciplines(sessionsData);
+      // const disciplines = this.getDisciplines(userData);
       return {
-        labels: disciplines,
-        data: disciplines.map(discipline => {
-          return this.getKeyData(sessionsData, discipline, 'duration')
+        labels: userData.practicedDisciplines,
+        data: userData.practicedDisciplines.map(discipline => {
+          return this.getKeyData(userData, discipline, 'duration')
             .reduce((duration, value) => duration + value);
         }),
-        backgroundColor: disciplines.map(() => {
+        backgroundColor: userData.practicedDisciplines.map(() => {
           return this.selectColour();
         })
       };
     }
   }
 
-  setDatasets(sessionsData, chartType, discipline) {
+  setDatasets(userData, chartType, discipline) {
+    console.log(userData, 'userData');
+    console.log(chartType, 'chartType');
+    console.log(discipline, 'discipline');
     //We return an object with the data laid out in the way that chartjs wants to receive it.
     return {
-      labels: this.getData(sessionsData, chartType, discipline).labels,
+      labels: this.getData(userData, chartType, discipline).labels,
       datasets: [{
         label: discipline || '',
-        backgroundColor: this.getData(sessionsData, chartType, discipline).backgroundColor,
-        data: this.getData(sessionsData, chartType, discipline).data
+        backgroundColor: this.getData(userData, chartType, discipline).backgroundColor,
+        data: this.getData(userData, chartType, discipline).data
       }]
     };
   }
 
-  setLineChartData(sessionsData, chartType) {
-    //We use getDisciplines to go through sessionsData and return an array of unique disciplines.
+  setLineChartData(userData, chartType) {
+    //We use getDisciplines to go through userData and return an array of unique disciplines.
     //We then map over it so that we can pass each discipline down to setDatasets.
-    return this.getDisciplines(sessionsData).map(discipline => {
-      return this.setDatasets(sessionsData, chartType, discipline);
+    return userData.practicedDisciplines.map(discipline => {
+      return this.setDatasets(userData, chartType, discipline);
     });
   }
 
@@ -143,9 +146,9 @@ class Statistics extends React.Component{
 
         this.setState({
           user: res.data,
-          chartData: this.setLineChartData(res.data.sessions, 'line'),
-          // chartData: this.setChartData(res.data.sessions, 'line'),
-          pieChart: this.setDatasets(res.data.sessions, 'doughnut')
+          // chartData: this.setLineChartData(res.data, 'line')
+          chartData: this.setLineChartData(res.data, 'line'),
+          pieChart: this.setDatasets(res.data, 'doughnut')
         });
       })
 
