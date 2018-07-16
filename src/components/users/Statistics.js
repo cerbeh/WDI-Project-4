@@ -43,26 +43,10 @@ class Statistics extends React.Component{
     ]);
   }
 
-  getKeyData(userData, discipline, key) {
-    return userData.sessions
-    //Return only the session that match the discipline
-      .filter(session => {
-        if(session.discipline === discipline) return session;
-      })
-      //Organise from oldest to newest dates
-      .sort((a,b) => {
-        return new Date(a.date) - new Date(b.date) ;
-      })
-      //Return only the data from session object from key provided
-      .map(session => {
-        return session[key];
-      });
-  }
-
   //We take the discipline passed to by setChartData to define which discipline we are creating a chart for.
   //We also pass discipline through to getKeyData for us to the be able to extract specific pieces of data from the sessions array.
 
-  getData(userData, chartType) {
+  setData(userData, chartType) {
 
     if(chartType === 'line') {
       return {
@@ -80,12 +64,9 @@ class Statistics extends React.Component{
         labels: userData.practicedDisciplines.map(discipline => discipline.discipline),
         datasets: [{
           data: userData.practicedDisciplines.map(discipline => {
-            // console.log(discipline.sessions,'discipline.sessions');
-            return discipline.sessions
-              .reduce((session, value) => {
-                console.log(session, value);
-                session.duration + value;
-              });
+            return discipline.sessions.reduce((sumOfDuration, session) => {
+              return sumOfDuration + session.duration;
+            }, 0);
           }),
           backgroundColor: userData.practicedDisciplines.map(() => {
             return this.selectColour();
@@ -95,26 +76,6 @@ class Statistics extends React.Component{
       };
     }
   }
-
-  // setDatasets(userData, chartType, discipline) {
-  //   //We return an object with the data laid out in the way that chartjs wants to receive it.
-  //   return {
-  //     labels: this.getData(userData, chartType, discipline).labels,
-  //     datasets: [{
-  //       label: discipline || '',
-  //       backgroundColor: this.getData(userData, chartType, discipline).backgroundColor,
-  //       data: this.getData(userData, chartType, discipline).data
-  //     }]
-  //   };
-  // }
-  //
-  // setLineChartData(userData, chartType) {
-  //   //We use getDisciplines to go through userData and return an array of unique disciplines.
-  //   //We then map over it so that we can pass each discipline down to setDatasets.
-  //   return userData.practicedDisciplines.map(discipline => {
-  //     return this.setDatasets(userData, chartType, discipline);
-  //   });
-  // }
 
   setImage(label, index) {
     switch(label) {
@@ -151,10 +112,9 @@ class Statistics extends React.Component{
       .then(res => {
         this.setState({
           user: res.data,
-          chartData: res.data.practicedDisciplines.map(discipline => this.getData(discipline, 'line')),
-          pieChart: this.getData(res.data, 'doughnut')
+          chartData: res.data.practicedDisciplines.map(discipline => this.setData(discipline, 'line')),
+          pieChart: this.setData(res.data, 'doughnut')
         });
-        console.log(this.state.pieChart);
       })
 
       .catch(err => this.setState({ error: err.message }));
