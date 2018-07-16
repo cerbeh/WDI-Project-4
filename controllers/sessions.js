@@ -20,7 +20,7 @@ function indexRoute(req, res, next) {
 function showRoute(req, res, next) {
   User.findById(req.params.id)
     .then(user => {
-      const session = user.sesssions.filter(session => {
+      const session = user.sessions.filter(session => {
         return session._id.toString() === req.params.sessionId;
       })[0];
       res.json(session);
@@ -32,13 +32,14 @@ function showRoute(req, res, next) {
 function updateRoute(req, res , next) {
   User.findById(req.params.id)
     .then(user => {
-      session.set(req.body);
-      session.save();
-      res.json(session);
+      //Logic to find the session that was edited and update it.
     })
+    .then(session /*?*/ => res.json(session))
     .catch(next);
 }
 
+
+//Previous attempt at trying to make it  work when reading the mongoose docs
 /*
 function updateRoute(req, res , next) {
   console.log(req.body);

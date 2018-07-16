@@ -2,7 +2,6 @@ const mongoose = require('mongoose');
 mongoose.Promise = require('bluebird');
 const { dbURI }= require('../config/environment');
 const User = require('../models/user');
-const Session = require('../models/session');
 
 
 mongoose.connect(dbURI, (err, db) => {
@@ -234,7 +233,7 @@ mongoose.connect(dbURI, (err, db) => {
       dob: '1987-10-24',
       height: 200,
       weight: 70,
-      sesssions: [{
+      sessions: [{
         title: 'Practice for semis',
         discipline: 'Kata',
         date: 20180710,
