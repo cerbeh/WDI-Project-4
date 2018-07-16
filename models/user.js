@@ -2,6 +2,16 @@ const mongoose = require('mongoose');
 const bcrypt = require('bcrypt');
 const moment = require('moment');
 
+const sessionSchema = new mongoose.Schema({
+  title: { type: String, required: 'Please provide a title' },
+  discipline: { type: String, enum: ['Kata', 'Keiko', 'Shiai', 'Jodan', 'Nito', 'Shin-sa', 'Mitori-geiko', 'Asa-geiko'], required: 'Please provide a discipline' },
+  date: Date,
+  duration: Number,
+  notes: String
+},{
+  id: false
+});
+
 const userSchema = new mongoose.Schema({
   username: { type: String, required: 'This field is required' },
   email: { type: String, required: 'This field is required address', unique: true },
@@ -11,7 +21,8 @@ const userSchema = new mongoose.Schema({
   dob: Date,
   height: Number,
   weight: Number,
-  created: { type: Date, default: new Date()}
+  created: { type: Date, default: new Date()},
+  sessions: [sessionSchema]
 },{
   id: false
 });
@@ -59,5 +70,15 @@ userSchema.pre('save', function hashPassword(next) {
 userSchema.methods.validatePassword = function validatePassword(password) {
   return bcrypt.compareSync(password, this.password);
 };
+
+sessionSchema.path('date')
+  .get(function formatDate(date) {
+    return moment(date).format('YYYY-MM-DD');
+  });
+
+sessionSchema.set('toJSON', {
+  virtuals: true,
+  getters: true
+});
 
 module.exports = mongoose.model('User', userSchema);

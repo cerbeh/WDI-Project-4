@@ -2,9 +2,12 @@ const User = require('../models/user');
 const Session = require('../models/session');
 
 function createRoute(req, res, next) {
-  req.body.creator = req.currentUser._id;
-  Session.create(req.body)
-    .then(session => res.json(session))
+  User.findById(req.params.id)
+    .then(user => {
+      user.sessions.push(req.body);
+      return user.save();
+    })
+    .then(user => res.json(user))
     .catch(next);
 }
 
