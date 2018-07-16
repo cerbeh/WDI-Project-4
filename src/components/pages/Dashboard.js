@@ -1,26 +1,61 @@
 import React from 'react';
+import axios from 'axios';
 import {  Link, withRouter } from 'react-router-dom';
 import Auth from '../../lib/Auth';
 
+const greet = ['Hola', 'Hey', 'こんにちわ', 'Bonjour', 'Hi', '여보세요' ];
+
+
 class Dashboard extends React.Component{
+  constructor(){
+    super();
+    this.state={
+      user: {},
+      date: new Date(),
+      greeting: 'こんにちわ',
+      timerID: '',
+      tick: ''
+    };
+  }
+
+  componentDidMount(){
+    this.timerID = setInterval(this.tick, 10000);
+    axios.get(`/api/users/${Auth.getPayload().sub}`)
+      .then(res => {
+        console.log(res);
+        this.setState({
+          user: res.data
+        });
+      })
+
+      .catch(err => this.setState({ error: err.message }));
+  }
+  componentWillUnmount() {
+    clearInterval(timerID);
+  }
   handleLogout = () => {
     Auth.logout();
     this.props.history.push('/');
   }
+  tick = () => {
+    const randGreeting = Math.floor(Math.random(greet.length)*(greet.length));
+    this.setState({ date: new Date(), greeting: greet[randGreeting] });
+  };
   render(){
+    console.log(this.state.user);
     return (
       <section className="dashboard hero">
         <div className="columns is-multiline is-mobile">
           <div className="column is-half home">
             <Link to="/" className="is-expanded is-block has-text-centered">
-              <i className="fa-2x fas fa-home"></i>
-              <p className="is-size-7">Home</p>
+              <h1 className="title">{this.state.greeting}, {this.state.user.username}</h1>
+              <h5 className="subtitle">The time is {this.state.date.toLocaleTimeString()}</h5>
             </Link>
           </div>
           <div className="column is-half account">
             <Link to={`/users/${Auth.getPayload().sub}`} className="is-expanded is-block has-text-centered">
               <i className="fa-2x fa fa-user"></i>
-              <p className="is-size-7">Account</p>
+              <p className="is-size-7">Profile</p>
             </Link>
           </div>
           <div className="column is-half new">
@@ -35,12 +70,6 @@ class Dashboard extends React.Component{
               <p className="is-size-7">Sessions</p>
             </Link>
           </div>
-          <div className="column is-half users">
-            <Link to="/users" className="is-expanded is-block has-text-centered">
-              <i className="fa-2x fas fa-users"></i>
-              <p className="is-size-7">Users</p>
-            </Link>
-          </div>
           <div className="column is-half calc">
             <Link to="/bmi" className="is-expanded is-block has-text-centered">
               <i className="fa-2x fas fa-calculator"></i>
@@ -52,12 +81,6 @@ class Dashboard extends React.Component{
               <i className="fa-2x fas fa-chart-line"></i>
               <p className="is-size-7">Statistics</p>
             </Link>
-          </div>
-          <div className="column is-half calendar">
-            <a className="is-expanded is-block has-text-centered">
-              <i className="fa-2x fas far fa-calendar-alt"></i>
-              <p className="is-size-7">Calendar</p>
-            </a>
           </div>
           <div className="column is-half about">
             <a className="is-expanded is-block has-text-centered">
