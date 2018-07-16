@@ -28,13 +28,24 @@
       border-radius: 30px;
       font-family: $primary-font;
       letter-spacing: 5px;
-      font-weight: bold;
+      font-weight: bolder;
     }
     hr{
       background-color:rgba(171,187,213, 0.9);
     }
     .title{
       color: white;
+      font-weight: 900;
       font-size: 4rem;
     }
 }
+
+
+  @media only screen and (min-width: 1024px) {
+    .registrationBackground {
+      .container{
+        margin: auto;
+        width: 50%;
+      }
+    }
+  }

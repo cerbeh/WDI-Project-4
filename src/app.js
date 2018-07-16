@@ -20,6 +20,7 @@ import AuthLogin from './components/auth/Login';
 import AuthRegister from './components/auth/Register';
 
 import Home from './components/pages/Home';
+import About from './components/pages/About';
 import Dashboard from './components/pages/Dashboard';
 import Bmi from './components/pages/Bmi';
 import Calendar from './components/pages/Calendar';
@@ -53,6 +54,7 @@ class App extends React.Component {
               <Route exact path="/calendar" component={Calendar} />
               <Route exact path="/dashboard" component={Dashboard} />
               <ProtectedRoute path="/statistics" component={Statistics} />
+              <Route exact path="/about" component={About} />
               <Route exact path="/" component={Home} />
               <Route component={NotFound} />
             </Switch>

@@ -5,9 +5,14 @@
     color: white;
     font-size: 3rem;
     letter-spacing: normal;
+    font-style: italic;
+    font-weight: bold
   }
   h2{
     color: white;
+  }
+  span{
+    color: $accent-colour;
   }
 }
 .hero {
@@ -17,4 +22,40 @@
     background-attachment: fixed;
     background-size: cover;
     background-color: #999;
+    .image-gallery {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    position: relative;
+        img{
+          visibility: hidden;
+        }
+    li{
+      position: absolute;
+    }
+  }
+}
+
+#one {
+  animation: xfade 16s 0s infinite;
+}
+#two {
+  animation: xfade 16s 4s infinite;
+}
+#three {
+  animation: xfade 16s 8s infinite;
+}
+#four {
+animation: xfade 16s 12s infinite;
+}
+@keyframes xfade{
+  17% {
+    opacity:1;
+  }
+  25% {
+    opacity:0;
+  }
+  92% {
+    opacity:0;
+  }
 }

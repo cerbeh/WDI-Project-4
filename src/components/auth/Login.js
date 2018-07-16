@@ -35,18 +35,18 @@ class AuthLogin extends React.Component {
           <h1 className="title">Login</h1>
           <form onSubmit={this.handleSubmit}>
             <div className="field">
-              <label className="email">email</label>
-              <input className="input" name="email" onChange={this.handleChange} />
+              <label className="usernameOrEmail">Username or Email</label>
+              <input className="input" name="usernameOrEmail" onChange={this.handleChange} />
             </div>
             <div className="field">
-              <label className="password">password</label>
+              <label className="password">Password</label>
               <input className="input" type="password" name="password"  onChange={this.handleChange} />
 
             </div>
-            <button className="button text-is-centered">Submit</button>
+            <button className="button">Submit</button>
             <hr />
-            <Link className="navbar-item" to="/register">Not a member? Sign up now</Link>
           </form>
+          <Link className="" to="/register">Not a member? Sign up now</Link>
         </div>
       </section>
     );

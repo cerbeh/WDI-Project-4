@@ -42,20 +42,25 @@ function register(req, res, next) {
     .catch(next);
 }
 
+
 function login(req, res, next) {
+  let findBy;
+  if (req.body.usernameOrEmail.match(/@/)) {
+    findBy = { email: req.body.usernameOrEmail };
+  } else {
+    findBy = { username: req.body.usernameOrEmail };
+  }
   User
-    .findOne({ email: req.body.email })
+    .findOne(findBy)
     .then(user => {
       if(!user || !user.validatePassword(req.body.password)) {
-        return res.status(401).json({ message: 'UNAUTHORIZED 😡' });
+        return res.status(401).json({ message: 'Unauthorized 😡' });
       }
-
       const token = jwt.sign({ sub: user._id }, secret, { expiresIn: '12h' });
-
       res.json({
         user,
         token,
-        message: `Welcome back ${user.username}`
+        message: `Welcome back, ${user.username}`
       });
     })
     .catch(next);

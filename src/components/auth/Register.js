@@ -61,7 +61,7 @@ class AuthRegister extends React.Component {
 
             <button className="button">Submit</button>
             <hr />
-            <Link className="navbar-item" to="/login">Already have an account? Login here.</Link>
+            <Link to="/login">Already have an account? Login here.</Link>
           </form>
         </div>
       </section>
