@@ -23,7 +23,7 @@ const Footer =() => {
         </Link>
         <Link className="navbar-item is-expanded is-block has-text-centered" to={`/users/${Auth.getPayload().sub}`}>
           <i className="far fa-user"></i>
-          <p className="is-size-7">Account</p>
+          <p className="is-size-7">Profile</p>
         </Link>
       </div>
     </nav>

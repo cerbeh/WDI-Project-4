@@ -13,13 +13,13 @@ class Dashboard extends React.Component{
       user: {},
       date: new Date(),
       greeting: 'こんにちわ',
-      timerID: '',
-      tick: ''
+      tick: '',
+      timerID: ''
     };
   }
 
   componentDidMount(){
-    this.timerID = setInterval(this.tick, 10000);
+    // this.timerID = setInterval(this.tick, 1000);
     axios.get(`/api/users/${Auth.getPayload().sub}`)
       .then(res => {
         console.log(res);
@@ -30,9 +30,9 @@ class Dashboard extends React.Component{
 
       .catch(err => this.setState({ error: err.message }));
   }
-  componentWillUnmount() {
-    clearInterval(timerID);
-  }
+  // componentWillUnmount() {
+  //   clearInterval(timerID);
+  // }
   handleLogout = () => {
     Auth.logout();
     this.props.history.push('/');
@@ -48,7 +48,7 @@ class Dashboard extends React.Component{
         <div className="columns is-multiline is-mobile">
           <div className="column is-half home">
             <Link to="/" className="is-expanded is-block has-text-centered">
-              <h1 className="title">{this.state.greeting}, {this.state.user.username}</h1>
+              {/* <h1 className="title">{this.state.greeting}, {this.state.user.username}!</h1> */}
               <h5 className="subtitle">The time is {this.state.date.toLocaleTimeString()}</h5>
             </Link>
           </div>
