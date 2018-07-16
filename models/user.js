@@ -68,15 +68,29 @@ userSchema.methods.validatePassword = function validatePassword(password) {
 
 userSchema.virtual('practicedDisciplines')
   .get(function() {
-    const disciplines = _.uniq(this.sessions.map(session => {
-      // const discipline = session.discipline;
+    let disciplines = _.uniq(this.sessions.map(session => {
       return session.discipline;
-      // {
-      // [discipline]: {
-      //   duration: 10
-      // }
-      // };
     }));
+
+    disciplines = disciplines.map(discipline => {
+      return {
+        discipline: discipline,
+        sessions: this.sessions
+          .filter(session => {
+            if(session.discipline === discipline) return session;
+          })
+          .sort((a, b) => {
+            return new Date(a.date) - new Date(b.date);
+          })
+          .map(session => {
+            return {
+              date: session.date,
+              duration: session.duration
+            };
+          })
+      };
+    });
+
     return disciplines;
   });
 
