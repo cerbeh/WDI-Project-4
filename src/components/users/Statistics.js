@@ -102,19 +102,21 @@ class Statistics extends React.Component{
 
 
   toggleHidden({target}){
-    console.log(target.id);
+    const disciplines = this.state.toggleHidden;
+    disciplines[target.id] = !disciplines[target.id];
+
     this.setState({
       isHidden: !this.state.isHidden,
       toggleHidden: {
-        [target.id]: !this.state.toggleHidden[target.id]
+        ...disciplines
       }
     });
-    console.log(this.state.toggleHidden);
+    // console.log(this.state.toggleHidden);
   }
 
-  setHiddenStatus(data) {
+  setHiddenStatus(user) {
     const disciplines = {};
-    data.practicedDisciplines.forEach(disciplineSessions => {
+    user.practicedDisciplines.forEach(disciplineSessions => {
       disciplines[disciplineSessions.discipline] = true;
     });
     return disciplines;
