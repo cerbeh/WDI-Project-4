@@ -15,13 +15,11 @@ class SessionsIndex extends React.Component {
 
   render() {
     return(
-      <div>
+      <div className ="sessions-index">
         <header className="header">
           <div className="text-box">
             <h1 className="heading-primary">
               <img src="https://i.imgur.com/zpPCFN8.png" />
-              <span className="heading-primary-main">Heading Primary Main</span>
-              <span className="heading-primary-sub">The secondary heading</span>
             </h1>
           </div>
         </header>
@@ -48,16 +46,16 @@ class SessionsIndex extends React.Component {
             <p className="is-3 has-text-centered">You have no sessions yet.
               <Link to={`/users/${this.props.match.params.id}/sessions/new`} className="is-3 "> Click here to add some!</Link></p>
           </section>
-        }
-        {
-          this.state.sessions &&
-          <div className="container">
-          <SessionTimeline data={this.state.sessions} />
-          </div>
-        }
+          }
+          {
+            this.state.sessions &&
+            <div className="container">
+              <SessionTimeline data={this.state.sessions} />
+            </div>
+          }
 
-      </section>
-    </div>
+        </section>
+      </div>
     );
   }
 }

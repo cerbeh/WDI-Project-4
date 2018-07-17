@@ -141,16 +141,24 @@ class Statistics extends React.Component{
 
   render(){
     return(
-      <section className="section">
-        <div className="columns is-multiline is-mobile">
-          <div className="column is-12">
-            <h1 className="title is-3">Statistics <i className="fas fa-chart-line"></i></h1>
-            <hr />
-            <h3>A total of</h3>
-            <h2>{this.reformatMinutes(this.state.user.totalTimePracticed)}</h2>
+      <div className="statistics ">
+        <header className="header">
+          <div className="text-box">
+            <h1 className="heading-primary">
+              <img src="https://i.imgur.com/2vKgZdS.png" alt="Profileheader"/>
+            </h1>
           </div>
+        </header>
+        <section className="section">
+          <div className="columns is-multiline is-mobile">
+            <div className="column is-12">
+              <h1 className="title is-3">Statistics <i className="fas fa-chart-line"></i></h1>
+              <hr />
+              <h3>A total of</h3>
+              <h2>{this.reformatMinutes(this.state.user.totalTimePracticed)}</h2>
+            </div>
 
-          {this.state.chartData && this.state.chartData.length === 0 &&
+            {this.state.chartData && this.state.chartData.length === 0 &&
           <section className="section">
             <div className="no-sessions container ">
               <img src="https://imgur.com/Vsd3i2Y.png"/>
@@ -158,9 +166,9 @@ class Statistics extends React.Component{
             <p className="is-3 has-text-centered">No sessions have been recorded.
               <Link to={`/users/${this.props.match.params.id}/edit`} className="is-3 "> Click here to add your first session</Link></p>
           </section>
-          }
+            }
 
-          {this.state.chartData && this.state.chartData.length !== 0 &&
+            {this.state.chartData && this.state.chartData.length !== 0 &&
             this.state.chartData.map((chart, index) =>
               <div className="column" key={index}>
                 <div
@@ -189,16 +197,17 @@ class Statistics extends React.Component{
                 </div>
               </div>
             )}
-          <div className="column is-12">
-            <div className="container">
-              {this.state.pieChart &&
+            <div className="column is-12">
+              <div className="container">
+                {this.state.pieChart &&
                 <DoughnutChart
                   data={this.state.pieChart}
                 />}
+              </div>
             </div>
           </div>
-        </div>
-      </section>
+        </section>
+      </div>
     );
   }
 }

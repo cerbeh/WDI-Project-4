@@ -1,0 +1,70 @@
+.profile{
+  .header{
+    height: 20vh;
+  }
+  .level{
+    padding-right: 55%;
+  }
+  strong{
+    font-size: 1.5rem;
+  }
+  i{
+    color: $accent-colour;
+  }
+}
+
+@media only screen and (min-width: 768px) and (max-width: 1023px){
+  .profile{
+    .header{
+
+    }
+    .level{
+      padding-right: 80%;
+    }
+    strong{
+      font-size: 1.5rem;
+    }
+    i{
+      color: $accent-colour;
+    }
+  }
+}
+
+
+@media only screen and (min-width: 1024px) and (max-width: 1439px) {
+  .profile{
+    .header{
+      margin-top: -50px;
+    }
+    .level{
+      margin-top: -60px;
+      padding-left: 10px;
+    }
+    strong{
+      font-size: 1.5rem;
+    }
+    i{
+      color: $accent-colour;
+    }
+  }
+
+}
+@media only screen and (min-width: 1440px) {
+  .profile{
+    .header{
+      height: 30vh;
+      margin-top: 90px;
+    }
+    .level{
+      margin-top: -60px;
+      padding-left: 10px;
+    }
+    strong{
+      font-size: 1.5rem;
+    }
+    i{
+      color: $accent-colour;
+    }
+  }
+
+}

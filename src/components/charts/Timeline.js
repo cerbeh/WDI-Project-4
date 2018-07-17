@@ -19,15 +19,17 @@ const SessionTimeline = ({data}) => {
           key={session._id}
           to={`/users/${Auth.getPayload().sub}/sessions/${session._id}`}>
           <TimelineEvent
+            container="card"
+            cardHeaderStyle={{backgroundColor: '#57d968', color: 'white'}}
             title={session.title}
-            titleStyle={{fontSize: '2rem'}}
+            titleStyle={{fontSize: '1rem', color: 'white', fontWeight: '900'}}
             subtitle={session.discipline}
-            subtitleStyle={{fontSize: '1rem'}}
+            subtitleStyle={{fontSize: '0.75rem'}}
             createdAt={session.date}
             icon={<img src="../../assets/image/kendo.svg"/>}
             bubbleStyle={{borderColor: '#57d968'}}
-            style={{backgroundColor: '#fff', boxShadow: '0 0 3px 1px #BD3B36'}}
-            contentStyle={{backgroundColor: '#00BCD4', color: '#fff'}}>
+            style={{backgroundColor: '#fff', boxShadow: '0 0 3px 1px black', borderRadius: '3', width: '75%'}}
+            contentStyle={{backgroundColor: 'white', color: 'black', fontWeight: '200'}}>
             {session.notes}
           </TimelineEvent>
         </Link>

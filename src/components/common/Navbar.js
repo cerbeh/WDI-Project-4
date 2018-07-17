@@ -38,12 +38,19 @@ class Navbar extends React.Component{
 
         <div className={`navbar-menu${this.state.navbarOpen ? ' is-active' : ''}`}>
           <div className="navbar-end">
-            {Auth.isAuthenticated() && <Link to='/dashboard' className="navbar-item is-active">Dashboard</Link>}
-            {Auth.isAuthenticated() && <Link to={`/users/${Auth.getPayload().sub}/sessions`} className="navbar-item ">Sessions</Link>}
+            {Auth.isAuthenticated() && <Link to='/dashboard' className="navbar-item"><i className="fas fa-tachometer-alt "></i></Link>}
+            {Auth.isAuthenticated() &&
+              <div className="navbar-item has-dropdown is-hoverable">
+                <a className="navbar-link"><i className="far fa-user"></i></a>
+                <div className="navbar-dropdown">
+                  <Link className="navbar-item" to={`/users/${Auth.getPayload().sub}`}>Profile</Link>
+                  <a onClick={this.handleLogout} className="navbar-item">Logout</a>
+                </div>
+              </div>
+            }
             {!Auth.isAuthenticated() && <Link className="navbar-item" to="/login">Login</Link>}
             {!Auth.isAuthenticated() && <Link className="navbar-item" to="/register">Register</Link>}
-            {Auth.isAuthenticated() && <Link className="navbar-item" to={`/users/${Auth.getPayload().sub}`}>Profile</Link>}
-            {Auth.isAuthenticated() && <a onClick={this.handleLogout} className="navbar-item">Logout</a>}
+
           </div>
         </div>
       </nav>

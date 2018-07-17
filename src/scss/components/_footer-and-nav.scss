@@ -1,0 +1,22 @@
+.is-fixed-top{
+  background-color: rgba(255,255,255,0.5);
+  background: transparent;
+  .navbar-item:hover, .navbar-link:hover{
+    border-radius: 20px;
+
+  }
+
+}
+
+@media only screen and (min-width: 1024px) {
+  main{
+    padding-top:4%;
+  }
+
+  .chart-data-btn{
+    img{
+    border-radius: 20px;
+    width: 75%;
+    }
+  }
+}
