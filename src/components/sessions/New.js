@@ -15,11 +15,12 @@ class sessionsNew extends React.Component {
   handleChange=({ target: { name, value }})=> {
     const newState = { ...this.state.session, [name]: value };
     this.setState({ session: newState });
+    console.log(this.state);
   }
 
   handleSubmit = (e) => {
     e.preventDefault();
-
+    console.log(this.state,'handleSubmit');
     axios({
       url: `/api/users/${this.props.match.params.id}/sessions`,
       method: 'POST',
