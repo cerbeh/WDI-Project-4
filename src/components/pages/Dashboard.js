@@ -3,7 +3,7 @@ import axios from 'axios';
 import {  Link, withRouter } from 'react-router-dom';
 import Auth from '../../lib/Auth';
 
-const greet = ['Hola', 'Hey', 'こんにちわ', 'Bonjour', 'Hi', '여보세요' ];
+const greeting = ['Hola', 'Tere', 'Hey', 'Hallå!','Xin Chào', 'M\'athchomaroon', 'こんにちわ', 'Bonjour', 'Hi', '여보세요', 'Helô', 'Zdravo' ];
 
 
 class Dashboard extends React.Component{
@@ -14,32 +14,34 @@ class Dashboard extends React.Component{
       date: new Date(),
       greeting: 'こんにちわ',
       tick: '',
+      nameTick: '',
       timerID: ''
     };
   }
 
   componentDidMount(){
-    // this.timerID = setInterval(this.tick, 1000);
+    const timerId = setInterval(this.tick, 1000);
     axios.get(`/api/users/${Auth.getPayload().sub}`)
       .then(res => {
         console.log(res);
         this.setState({
-          user: res.data
+          user: res.data,
+          timerId
         });
       })
 
       .catch(err => this.setState({ error: err.message }));
   }
-  // componentWillUnmount() {
-  //   clearInterval(timerID);
-  // }
+  componentWillUnmount() {
+    clearInterval(this.state.timerId);
+  }
   handleLogout = () => {
     Auth.logout();
     this.props.history.push('/');
   }
   tick = () => {
-    const randGreeting = Math.floor(Math.random(greet.length)*(greet.length));
-    this.setState({ date: new Date(), greeting: greet[randGreeting] });
+    const randGreeting = Math.floor(Math.random(greeting.length)*(greeting.length));
+    this.setState({ date: new Date(), greeting: greeting[randGreeting] });
   };
   render(){
     return (
@@ -47,7 +49,7 @@ class Dashboard extends React.Component{
         <div className="columns is-multiline is-mobile">
           <div className="column is-half home">
             <Link to="/" className="is-expanded is-block has-text-centered">
-              {/* <h1 className="title">{this.state.greeting}, {this.state.user.username}!</h1> */}
+              <h1 className="title">{this.state.greeting}, {this.state.user.username}!</h1>
               <h5 className="subtitle">The time is {this.state.date.toLocaleTimeString()}</h5>
             </Link>
           </div>
