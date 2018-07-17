@@ -30,4 +30,12 @@ describe('UsersForm tests', () => {
     expect(wrapper.find('form').length).to.eq(1);
     done();
   });
+
+  it('should render the correct inputs', done => {
+    expect(wrapper.find('[name="username"]').length).to.eq(1);
+    // expect(wrapper.find('[name="email"]').length).to.eq(1);
+    // expect(wrapper.find('[name="password"]').length).to.eq(1);
+    // expect(wrapper.find('[name="passwordConfirmation"]').length).to.eq(1);
+    done();
+  });
 });
