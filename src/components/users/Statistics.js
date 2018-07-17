@@ -61,13 +61,15 @@ class Statistics extends React.Component{
 
     if(chartType === 'doughnut') {
       return {
-        labels: userData.practicedDisciplines.map(discipline => discipline.discipline),
+        labels: userData.practicedDisciplines.map(sessionsDiscipline => sessionsDiscipline.discipline),
         datasets: [{
+
           data: userData.practicedDisciplines.map(discipline => {
             return discipline.sessions.reduce((sumOfDuration, session) => {
               return sumOfDuration + session.duration;
             }, 0);
           }),
+
           backgroundColor: userData.practicedDisciplines.map(() => {
             return this.selectColour();
           })
