@@ -129,21 +129,11 @@ class Statistics extends React.Component{
     return(
       <section className="section">
         <div className="columns is-multiline is-mobile">
-          <div className="column is-10">
-            <h1 className="title is-3">Statistics</h1>
+          <div className="column is-12">
+            <h1 className="title is-3">Statistics <i className="fas fa-chart-line"></i></h1>
             <hr />
             <h3>A total of</h3>
             <h2>{this.reformatMinutes(this.state.user.totalTimePracticed)}</h2>
-          </div>
-          <div className="column is-1">
-            <div className="container">
-              <Link to={`/users/${Auth.getPayload().sub}/sessions`}>
-                <button className="edit">
-                  <i className="fas fa-pencil-alt   fa-2x"></i>
-                  <p className="is-8">Sessions</p>
-                </button>
-              </Link>
-            </div>
           </div>
 
           {this.state.chartData && this.state.chartData.length === 0 &&
@@ -158,7 +148,7 @@ class Statistics extends React.Component{
 
           {this.state.chartData && this.state.chartData.length !== 0 &&
             this.state.chartData.map((chart, index) =>
-              <div className="column is-12" key={index}>
+              <div className="column" key={index}>
                 <div
                   className="container chart-data-btn"
                   onClick={this.toggleHidden.bind(this)}
@@ -166,10 +156,18 @@ class Statistics extends React.Component{
                   {this.setImage(chart.datasets[0].label, index)}
                   {!this.state.isHidden &&
                     <section>
+                      <div className="panel">
+                        <p className="panel-heading">
+                          Line Chart
+                        </p>
+                        <div className="panel-block">
+                          <Chart
+                            data={chart}
+                          />
 
-                      <Chart
-                        data={chart}
-                      />
+                        </div>
+                      </div>
+
                     </section>
                   }
                 </div>

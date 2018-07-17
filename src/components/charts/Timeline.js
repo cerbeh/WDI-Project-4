@@ -20,7 +20,9 @@ const SessionTimeline = ({data}) => {
           to={`/users/${Auth.getPayload().sub}/sessions/${session._id}`}>
           <TimelineEvent
             title={session.title}
+            titleStyle={{fontSize: '2rem'}}
             subtitle={session.discipline}
+            subtitleStyle={{fontSize: '1rem'}}
             createdAt={session.date}
             icon={<img src="../../assets/image/kendo.svg"/>}
             bubbleStyle={{borderColor: '#57d968'}}>

@@ -15,24 +15,32 @@ class SessionsIndex extends React.Component {
 
   render() {
     return(
-      <section className="section">
-        <div className="columns is-multiline is-mobile">
-          <div className="column is-10">
-            <img src="https://i.imgur.com/zpPCFN8.png" />
-            <hr />
-            { this.state.sessions &&
+      <div>
+        <header className="header">
+          <div className="text-box">
+            <h1 className="heading-primary">
+              <img src="https://i.imgur.com/zpPCFN8.png" />
+              <span className="heading-primary-main">Heading Primary Main</span>
+              <span className="heading-primary-sub">The secondary heading</span>
+            </h1>
+          </div>
+        </header>
+
+        <section className="section">
+          <div className="columns is-multiline is-mobile">
+            <div className="column is-10 has-text-left">
+              { this.state.sessions &&
             <p className="is-3">
               <Link to={`/users/${this.props.match.params.id}/sessions/new`}>
                 Add new session <i className="fas fa-plus-circle"></i>
               </Link>
             </p>
-            }
+              }
+            </div>
           </div>
 
-        </div>
-
-        {
-          this.state.sessions && this.state.sessions.length === 0 &&
+          {
+            this.state.sessions && this.state.sessions.length === 0 &&
           <section className="section">
             <div className="no-sessions container  ">
               <img src="https://i.imgur.com/sjrwESY.png"/>
@@ -41,13 +49,15 @@ class SessionsIndex extends React.Component {
               <Link to={`/users/${this.props.match.params.id}/sessions/new`} className="is-3 "> Click here to add some!</Link></p>
           </section>
         }
-
         {
           this.state.sessions &&
+          <div className="container">
           <SessionTimeline data={this.state.sessions} />
+          </div>
         }
 
       </section>
+    </div>
     );
   }
 }
