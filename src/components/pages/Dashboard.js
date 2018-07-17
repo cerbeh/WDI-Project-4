@@ -42,9 +42,8 @@ class Dashboard extends React.Component{
     this.setState({ date: new Date(), greeting: greet[randGreeting] });
   };
   render(){
-    console.log(this.state.user);
     return (
-      <section className="dashboard hero">
+      <section className="dashboard">
         <div className="columns is-multiline is-mobile">
           <div className="column is-half home">
             <Link to="/" className="is-expanded is-block has-text-centered">

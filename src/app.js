@@ -1,5 +1,4 @@
 import React from 'react';
-// import { Link } from 'react-router-dom';
 import ReactDOM from 'react-dom';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
 
@@ -23,7 +22,6 @@ import Home from './components/pages/Home';
 import About from './components/pages/About';
 import Dashboard from './components/pages/Dashboard';
 import Bmi from './components/pages/Bmi';
-import Calendar from './components/pages/Calendar';
 import NotFound from './components/common/NotFound';
 import Navbar from './components/common/Navbar';
 import Footer from './components/common/Footer';
@@ -53,7 +51,6 @@ class App extends React.Component {
               <Route path="/login" component={AuthLogin} />
               <Route path="/register" component={AuthRegister} />
               <Route exact path="/bmi" component={Bmi} />
-              <Route exact path="/calendar" component={Calendar} />
               <Route exact path="/dashboard" component={Dashboard} />
               <ProtectedRoute path="/statistics" component={Statistics} />
               <Route exact path="/about" component={About} />
