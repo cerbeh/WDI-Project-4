@@ -27,6 +27,7 @@ class UsersShow extends React.Component{
         this.setState({
           user: res.data
         });
+        console.log(this.state.user);
       })
 
       .catch(err => this.setState({ error: err.message }));

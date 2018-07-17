@@ -47,7 +47,7 @@ describe('SessionsIndex tests', () => {
   let promise;
 
   before(done => {
-    promise =Promise.resolve({ data });
+    promise = Promise.resolve({ data });
     sinon.stub(axios, 'get').returns(promise);
     done();
   });
@@ -56,7 +56,7 @@ describe('SessionsIndex tests', () => {
     done();
   });
   beforeEach(done => {
-    wrapper =mount(
+    wrapper = mount(
       <MemoryRouter>
         <SessionsIndex />
       </MemoryRouter>
