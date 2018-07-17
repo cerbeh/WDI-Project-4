@@ -80,40 +80,54 @@ class Statistics extends React.Component{
   setImage(label, index) {
     switch(label) {
       case 'Kata':
-        return ([<img src="https://i.imgur.com/ojsP9fT.png" key="kata" alt="kata"/>]);
+        return ([<img src="https://i.imgur.com/ojsP9fT.png" key="kata" id="Kata" alt="Kata"/>]);
       case 'Keiko':
-        return ([<img src="https://i.imgur.com/rRAdVQL.png" key="keiko" alt="keiko"/>]);
+        return ([<img src="https://i.imgur.com/rRAdVQL.png" key="keiko" id="Keiko" alt="Keiko"/>]);
       case 'Shiai':
-        return ([<img src="https://i.imgur.com/1Wk6N6z.png" key="shiai" alt="shiai"/>]);
+        return ([<img src="https://i.imgur.com/1Wk6N6z.png" key="shiai" id="Shiai" alt="Shiai"/>]);
       case 'Jodan':
-        return ([<img src="https://i.imgur.com/7Xc3Gml.png" key="jodan" alt="jodan"/>]);
+        return ([<img src="https://i.imgur.com/7Xc3Gml.png" key="jodan" id="Jodan" alt="Jodan"/>]);
       case 'Nito':
-        return ([<img src="https://i.imgur.com/deWDhqH.png" key="nito" alt="nito"/>]);
+        return ([<img src="https://i.imgur.com/deWDhqH.png" key="nito" id="Nito" alt="Nito"/>]);
       case 'Shin-sa':
-        return ([<img src="https://i.imgur.com/tFwf0ca.png" key="shin-sa" alt="shin-sa"/>]);
+        return ([<img src="https://i.imgur.com/tFwf0ca.png" key="shin-sa" id="Shin-sa" alt="Shin-sa"/>]);
       case 'Mitori-geiko':
-        return ([<img src="https://i.imgur.com/kDsMFY4.png" key="mitori-geiko" alt="mitori-geiko"/>]);
+        return ([<img src="https://i.imgur.com/kDsMFY4.png" key="mitori-geiko" id="Mitori-geiko" alt="Mitori-geiko"/>]);
       case 'Asa-geiko':
-        return ([<img src="https://i.imgur.com/4GRTfgM.png" key="asa-geiko" alt="asa-geiko"/>]);
+        return ([<img src="https://i.imgur.com/4GRTfgM.png" key="asa-geiko" id="Asa-geiko" alt="Asa-geiko"/>]);
       default:
         return ([<img key={index} src="http://fillmurray.com/200/200"/>]);
     }
   }
 
 
-  toggleHidden(){
+  toggleHidden({ currentTarget }){
+    const disciplines = this.state.toggleCharts;
+    disciplines[currentTarget.id] = !disciplines[currentTarget.id];
     this.setState({
-      isHidden: !this.state.isHidden
+      isHidden: !this.state.isHidden,
+      toggleCharts: {...disciplines}
     });
+
+  }
+
+  setHiddenStatus(user) {
+    const disciplines = {};
+    user.practicedDisciplines.forEach(disciplineSessions => {
+      disciplines[disciplineSessions.discipline] = true;
+    });
+    return disciplines;
   }
 
   componentDidMount(){
     axios.get(`api/users/${Auth.getPayload().sub}`)
       .then(res => {
+        const disciplines = this.setHiddenStatus(res.data);
         this.setState({
           user: res.data,
           chartData: res.data.practicedDisciplines.map(discipline => this.setData(discipline, 'line')),
-          pieChart: this.setData(res.data, 'doughnut')
+          pieChart: this.setData(res.data, 'doughnut'),
+          toggleCharts: {...disciplines}
         });
       })
 
@@ -152,19 +166,21 @@ class Statistics extends React.Component{
                 <div
                   className="container chart-data-btn"
                   onClick={this.toggleHidden.bind(this)}
+                  id={chart.datasets[0].label}
                 >
                   {this.setImage(chart.datasets[0].label, index)}
-                  {!this.state.isHidden &&
+                  {!this.state.toggleCharts[chart.datasets[0].label] &&
                     <section>
                       <div className="panel">
                         <p className="panel-heading">
                           Line Chart
                         </p>
                         <div className="panel-block">
+
                           <Chart
                             data={chart}
+                            id={chart.datasets[0].label}
                           />
-
                         </div>
                       </div>
 

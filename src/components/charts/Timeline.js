@@ -25,7 +25,9 @@ const SessionTimeline = ({data}) => {
             subtitleStyle={{fontSize: '1rem'}}
             createdAt={session.date}
             icon={<img src="../../assets/image/kendo.svg"/>}
-            bubbleStyle={{borderColor: '#57d968'}}>
+            bubbleStyle={{borderColor: '#57d968'}}
+            style={{backgroundColor: '#fff', boxShadow: '0 0 3px 1px #BD3B36'}}
+            contentStyle={{backgroundColor: '#00BCD4', color: '#fff'}}>
             {session.notes}
           </TimelineEvent>
         </Link>

@@ -28,60 +28,17 @@ function showRoute(req, res, next) {
     .catch(next);
 }
 
-//THIS ONE IS THE ONE THAT DOESNT WORK.
 function updateRoute(req, res , next) {
-  User.findById(req.params.id)
+  User
+    .findById(req.params.id)
     .then(user => {
-      user.sessions.findById(req.params.sessionId)
-        .then(session => console.log(session));
-      //Logic to find the session that was edited and update it.
-    })
-    // .then(session /*    ?    */ => res.json(session))
-    .catch(next);
-}
-
-
-
-/*
-Previous attempts at trying to make it  work when reading the mongoose docs
-
-function updateRoute(req, res , next) {
-  console.log(req.body);
-  User.findById(req.params.id)
-    .then(user => {
-      user.update({ 'sessions._id': req.params.sessionId },
-        { '$set': {
-          'sessions.$.title': req.body.title
-        },
-        new: true });
-      res.json(user.sessions);
-    })
-    .catch(next);
-}
-
-<<<<<<< HEAD
-function updateRoute(req, res , next) {
-  User.findById(req.params.id)
-    .then(user => {
-      let updatedSession;
-      user.sessions.map(session => {
-        if(session._id.toString() === req.params.sessionId) {
-          session.title = req.body.title;
-          session.discipline = req.body.discipline;
-          session.duration = req.body.duration;
-          session.notes = req.body.notes;
-          return updatedSession = session;
-        }
-        return session;
-      });
+      const session = user.sessions.id(req.params.sessionId);
+      session.set(req.body);
       user.save();
-      res.json(updatedSession);
     })
+    .then(user => res.json(user))
     .catch(next);
 }
-
-*/
-
 
 function deleteRoute(req, res, next) {
   User.findById(req.params.id)
