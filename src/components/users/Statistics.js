@@ -61,15 +61,13 @@ class Statistics extends React.Component{
 
     if(chartType === 'doughnut') {
       return {
-        labels: userData.practicedDisciplines.map(sessionsDiscipline => sessionsDiscipline.discipline),
+        labels: userData.practicedDisciplines.map(discipline => discipline.discipline),
         datasets: [{
-
           data: userData.practicedDisciplines.map(discipline => {
             return discipline.sessions.reduce((sumOfDuration, session) => {
               return sumOfDuration + session.duration;
             }, 0);
           }),
-
           backgroundColor: userData.practicedDisciplines.map(() => {
             return this.selectColour();
           })
@@ -106,7 +104,6 @@ class Statistics extends React.Component{
   toggleHidden({ currentTarget }){
     const disciplines = this.state.toggleCharts;
     disciplines[currentTarget.id] = !disciplines[currentTarget.id];
-
     this.setState({
       isHidden: !this.state.isHidden,
       toggleCharts: {...disciplines}
@@ -182,13 +179,13 @@ class Statistics extends React.Component{
                   id={chart.datasets[0].label}
                 >
                   {this.setImage(chart.datasets[0].label, index)}
-                  {!this.state.toggleHidden[chart.datasets[0].label] &&
+                  {!this.state.toggleCharts[chart.datasets[0].label] &&
                     <section>
 
                       <Chart
                         data={chart}
+                        id={chart.datasets[0].label}
                       />
-
                     </section>
                   }
                 </div>

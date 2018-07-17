@@ -60,13 +60,13 @@ mongoose.connect(dbURI, (err, db) => {
       },{
         title: 'Practice for semis',
         discipline: 'Keiko',
-        date: new Date('Mar 18, 2018'),
+        date: new Date('Mar 17, 2018'),
         duration: 120,
         notes: 'Sesh'
       },{
         title: 'Gotta love them gradings',
         discipline: 'Shin-sa',
-        date: new Date('Mar 18, 2018'),
+        date: new Date('Mar 16, 2018'),
         duration: 30,
         notes: 'Can I get 9th Dan?'
       }]
