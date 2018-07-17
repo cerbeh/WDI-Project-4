@@ -2,15 +2,29 @@ import React, { Component } from 'react';
 import Range from '../common/BmiRange';
 import Output from '../common/BmiOutput';
 
+import Auth from '../../lib/Auth';
+import axios from 'axios';
+
 class Bmi extends Component {
   constructor(props){
     super(props);
-    this.state = {
-      height: 157,
-      weight: 51,
-      bmi: 20.69,
-      bmiClass: 'Normal'
-    };
+    //Get an axios request in here to set the default height and weight to be users
+    this.state = {};
+  }
+
+  componentDidMount() {
+    axios.get(`/api/users/${Auth.getPayload().sub}`)
+      .then(res => {
+
+        const bmi = this.setBmi(res.data.weight, res.data.height);
+        console.log(bmi);
+        this.setState({
+          height: res.data.height,
+          weight: res.data.weight,
+          bmi: bmi,
+          bmiClass: this.getBmiClass(bmi)
+        });
+      });
   }
 
   heightChange = (height) => {
@@ -21,9 +35,15 @@ class Bmi extends Component {
     this.setState({ weight: weight }, this.setBmi );
   }
 
-  setBmi = () => {
-    const bmi = ((this.state.weight / this.state.height / this.state.height) * 10000).toFixed(2);
-    this.setState({ bmi: bmi, bmiClass: this.getBmiClass(bmi) });
+  getBmi = (weight, height) => ((weight / height / height) * 10000).toFixed(2);
+
+  setBmi = (weight, height) => {
+    if (this.state.height) {
+      const bmi = this.getBmi(this.state.weight, this.state.height);
+      this.setState({ bmi, bmiClass: this.getBmiClass(bmi) });
+    } else {
+      return this.getBmi(weight, height);
+    }
   }
 
   getBmiClass = (bmi) => {
@@ -41,15 +61,15 @@ class Bmi extends Component {
           <form>
             <div>
               <label>Height</label>
-              <Range
+              { this.state.height && <Range
                 value={this.state.height}
-                onChange={this.heightChange} />
+                onChange={this.heightChange} />}
             </div>
             <div>
               <label>Weight</label>
-              <Range
+              { this.state.weight && <Range
                 value={this.state.weight}
-                onChange={this.weightChange} />
+                onChange={this.weightChange} />}
             </div>
           </form>
           <Output data={this.state}/>
