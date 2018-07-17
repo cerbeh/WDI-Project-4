@@ -2,6 +2,7 @@ const User = require('../models/user');
 
 
 function createRoute(req, res, next) {
+  console.log(req.body);
   User.findById(req.params.id)
     .then(user => {
       user.sessions.push(req.body);

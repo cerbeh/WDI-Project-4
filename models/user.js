@@ -5,7 +5,11 @@ const  _ = require('lodash');
 
 const sessionSchema = new mongoose.Schema({
   title: { type: String, required: 'Please provide a title' },
-  discipline: { type: String, enum: ['Kata', 'Keiko', 'Shiai', 'Jodan', 'Nito', 'Shin-sa', 'Mitori-geiko', 'Asa-geiko'], required: 'Please provide a discipline' },
+  discipline: {
+    type: String,
+    enum: ['Kata', 'Keiko', 'Shiai', 'Jodan', 'Nito', 'Shin-sa', 'Mitori-geiko', 'Asa-geiko'],
+    required: 'Please provide a discipline'
+  },
   date: Date,
   duration: Number,
   notes: String
@@ -17,7 +21,6 @@ const userSchema = new mongoose.Schema({
   username: { type: String, required: 'This field is required'},
   email: { type: String, required: 'This field is required', unique: true },
   password: { type: String, required: 'This field is required'},
-  gender: { type: String, enum: ['Male', 'Female', 'Non-binary', 'Transgender', 'Other', 'Prefer not to say']},
   grade: { type: String, enum: ['1st Kyu', '1st Dan', '2nd Dan', '3rd Dan', '4th Dan', '5th Dan', '6th Dan', '7th Dan', '8th Dan']},
   dob: Date,
   height: Number,
