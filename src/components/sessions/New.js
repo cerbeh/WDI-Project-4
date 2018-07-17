@@ -20,11 +20,11 @@ class sessionsNew extends React.Component {
 
   handleSubmit = (e) => {
     e.preventDefault();
-    console.log(this.state,'handleSubmit');
+    // console.log(this.state.session,'handleSubmit');
     axios({
       url: `/api/users/${this.props.match.params.id}/sessions`,
       method: 'POST',
-      data: this.state,
+      data: this.state.session,
       headers: { Authorization: `Bearer ${Auth.getToken()}`}
     })
       .then(() => {
