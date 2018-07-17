@@ -1,43 +1,37 @@
-.no-sessions{
-  border-radius: 100%;
-  width:200px;
-  height: 200px;
-  background-color: dodgerBlue;
+.chart-data-btn{
+  img{
+  border-radius: 20px;
+  width:100%;
+  }
 }
 
-
-.sessions-index{
+.statistics{
   .header{
     height: 20vh;
   }
-  section{
-    padding-left: 20%;
-  }
+  // section{
+  //   margin-top: -10%;
+  // }
 }
 
 @media only screen and (min-width: 768px) and (max-width: 1023px){
-  .sessions-index{
-    .header{
+  .statistics{
 
-    }
-    section{
-      margin-top: -5%;
-    }
   }
 }
 
-
 @media only screen and (min-width: 1024px) and (max-width: 1439px) {
-  .sessions-index{
+  .statistics{
     .header{
       height: 40vh;
       margin-top: -50px;
     }
+
   }
 
 }
 @media only screen and (min-width: 1440px) {
-  .sessions-index{
+  .statistics{
     .header{
       height: 50vh;
       margin-top: 90px;
