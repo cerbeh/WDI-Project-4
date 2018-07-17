@@ -8,11 +8,13 @@ import Form from './Form';
 class sessionsNew extends React.Component {
 
   state = {
-    errors: {}
+    errors: {},
+    session: {}
   }
 
-  handleChange = ({ target: {name, value }}) => {
-    this.setState({ [name]: value });
+  handleChange=({ target: { name, value }})=> {
+    const newState = { ...this.state.session, [name]: value };
+    this.setState({ session: newState });
   }
 
   handleSubmit = (e) => {
@@ -38,7 +40,7 @@ class sessionsNew extends React.Component {
           <Form
             handleChange={this.handleChange}
             handleSubmit={this.handleSubmit}
-            data={this.state}
+            data={this.state.session}
             errors={this.state.errors}
           />
         </div>

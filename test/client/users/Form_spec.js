@@ -6,21 +6,21 @@ import { shallow } from 'enzyme';
 
 import UsersForm from '../../../src/components/users/Form';
 
-xdescribe('UsersForm tests', () => {
+describe('UsersForm tests', () => {
 
   let wrapper;
   //
   beforeEach(done => {
     // shallow is for functional components (it does not trigger lifecycle hooks)
     const props = {
-      data: {
-        // username: 'test',
-        // dob: '1970-01-01',
-        // email: 'test@test.com',
-        // password: 'test',
-        // passwordConfirmation: 'test',
-        // errors: {}
-      }
+      user: {
+        username: 'test',
+        dob: '1970-01-01',
+        email: 'test@test.com',
+        password: 'test',
+        passwordConfirmation: 'test'
+      },
+      errors: {}
     };
     wrapper = shallow(<UsersForm  {...props}/>);
     done();

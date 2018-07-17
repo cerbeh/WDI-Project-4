@@ -44,7 +44,7 @@ class UsersEdit extends React.Component{
           <UsersForm
             handleChange={this.handleChange}
             handleSubmit={this.handleSubmit}
-            data={this.state.user}
+            user={this.state.user}
             errors={this.state.errors}
           />
         </div>

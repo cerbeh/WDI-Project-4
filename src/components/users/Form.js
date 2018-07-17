@@ -1,23 +1,23 @@
 import React from 'react';
 
-const UsersForm = ({ handleChange, handleSubmit, data, errors }) => {
+const UsersForm = ({ handleChange, handleSubmit, user, errors }) => {
   return (
     <form onSubmit={handleSubmit}>
       <div className="field">
         <label className="label">Username<span className="req">*</span></label>
-        {data && <input className="input" name="username" placeholder="Username" onChange={handleChange} value={data.username || ''}/>}
+        {user && <input className="input" name="username" placeholder="Username" onChange={handleChange} value={user.username || ''}/>}
         {errors.username && <small>{errors.username}</small>}
       </div>
       <div className="field">
         <label className="label">Date of Birth</label>
-        {data && <input className="input" type="date" name="dob" placeholder="Date of Birth" onChange={handleChange} value={data.dob || ''} />}
+        {user && <input className="input" type="date" name="dob" placeholder="Date of Birth" onChange={handleChange} value={user.dob || ''} />}
         {errors.dob && <small>{errors.dob}</small>}
       </div>
       <div className="field">
         <label className="label">Gender</label>
         <div className="control">
           <div className="select is-fullwidth">
-            {data &&  <select name="gender" onChange={handleChange} value={data.gender || ''}>
+            {user &&  <select name="gender" onChange={handleChange} value={user.gender || ''}>
               <option value="" disabled>Please choose</option>
               <option>Male</option>
               <option>Female</option>
@@ -32,19 +32,19 @@ const UsersForm = ({ handleChange, handleSubmit, data, errors }) => {
       </div>
       <div className="field">
         <label className="label">Height(cm)</label>
-        {data && <input className="input" name="height" placeholder="Height" onChange={handleChange} value={data.height || ''}/>}
+        {user && <input className="input" name="height" placeholder="Height" onChange={handleChange} value={user.height || ''}/>}
         {errors.height && <small>{errors.height}</small>}
       </div>
       <div className="field">
         <label className="label">Weight(kg)</label>
-        {data && <input className="input" name="weight" placeholder="Weight" onChange={handleChange} value={data.weight || ''}/>}
+        {user && <input className="input" name="weight" placeholder="Weight" onChange={handleChange} value={user.weight || ''}/>}
         {errors.weight && <small>{errors.weight}</small>}
       </div>
       <div className="field">
         <label className="label">Grade</label>
         <div className="control">
           <div className="select is-fullwidth">
-            { data &&  <select name="grade" onChange={handleChange} value={data.grade || ''}>
+            { user &&  <select name="grade" onChange={handleChange} value={user.grade || ''}>
               <option value="" disabled>Please choose</option>
               <option>1st Kyu</option>
               <option>1st Dan</option>
