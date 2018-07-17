@@ -1,6 +1,9 @@
 .is-fixed-top{
   background-color: rgba(255,255,255,0.5);
   background: transparent;
+  .navbar-item, .navbar-link{
+    border-radius: 20px;
+  }
 
 }
 
