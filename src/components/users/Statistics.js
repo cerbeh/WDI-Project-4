@@ -101,17 +101,15 @@ class Statistics extends React.Component{
   }
 
 
-  toggleHidden({target}){
-    const disciplines = this.state.toggleHidden;
-    disciplines[target.id] = !disciplines[target.id];
+  toggleHidden({ currentTarget }){
+    const disciplines = this.state.toggleCharts;
+    disciplines[currentTarget.id] = !disciplines[currentTarget.id];
 
     this.setState({
       isHidden: !this.state.isHidden,
-      toggleHidden: {
-        ...disciplines
-      }
+      toggleCharts: {...disciplines}
     });
-    // console.log(this.state.toggleHidden);
+
   }
 
   setHiddenStatus(user) {
@@ -130,9 +128,8 @@ class Statistics extends React.Component{
           user: res.data,
           chartData: res.data.practicedDisciplines.map(discipline => this.setData(discipline, 'line')),
           pieChart: this.setData(res.data, 'doughnut'),
-          toggleHidden: {...disciplines}
+          toggleCharts: {...disciplines}
         });
-        console.log(this.state.toggleHidden);
       })
 
       .catch(err => this.setState({ error: err.message }));
@@ -180,15 +177,16 @@ class Statistics extends React.Component{
                 <div
                   className="container chart-data-btn"
                   onClick={this.toggleHidden.bind(this)}
+                  id={chart.datasets[0].label}
                 >
                   {this.setImage(chart.datasets[0].label, index)}
-                  {!this.state.isHidden &&
+                  {!this.state.toggleHidden[chart.datasets[0].label] &&
                     <section>
 
                       <Chart
                         data={chart}
-                        id={chart.datasets[0].label}
                       />
+
                     </section>
                   }
                 </div>

@@ -1,7 +1,7 @@
 import React from 'react';
 import { Line } from 'react-chartjs-2';
 
-const Chart = ({data}) => {
+const Chart = ({data, id}) => {
 
   const defaultProps = {
     displayTitle: true,
@@ -10,7 +10,7 @@ const Chart = ({data}) => {
   };
 
   return (
-    <div className="chart">
+    <div className="chart" id="words">
 
       <Line
         data={data}
@@ -18,7 +18,7 @@ const Chart = ({data}) => {
           maintainAspectRatio: true,
           title: {
             display: defaultProps.displayTitle,
-            text: 'Total Practice Time',
+            text: `Total Practice Time for ${id}`,
             fontSize: 25
           },
           legend: {
