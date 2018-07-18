@@ -17,6 +17,21 @@
   padding: auto;
 }
 
+.registrationBackground{
+  button{
+    background-color: $accent-colour;
+    color: white;
+    font-size: 1rem;
+    width: 100%;
+    margin-top: 5%;
+    border: none;
+    border-radius: 30px;
+    font-family: $primary-font;
+    letter-spacing: 5px;
+    font-weight: bolder;
+  }
+}
+
 
 
   @media only screen and (min-width: 1024px) {

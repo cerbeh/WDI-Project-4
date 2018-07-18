@@ -30,7 +30,7 @@ class Home extends React.Component {
         <div className="hero-body">
           <div className="container home-container has-text-left">
             <div className="rectangle"></div>
-            <h1 className="title tracking-in-contract ">
+            <h1 className="title tracking-in-expand ">
               kendo<em>.io</em>
             </h1>
             <h2 className="subtitle">
