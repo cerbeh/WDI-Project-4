@@ -1,22 +1,60 @@
 .profile{
   .header{
-    height: 20vh;
+    height: 23vh;
+    letter-spacing: 2px;
+  }
+  .heading-primary{
+    font-size: 3rem;
+    font-weight: 900;
+    color: white;
+    font-weight: bold;
+    font-style: normal;
   }
   .level{
     padding-right: 55%;
+    h1{
+      font-weight: 700;
+    }
   }
   strong{
     font-size: 1.5rem;
+    font-weight: 500;
   }
   i{
     color: $accent-colour;
   }
+  .disciplines{
+    .title{
+      font-weight: 550;
+      background-color: $accent-colour;
+      border-radius: 10px;
+      font-size: 1.5rem;
+      color: white;
+      font-style: normal;
+      text-decoration: underline;
+    }
+    li{
+      text-transform: uppercase;
+      font-weight: 500;
+      letter-spacing: 2px;
+    }
+  }
 }
+
+
 
 @media only screen and (min-width: 768px) and (max-width: 1023px){
   .profile{
     .header{
 
+    }
+
+    .heading-primary{
+      font-size: 6rem;
+      font-weight: 900;
+      color: white;
+      font-weight: bold;
+      font-style: normal;
     }
     .level{
       padding-right: 80%;
@@ -36,6 +74,13 @@
     .header{
       margin-top: -50px;
     }
+    .heading-primary{
+      font-size: 6rem;
+      font-weight: 900;
+      color: white;
+      font-weight: bold;
+      font-style: normal;
+    }
     .level{
       margin-top: -60px;
       padding-left: 10px;
@@ -54,6 +99,13 @@
     .header{
       height: 30vh;
       margin-top: 90px;
+    }
+    .heading-primary{
+      font-size: 6rem;
+      font-weight: 900;
+      color: white;
+      font-weight: bold;
+      font-style: normal;
     }
     .level{
       margin-top: -60px;
