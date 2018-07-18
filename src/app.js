@@ -19,7 +19,7 @@ import AuthLogin from './components/auth/Login';
 import AuthRegister from './components/auth/Register';
 
 import Home from './components/pages/Home';
-import About from './components/pages/About';
+import AboutPage from './components/pages/About';
 import Dashboard from './components/pages/Dashboard';
 import Bmi from './components/pages/Bmi';
 import NotFound from './components/common/NotFound';
@@ -53,7 +53,7 @@ class App extends React.Component {
               <Route exact path="/bmi" component={Bmi} />
               <Route exact path="/dashboard" component={Dashboard} />
               <ProtectedRoute path="/statistics" component={Statistics} />
-              <Route exact path="/about" component={About} />
+              <Route exact path="/about" component={AboutPage} />
               <Route exact path="/" component={Home} />
               <Route component={NotFound} />
             </Switch>

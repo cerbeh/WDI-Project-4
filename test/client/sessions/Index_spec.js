@@ -41,13 +41,21 @@ const data =[{
   notes: 'Sesh'
 }];
 
+const props = {
+  match: {
+    params: {
+      id: 1
+    }
+  }
+};
+
 
 describe('SessionsIndex tests', () => {
   let wrapper;
   let promise;
 
   before(done => {
-    promise =Promise.resolve({ data });
+    promise = Promise.resolve({ data });
     sinon.stub(axios, 'get').returns(promise);
     done();
   });
@@ -56,9 +64,9 @@ describe('SessionsIndex tests', () => {
     done();
   });
   beforeEach(done => {
-    wrapper =mount(
+    wrapper = mount(
       <MemoryRouter>
-        <SessionsIndex />
+        <SessionsIndex {...props} />
       </MemoryRouter>
     );
     done();
@@ -67,7 +75,10 @@ describe('SessionsIndex tests', () => {
   it('should render sessions', done => {
     promise.then(() => {
       wrapper.update();
-      expect(wrapper.find('div.container').length).to.eq(4);
+      data.forEach((session, index) => {
+        expect(wrapper.find('a').at(index).prop('href')).to.eq(session._id);
+      });
+      // expect(wrapper.find('div.container').length).to.eq(4);
       done();
     })
       .catch(done);
