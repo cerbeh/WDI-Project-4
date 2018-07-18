@@ -1,4 +1,4 @@
-const port = 4000;
+const port = process.env.PORT || 4000;
 const dbURI = 'mongodb://localhost:27017/WDI-Project-4';
 const secret = '🐝🥐🐝🥐🐝🥐🐝🥐🐝🥐Martin&Linda🐝🥐🐝🥐🐝🥐🐝🥐🐝🥐🐝🥐🐝🥐🐝🥐🐝';
 
