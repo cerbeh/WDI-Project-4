@@ -61,7 +61,7 @@ class UsersShow extends React.Component{
           </div>
         </div>
 
-        {this.state.user && !this.state.user.gender  &&
+        {this.state.user && !this.state.user.height  &&
         <section className="section">
           <div className="no-sessions container ">
             <img src="https://imgur.com/Vsd3i2Y.png"/>

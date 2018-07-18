@@ -30,7 +30,7 @@ mongoose.connect(dbURI, (err, db) => {
         notes: 'Sesh'
       },{
         title: 'I hate mornings',
-        discipline: 'Asa-geiko',
+        discipline: 'Kata',
         date: new Date('Mar 1, 2018'),
         duration: 30,
         notes: 'Morning practice sucks'
@@ -39,6 +39,72 @@ mongoose.connect(dbURI, (err, db) => {
         discipline: 'Keiko',
         date: new Date('Mar 18, 2018'),
         duration: 50,
+        notes: 'Sesh'
+      },{
+        title: 'Practice for semis',
+        discipline: 'Keiko',
+        date: new Date('Mar 12, 2018'),
+        duration: 45,
+        notes: 'Sesh'
+      },{
+        title: 'Practice for semis',
+        discipline: 'Keiko',
+        date: new Date('Mar 13, 2018'),
+        duration: 45,
+        notes: 'Sesh'
+      },{
+        title: 'Practice for semis',
+        discipline: 'Asa-geiko',
+        date: new Date('Mar 14, 2018'),
+        duration: 45,
+        notes: 'Sesh'
+      },{
+        title: 'Practice for semis',
+        discipline: 'Nito',
+        date: new Date('Mar 20, 2018'),
+        duration: 45,
+        notes: 'Sesh'
+      },{
+        title: 'Practice for semis',
+        discipline: 'Asa-geiko',
+        date: new Date('Mar 10, 2018'),
+        duration: 45,
+        notes: 'Sesh'
+      },{
+        title: 'Practice for semis',
+        discipline: 'Asa-geiko',
+        date: new Date('Mar 08, 2018'),
+        duration: 45,
+        notes: 'Sesh'
+      },{
+        title: 'Practice for semis',
+        discipline: 'Asa-geiko',
+        date: new Date('Mar 05, 2018'),
+        duration: 45,
+        notes: 'Sesh'
+      },{
+        title: 'Practice for semis',
+        discipline: 'Asa-geiko',
+        date: new Date('Mar 02, 2018'),
+        duration: 45,
+        notes: 'Sesh'
+      },{
+        title: 'Practice for semis',
+        discipline: 'Kata',
+        date: new Date('Feb 26, 2018'),
+        duration: 45,
+        notes: 'Sesh'
+      },{
+        title: 'Practice for semis',
+        discipline: 'Asa-geiko',
+        date: new Date('Feb 24, 2018'),
+        duration: 45,
+        notes: 'Sesh'
+      },{
+        title: 'Practice for semis',
+        discipline: 'Kata',
+        date: new Date('Feb 22, 2018'),
+        duration: 45,
         notes: 'Sesh'
       }]
     },{
