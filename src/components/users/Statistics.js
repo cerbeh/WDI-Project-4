@@ -145,14 +145,14 @@ class Statistics extends React.Component{
         <header className="header">
           <div className="text-box">
             <h1 className="heading-primary">
-              <img src="https://i.imgur.com/2vKgZdS.png" alt="Profileheader"/>
+              Statistics
             </h1>
           </div>
         </header>
         <section className="section">
           <div className="columns is-multiline is-mobile">
             <div className="column is-12">
-              <h1>A total of</h1>
+              <h1>You have practiced a total of:</h1>
               <h2><strong>{this.reformatMinutes(this.state.user.totalTimePracticed)}</strong></h2>
             </div>
             <div className="column is-three-quarters-mobile is-three-quarters-tablet is-three-quarters-desktop">

@@ -18,8 +18,10 @@ const AboutPage = () => {
         <div className="column is-5">
           <h2 className="about-header title is-4">About Martin</h2>
           <p className="about-text">
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam ultricies tortor at magna iaculis, quis sagittis elit pretium. Nullam eu ante dolor. Ut gravida suscipit vulputate. Nullam amet.
+          Martin Julian 🐜Bug-Hunter🐛 Allgood. Quick of wit, faster with code. His unrelenting problem solving skills is what has progressed this app from looking like boats-api into what it is now.
           </p>
+
+          <img className="about-image" src="https://jnxz07-a.akamaihd.net/wp-content/uploads/2015/02/buscemi.png" />
         </div>
       </div>
     </section>
