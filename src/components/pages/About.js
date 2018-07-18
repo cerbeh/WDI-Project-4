@@ -13,6 +13,7 @@ const AboutPage = () => {
           <p className="about-text">
             Originally created to conquer the Earth and rule with an iron fist, Linda decided coding was a much better option and has turned her artistic eye towards creating beautiful and stylistic sites.
           </p>
+          <img className="about-image" src="https://media.licdn.com/dms/image/C4D03AQFeCLnOxdNYog/profile-displayphoto-shrink_800_800/0?e=1537401600&v=beta&t=Muk52jykhU3Vx_Pdw5ryYv-U11ZO7QEQL2oJJ1owju0" />
         </div>
         <div className="column is-5">
           <h2 className="about-header title is-4">About Martin</h2>

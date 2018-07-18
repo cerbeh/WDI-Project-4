@@ -71,7 +71,7 @@ class UsersShow extends React.Component{
         </section>
         }
 
-        <div className="columns is-centered">
+        <div className="columns ">
           {this.state.user && this.state.user.height &&
 
             <div className="column is-4-desktop">
