@@ -152,10 +152,16 @@ class Statistics extends React.Component{
         <section className="section">
           <div className="columns is-multiline is-mobile">
             <div className="column is-12">
-              <h1 className="title is-3">Statistics <i className="fas fa-chart-line"></i></h1>
-              <hr />
-              <h3>A total of</h3>
-              <h2>{this.reformatMinutes(this.state.user.totalTimePracticed)}</h2>
+              <h1>A total of</h1>
+              <h2><strong>{this.reformatMinutes(this.state.user.totalTimePracticed)}</strong></h2>
+            </div>
+            <div className="column is-three-quarters-mobile is-three-quarters-tablet is-three-quarters-desktop">
+              <div className="container pie-container">
+                {this.state.pieChart &&
+                <DoughnutChart
+                  data={this.state.pieChart}
+                />}
+              </div>
             </div>
 
             {this.state.chartData && this.state.chartData.length === 0 &&
@@ -170,7 +176,7 @@ class Statistics extends React.Component{
 
             {this.state.chartData && this.state.chartData.length !== 0 &&
             this.state.chartData.map((chart, index) =>
-              <div className="column" key={index}>
+              <div className="column is-three-quarters-desktop is-three-quarters-mobile is-three-quarters-tablet" key={index}>
                 <div
                   className="container chart-data-btn"
                   onClick={this.toggleHidden.bind(this)}
@@ -197,14 +203,7 @@ class Statistics extends React.Component{
                 </div>
               </div>
             )}
-            <div className="column is-12">
-              <div className="container">
-                {this.state.pieChart &&
-                <DoughnutChart
-                  data={this.state.pieChart}
-                />}
-              </div>
-            </div>
+
           </div>
         </section>
       </div>
