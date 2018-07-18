@@ -71,18 +71,26 @@ class UsersShow extends React.Component{
         </section>
         }
 
-        <div className="columns">
+        <div className="columns is-centered ">
           {this.state.user && this.state.user.height &&
 
             <div className="column is-4-desktop">
-              <h5 className="subtitle">I was born on:</h5>
-              <h2 className="subtitle"><strong>{this.state.user.dob}</strong></h2>
-              <h5 className="subtitle">My height:</h5>
-              <h2 className="subtitle"><strong>{this.state.user.height}</strong> cm</h2>
-              <h5 className="subtitle">My Weight:</h5>
-              <h2 className="subtitle"><strong>{this.state.user.weight}</strong> kilos</h2>
-              <h5 className="subtitle">Grade:</h5>
-              <h2 className="subtitle"><strong>{this.state.user.grade}</strong></h2>
+              <div className="columns">
+
+                <div className="column">
+                  <h5 className="subtitle">I was born on:</h5>
+                  <h2 className="subtitle"><strong>{this.state.user.dob}</strong></h2>
+                  <h5 className="subtitle">Grade:</h5>
+                  <h2 className="subtitle"><strong>{this.state.user.grade}</strong></h2>
+                </div>
+
+                <div className="column">
+                  <h5 className="subtitle">My height:</h5>
+                  <h2 className="subtitle"><strong>{this.state.user.height}</strong> cm</h2>
+                  <h5 className="subtitle">My Weight:</h5>
+                  <h2 className="subtitle"><strong>{this.state.user.weight}</strong> kilos</h2>
+                </div>
+              </div>
             </div>
           }
 
@@ -90,13 +98,13 @@ class UsersShow extends React.Component{
           {this.state.user && this.state.user.practicedDisciplines &&
             <div className="column is-4 disciplines ">
               <h3 className="title is-3 has-text-centered">Disciplines Practiced</h3>
-              <ul>
+              <div className="columns is-multiline has-text-centered is-centered">
                 {this.state.user.practicedDisciplines.map(name =>
-                  <li className="subtitle" key={name.discipline}>
+                  <div className="subtitle column is-half" key={name.discipline}>
                     {name.discipline}
-                  </li>
+                  </div>
                 )}
-              </ul>
+              </div>
             </div>
           }
         </div>
