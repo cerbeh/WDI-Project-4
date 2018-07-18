@@ -1,4 +1,8 @@
 
+.sessions-show-wrapper {
+  margin-bottom: 12%;
+}
+
 .sessions-show{
   margin-bottom: -300px;
   .header{
@@ -44,20 +48,26 @@
 }
 
 @media only screen and (min-width: 768px) and (max-width: 1023px){
-  .sessions-show{
-    section{
-      margin-top: -5%;
-      .button{
-        width: 25%;
-        margin-right:12%;
-        margin-left:12%;
+  section .sessions-show-wrapper {
+    margin-bottom: 5%;
+  }
+    .sessions-show{
+      section{
+        margin-top: -5%;
+        .button{
+          width: 25%;
+          margin-right:12%;
+          margin-left:12%;
+        }
       }
     }
   }
-}
 
 
 @media only screen and (min-width: 1024px) and (max-width: 1439px) {
+  .sessions-show-wrapper {
+    margin-bottom: 0;
+  }
   .sessions-show{
     .header{
       height: 40vh;
@@ -74,6 +84,9 @@
 
 }
 @media only screen and (min-width: 1440px) {
+  .sessions-show-wrapper {
+    margin-bottom: 0;
+  }
   .sessions-show{
     .header{
       height: 40vh;

@@ -24,7 +24,7 @@ class SessionsShow extends React.Component {
 
   render() {
     return(
-      <section>
+      <section className="sessions-show-wrapper">
         {this.state.session &&
           <div className="sessions-show">
             <header className="header">

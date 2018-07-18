@@ -35,7 +35,7 @@ class UsersShow extends React.Component{
 
   render(){
     return(
-      <div className="profile ">
+      <div className="profile">
         <header className="header">
           <div className="text-box">
             <h1 className="heading-primary">

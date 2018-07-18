@@ -32,12 +32,6 @@ canvas{
   background: transparent;
 }
 
-@media only screen and (min-width: 768px) and (max-width: 1023px){
-  main {
-    margin-bottom: 70px;
-  }
-}
-
 
 .session-list {
   display: flex;
@@ -65,4 +59,8 @@ canvas{
     &:hover {
         background-color: transparent;
     }
+}
+
+.tablet-layout {
+  // background-color: chartreuse;
 }
