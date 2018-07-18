@@ -45,7 +45,7 @@ class UsersShow extends React.Component{
         </header>
 
 
-        <div className="level">
+        <div className="level is-mobile">
           <div className="level-left">
             <div className="level-item">
               <h1 className="title is-1">{this.state.user.username}</h1>
@@ -71,7 +71,7 @@ class UsersShow extends React.Component{
         </section>
         }
 
-        <div className="columns ">
+        <div className="columns">
           {this.state.user && this.state.user.height &&
 
             <div className="column is-4-desktop">
