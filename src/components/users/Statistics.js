@@ -185,18 +185,18 @@ class Statistics extends React.Component{
                   {this.setImage(chart.datasets[0].label, index)}
                   {!this.state.toggleCharts[chart.datasets[0].label] &&
                     <section>
-                      <div className="panel">
+                      {/* <div className="panel">
                         <p className="panel-heading">
                           Line Chart
                         </p>
-                        <div className="panel-block">
+                        <div className="panel-block"> */}
 
-                          <Chart
-                            data={chart}
-                            id={chart.datasets[0].label}
-                          />
-                        </div>
-                      </div>
+                            <Chart
+                              data={chart}
+                              id={chart.datasets[0].label}
+                            />
+                          {/* </div>
+                      </div> */}
 
                     </section>
                   }
