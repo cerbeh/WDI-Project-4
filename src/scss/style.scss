@@ -8,6 +8,7 @@
 @import 'pages/registration-login';
 @import 'pages/404';
 @import 'pages/sessions';
+@import 'pages/sessions-show';
 @import 'pages/dashboard';
 @import 'pages/about';
 @import 'pages/statistics';
@@ -15,6 +16,7 @@
 @import 'components/button';
 @import 'components/footer-and-nav';
 @import 'components/flash';
+@import 'components/animations';
 
 
 .is-overlay{
@@ -29,7 +31,6 @@ canvas{
   border-style: none;
   background: transparent;
 }
-
 
 
 .session-list {

@@ -24,36 +24,44 @@ class SessionsShow extends React.Component {
 
   render() {
     return(
-      <section>
+      <section className="sessions-show-wrapper">
         {this.state.session &&
-          <section className ="section">
-            <div className="container">
-              <h1 className="title">{this.state.session.title} on {this.state.session.date}</h1>
-              <hr />
-              <h2 className="subtitle">Session Type:</h2>
-              <strong>{this.state.session.discipline}</strong>
-              <h2 className="subtitle">Duration:</h2>
-              <i className="far fa-clock "></i><strong>{this.state.session.duration}</strong> minutes
-              <h2 className="subtitle">Notes:</h2>
-              <p>
-                <strong>{this.state.session.notes}</strong>
-              </p>
-            </div>
-            <section>
-              <div className="container">
-                <button onClick={this.handleDelete} className="button">Delete</button>
-                <Link
-                  to={`/users/${this.props.match.params.id}/sessions/${this.props.match.params.sessionId}/edit`}
-                  className="button"
-                >Edit
-                </Link>
-
+          <div className="sessions-show">
+            <header className="header">
+              <div className="text-box">
+                <h1 className="heading-primary">
+                  Session
+                </h1>
               </div>
+            </header>
+            <section className ="section">
+              <div className="container">
+                <h1 className="title">{this.state.session.title}</h1>
+                <h5 className="subtitle">{this.state.session.date}</h5>
+                <hr />
+                <h2 className="subtitle">Session Type:</h2>
+                <p>{this.state.session.discipline}</p>
+                <h2 className="subtitle">Duration:</h2>
+                <p><i className="far fa-clock "></i>&nbsp;&nbsp;{this.state.session.duration} minutes</p>
+                <h2 className="subtitle">Notes:</h2>
+                <p>{this.state.session.notes}</p>
+              </div>
+              <section>
+                <div className="btn-container container">
+                  <Link
+                    to={`/users/${this.props.match.params.id}/sessions/${this.props.match.params.sessionId}/edit`}
+                    className="button"
+                  >Edit
+                  </Link>
+                  <button onClick={this.handleDelete} className="button">Delete</button>
+
+                </div>
+
+              </section>
+
 
             </section>
-
-
-          </section>
+          </div>
         }
       </section>
     );

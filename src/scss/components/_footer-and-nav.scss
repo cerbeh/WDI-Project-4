@@ -1,8 +1,11 @@
 .is-fixed-top{
   background-color: rgba(255,255,255,0.5);
   background: transparent;
-  .navbar-item:hover, .navbar-link:hover{
-    border-radius: 20px;
+  .navbar-item{
+    background-color: rgba(255,255,255,0.5);
+  }
+  .navbar-item:hover,   .navbar-link:hover{
+    color: $accent-colour;
 
   }
 

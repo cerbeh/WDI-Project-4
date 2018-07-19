@@ -84,10 +84,10 @@ class Dashboard extends React.Component{
             </Link>
           </div>
           <div className="column is-half about">
-            <a className="is-expanded is-block has-text-centered">
+            <Link to="/about" className="is-expanded is-block has-text-centered">
               <i className="fa-2x fas fa-angry"></i>
               <p className="is-size-7">About Us</p>
-            </a>
+            </Link>
           </div>
           <div className="column is-half logout">
             <a className="is-expanded is-block has-text-centered" onClick={this.handleLogout}>

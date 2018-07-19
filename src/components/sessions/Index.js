@@ -15,7 +15,7 @@ class SessionsIndex extends React.Component {
 
   render() {
     return(
-      <div className ="sessions-index">
+      <div className="sessions-index">
         <header className="header">
           <div className="text-box">
             <h1 className="heading-primary">

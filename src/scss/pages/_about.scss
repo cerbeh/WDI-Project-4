@@ -7,12 +7,18 @@ section.about-section {
   padding-top: 100px;
   display: flex;
   justify-content: center;
+  font-family: $primary-font;
   // background-color: papayawhip;
 }
 
 p.about-text {
-  font-family: 'Comic sans MS', sans-serif;
+  font-family: $primary-font;
   // background-color: chartreuse;
   text-align: center;
+  margin: 0 20%;
+}
+
+img.about-image {
+  height: 225px;
   margin: 0 30%;
 }

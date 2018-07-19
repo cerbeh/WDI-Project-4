@@ -13,12 +13,15 @@ const AboutPage = () => {
           <p className="about-text">
             Originally created to conquer the Earth and rule with an iron fist, Linda decided coding was a much better option and has turned her artistic eye towards creating beautiful and stylistic sites.
           </p>
+          <img className="about-image" src="https://media.licdn.com/dms/image/C4D03AQFeCLnOxdNYog/profile-displayphoto-shrink_800_800/0?e=1537401600&v=beta&t=Muk52jykhU3Vx_Pdw5ryYv-U11ZO7QEQL2oJJ1owju0" />
         </div>
         <div className="column is-5">
           <h2 className="about-header title is-4">About Martin</h2>
           <p className="about-text">
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam ultricies tortor at magna iaculis, quis sagittis elit pretium. Nullam eu ante dolor. Ut gravida suscipit vulputate. Nullam amet.
+          Martin Julian 🐜Bug-Hunter🐛 Allgood. Quick of wit, faster with code. His unrelenting problem solving skills is what has progressed this app from looking like boats-api into what it is now.
           </p>
+
+          <img className="about-image" src="https://jnxz07-a.akamaihd.net/wp-content/uploads/2015/02/buscemi.png" />
         </div>
       </div>
     </section>
