@@ -21,7 +21,7 @@ const AboutPage = () => {
           Martin Julian 🐜Bug-Hunter🐛 Allgood. Quick of wit, faster with code. His unrelenting problem solving skills is what has progressed this app from looking like boats-api into what it is now.
           </p>
 
-          <img className="about-image" src="https://jnxz07-a.akamaihd.net/wp-content/uploads/2015/02/buscemi.png" />
+          <img className="about-image" src="https://media.licdn.com/dms/image/C5603AQGu6wh3qYGBLw/profile-displayphoto-shrink_800_800/0?e=1537401600&v=beta&t=8IPimtjCTjPIlymzQ2KXgHlAySVGqEy4OEIg0ioXBRc" />
         </div>
       </div>
     </section>
