@@ -2,14 +2,14 @@ const express = require('express');
 const app = express();
 const bodyParser = require('body-parser');
 const errorHandler = require('./lib/errorHandler');
+const mongoose = require('mongoose');
 
 const { port, dbURI } = require('./config/environment');
+mongoose.connect(dbURI, {useNewUrlParser: true});//
 const routes = require('./config/routes');
 
-const mongoose = require('mongoose');
 mongoose.Promise = require('bluebird');
 
-mongoose.connect(dbURI);
 
 app.use(express.static(`${__dirname}/public`));
 
