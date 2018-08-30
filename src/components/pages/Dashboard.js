@@ -3,7 +3,7 @@ import axios from 'axios';
 import {  Link, withRouter } from 'react-router-dom';
 import Auth from '../../lib/Auth';
 
-const greeting = [' Hola', 'Tere', 'Hey', 'Hallå!','Xin Chào', 'M\'athchomaroon', 'こんにちわ', 'Bonjour', 'Hi', '여보세요', 'Helô', 'Zdravo' ];
+const greeting = [' Hola', 'Tere', 'Hey', 'Hallå!','Xin Chào', 'M\'athchomaroon', 'こんにちわ', 'Bonjour', 'Hi', '여보세요', 'Helô', 'Zdravo', 'Labas' ];
 
 
 class Dashboard extends React.Component{

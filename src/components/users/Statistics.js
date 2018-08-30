@@ -193,11 +193,11 @@ class Statistics extends React.Component{
                         </p>
                         <div className="panel-block"> */}
 
-                            <Chart
-                              data={chart}
-                              id={chart.datasets[0].label}
-                            />
-                          {/* </div>
+                      <Chart
+                        data={chart}
+                        id={chart.datasets[0].label}
+                      />
+                      {/* </div>
                       </div> */}
 
                     </section>
