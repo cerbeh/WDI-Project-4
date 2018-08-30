@@ -85,16 +85,12 @@ userSchema.virtual('practicedDisciplines')
     }))
       .map(discipline => {
         return {
-
           discipline: discipline,
-
           sessions: this.sessions
             .filter(session => {
               if(session.discipline === discipline) return session;
             })
-            .sort((a, b) => {
-              return new Date(a.date) - new Date(b.date);
-            })
+            .sort((a, b) => new Date(a.date) - new Date(b.date))
             .map(session => {
               return {
                 date: session.date,

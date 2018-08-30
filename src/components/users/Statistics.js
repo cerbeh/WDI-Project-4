@@ -129,6 +129,8 @@ class Statistics extends React.Component{
           pieChart: this.setData(res.data, 'doughnut'),
           toggleCharts: {...disciplines}
         });
+        console.log(this.state.user.sessions);
+        console.log(this.state.user.practicedDisciplines);
       })
 
       .catch(err => this.setState({ error: err.message }));
