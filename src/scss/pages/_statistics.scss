@@ -27,6 +27,9 @@
   }
   .section{
     margin-top: -4%;
+    .column{
+      padding-left: 20%;
+    }
   }
   .container{
     margin-left: 20%;
@@ -53,7 +56,7 @@
       margin-top: -50px;
       h1{
         font-size: 5rem;
-        
+
       }
     }
 
@@ -67,7 +70,7 @@
       margin-top: 90px;
       h1{
         font-size: 9rem;
-        
+
       }
     }
   }
